@@ -176,5 +176,43 @@ namespace Ev3Controller.Model.Tests
             Assert.AreEqual(this.ComPortTest.BaudrateValue, 921600);
         }
         #endregion
+
+        #region Unit test of Equals method.
+        [TestMethod()]
+        [TestCategory("Equals")]
+        public void EqualsTest_001()
+        {
+            this.ComPortTest = new ComPort("Name", "Device");
+            Assert.IsTrue(this.ComPortTest.Equals(new ComPort("Name", "Device")));
+        }
+        [TestMethod()]
+        [TestCategory("Equals")]
+        public void EqualsTest_002()
+        {
+            this.ComPortTest = new ComPort("Name", "Device");
+            Assert.IsFalse(this.ComPortTest.Equals(new ComPort("_Name", "Device")));
+        }
+        [TestMethod()]
+        [TestCategory("Equals")]
+        public void EqualsTest_003()
+        {
+            this.ComPortTest = new ComPort("Name", "Device");
+            Assert.IsFalse(this.ComPortTest.Equals(new ComPort("Name", "_Device")));
+        }
+        [TestMethod()]
+        [TestCategory("Equals")]
+        public void EqualsTest_004()
+        {
+            this.ComPortTest = new ComPort("Name", "Device");
+            Assert.IsFalse(this.ComPortTest.Equals(new ComPort("_Name", "_Device")));
+        }
+        [TestMethod()]
+        [TestCategory("Equals")]
+        public void EqualsTest_005()
+        {
+            this.ComPortTest = new ComPort("Name", "Device");
+            Assert.IsFalse(this.ComPortTest.Equals(null));
+        }
+        #endregion
     }
 }

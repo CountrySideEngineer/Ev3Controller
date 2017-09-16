@@ -156,5 +156,32 @@ namespace Ev3Controller.Model
         /// </summary>
         public StopBits StopBits { get; set; }
         #endregion
+
+        #region Other methods and private properties in calling order
+        /// <summary>
+        /// Compare the ComPort object specified by argument matches with self.
+        /// </summary>
+        /// <param name="ComPort">ComPort object to compare.</param>
+        /// <returns>If matches, returns true, otherwise returns false.</returns>
+        public bool Equals(ComPort ComPort)
+        {
+            try
+            {
+                if (this.Name.Equals(ComPort.Name) && this.Device.Equals(ComPort.Device))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        #endregion
     }
 }
