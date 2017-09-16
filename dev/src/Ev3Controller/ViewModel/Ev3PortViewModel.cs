@@ -10,13 +10,30 @@ namespace Ev3Controller.ViewModel
 
     public class Ev3PortViewModel : DeviceViewModelBase
     {
+        #region Private fields and constants (in a region)
+        /// <summary>
+        /// Dictionary contains label and status whether the connection state can change or not.
+        /// </summary>
+        protected static Dictionary<ConnectionState, LabelAndEnable> StateLabelMap =
+            new Dictionary<ConnectionState, LabelAndEnable>
+        {
+            {ConnectionState.Disconnected, new LabelAndEnable(true, @"接続", @"未接続") },
+            {ConnectionState.Disconnecting, new LabelAndEnable(false, @"接続", @"切断中") },
+            {ConnectionState.Connecting, new LabelAndEnable(false, @"接続", @"接続中") },
+            {ConnectionState.Connected, new LabelAndEnable(true, @"切断", @"接続済み") },
+            {ConnectionState.Sending, new LabelAndEnable(false, @"切断", @"送信中") },
+            {ConnectionState.Receiving, new LabelAndEnable(false, @"切断", @"受信中") },
+            {ConnectionState.Unknown, new LabelAndEnable(true, @"不明", @"不明") },
+        };
+        #endregion
+
         #region Constructors and the Finalizer
         /// <summary>
         /// Constructor
         /// </summary>
         public Ev3PortViewModel()
         {
-
+            this.ConnectState = new ConnectState(ConnectionState.Disconnected);
         }
         #endregion
 
@@ -45,6 +62,12 @@ namespace Ev3Controller.ViewModel
             set
             {
                 this._ConnectState = value;
+
+                LabelAndEnable MapValue =
+                    Ev3PortViewModel.StateLabelMap[this._ConnectState.State];
+                this.CanChangePort = MapValue.CanChange;
+                this.ActionName = MapValue.ActionLabel;
+                this.StateLabel = MapValue.ConnLabel;
             }
         }
 
@@ -54,11 +77,22 @@ namespace Ev3Controller.ViewModel
         protected string _ActionName;
         public string ActionName
         {
-            get { return this.ActionName; }
+            get { return this._ActionName; }
             set
             {
                 this._ActionName = value;
                 this.RaisePropertyChanged("ActionName");
+            }
+        }
+
+        protected string _StateLabel;
+        public string StateLabel
+        {
+            get { return this._StateLabel; }
+            set
+            {
+                this._StateLabel = value;
+                this.RaisePropertyChanged("StateLabel");
             }
         }
 
@@ -85,8 +119,48 @@ namespace Ev3Controller.ViewModel
         /// <param name="e">Value to represent event data.</param>
         public virtual void ConnectedStateChangedCallback(object sender, ConnectStateChangedEventArgs e)
         {
-            //Write code here to handle ConnectStateChanged event.
+            this.ConnectState = e.NewValue;
+            //Other properties are update in ConnectState setter.
         }
+
+        /// <summary>
+        /// Inner class contains label and status whether the connection state can change or not.
+        /// </summary>
+        protected class LabelAndEnable
+        {
+            #region Constructors and the Finalizer
+            /// <summary>
+            /// Constructor
+            /// </summary>
+            /// <param name="CanChange">The port can change or not.</param>
+            /// <param name="ActionLabel">Action name which will be executed.</param>
+            /// <param name="ConnLabel">State of connection name.</param>
+            public LabelAndEnable(bool CanChange, string ActionLabel, string ConnLabel)
+            {
+                this.CanChange = CanChange;
+                this.ActionLabel = ActionLabel;
+                this.ConnLabel = ConnLabel;
+            }
+            #endregion
+
+            #region Public Properties
+            /// <summary>
+            /// Represents whether the port can change or not.
+            /// </summary>
+            public bool CanChange { get; protected set; }
+            
+            /// <summary>
+            /// Represents which action will be executed.
+            /// </summary>
+            public string ActionLabel { get; protected set; }
+
+            /// <summary>
+            /// Represents the state of connection.
+            /// </summary>
+            public string ConnLabel { get; protected set; }
+            #endregion
+        }
+
         #endregion
     }
 }
