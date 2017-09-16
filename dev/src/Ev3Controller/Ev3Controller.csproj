@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ComPort.cs" />
     <Compile Include="Model\ConnectState.cs" />
     <Compile Include="Model\ConnectStateChangedEventArgs.cs" />
     <Compile Include="Model\IsConnectedChangedEventArgs.cs" />
