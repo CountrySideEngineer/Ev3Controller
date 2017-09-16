@@ -33,7 +33,7 @@ namespace Ev3Controller.ViewModel
         /// </summary>
         public Ev3PortViewModel()
         {
-
+            this.ConnectState = new ConnectState(ConnectionState.Disconnected);
         }
         #endregion
 
@@ -62,6 +62,12 @@ namespace Ev3Controller.ViewModel
             set
             {
                 this._ConnectState = value;
+
+                LabelAndEnable MapValue =
+                    Ev3PortViewModel.StateLabelMap[this._ConnectState.State];
+                this.CanChangePort = MapValue.CanChange;
+                this.ActionName = MapValue.ActionLabel;
+                this.StateLabel = MapValue.ConnLabel;
             }
         }
 
@@ -71,7 +77,7 @@ namespace Ev3Controller.ViewModel
         protected string _ActionName;
         public string ActionName
         {
-            get { return this.ActionName; }
+            get { return this._ActionName; }
             set
             {
                 this._ActionName = value;
@@ -114,10 +120,7 @@ namespace Ev3Controller.ViewModel
         public virtual void ConnectedStateChangedCallback(object sender, ConnectStateChangedEventArgs e)
         {
             this.ConnectState = e.NewValue;
-            LabelAndEnable StateLabel = Ev3PortViewModel.StateLabelMap[this.ConnectState.State];
-
-            this.CanChangePort = StateLabel.CanChange;
-            this.ActionName = StateLabel.ActionLabel;
+            //Other properties are update in ConnectState setter.
         }
 
         /// <summary>
