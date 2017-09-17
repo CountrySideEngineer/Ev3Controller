@@ -32,6 +32,7 @@ namespace Ev3Controller.Model
         {
             this.ComPort = ComPort;
         }
+        public ComPortAccess() { this.ComPort = null; }
         #endregion
 
         #region Public Properties
