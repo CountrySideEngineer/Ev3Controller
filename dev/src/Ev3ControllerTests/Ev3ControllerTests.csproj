@@ -51,6 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Model\ComPortAccessSequenceTests.cs" />
     <Compile Include="Model\ComPortAccessTests.cs" />
     <Compile Include="Model\ComPortTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
