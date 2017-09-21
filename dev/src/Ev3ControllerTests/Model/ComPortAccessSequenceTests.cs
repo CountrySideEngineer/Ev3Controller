@@ -11,5 +11,24 @@ namespace Ev3Controller.Model.Tests
     [TestClass()]
     public class ComPortAccessSequenceTests
     {
+        [TestMethod()]
+        public void ComPortAccessSequenceTest_001()
+        {
+        }
+
+        [TestMethod()]
+        public void StartSequenceTest()
+        {
+        }
+
+        [TestMethod()]
+        public void StopSequenceTest()
+        {
+        }
+
+        [TestMethod()]
+        public void SequenceTest()
+        {
+        }
     }
 }

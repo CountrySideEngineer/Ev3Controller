@@ -55,6 +55,7 @@
     <Compile Include="Model\ComPortAccessSequenceTests.cs" />
     <Compile Include="Model\ComPortAccessTests.cs" />
     <Compile Include="Model\ComPortConnectSequenceTests.cs" />
+    <Compile Include="Model\ComPortDisconnectSequenceTests.cs" />
     <Compile Include="Model\ComPortTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ComPortViewModelTests.cs" />
