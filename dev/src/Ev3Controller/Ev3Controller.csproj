@@ -61,6 +61,9 @@
     <Compile Include="Model\ComPort.cs" />
     <Compile Include="Model\ComPortAccess.cs" />
     <Compile Include="Model\ComPortAccessSequence.cs" />
+    <Compile Include="Model\ComPortAccessSequenceRunner.cs" />
+    <Compile Include="Model\ComPortConnectSequence.cs" />
+    <Compile Include="Model\ComPortDisconnectSequence.cs" />
     <Compile Include="Model\ConnectState.cs" />
     <Compile Include="Model\ConnectStateChangedEventArgs.cs" />
     <Compile Include="Model\IsConnectedChangedEventArgs.cs" />
