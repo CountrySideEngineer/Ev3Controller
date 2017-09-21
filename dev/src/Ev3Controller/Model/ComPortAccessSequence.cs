@@ -9,145 +9,81 @@ namespace Ev3Controller.Model
     /// <summary>
     /// Implement each sequence to access COM port, open and close , and read and write.
     /// </summary>
-    public class ComPortAccessSequence
+    public abstract class ComPortAccessSequence
     {
-        #region Event
-        public delegate void ConnectStateChangedEventHandler(object sender, ConnectStateChangedEventArgs e);
-        public event ConnectStateChangedEventHandler ConnectStateChanged;
-        public delegate void NotifyConnectSequenceFinishedEventHandler(object sender, EventArgs Args);
-        public event NotifyConnectSequenceFinishedEventHandler NotifyConnectSequenceFinished;
-        public delegate void NotifyDisconnectSequenceFinishedEventHandler(object sender, EventArgs Args);
-        public event NotifyDisconnectSequenceFinishedEventHandler NotifyDisconnectSequenceFinished;
+        #region Public constants
+        /// <summary>
+        /// Flag whether the loop continues or not.
+        /// This flag must be changed only in this class method, \"Sequence\" or \"StopSequence\".
+        /// </summary>
+        public bool DoesContinue { get; protected set; }
+
+        /// <summary>
+        /// Flag shows the method \"Sequence\" is running or not.
+        /// </summary>
+        public bool IsRunning { get; protected set; }
         #endregion
 
+        #region Public Properties
+        /// <summary>
+        /// Flag show whether the object has message to show when the sequence starting.
+        /// </summary>
+        public bool HasStartingMessage { get; protected set; }
+
+        /// <summary>
+        /// Flag show whether the object has message to show when the sequence started.
+        /// </summary>
+        public bool HasStartedMessage { get; protected set; }
+
+        /// <summary>
+        /// Flag show whether the object has message to show when the sequence finished.
+        /// </summary>
+        public bool HasFinishedMessage { get; protected set; }
+
+        /// <summary>
+        /// A message shown when the sequence starting.
+        /// </summary>
+        public string StartingMessage { get; protected set; }
+
+        /// <summary>
+        /// A message shown when the sequence started.
+        /// </summary>
+        public string StartedMessage { get; protected set; }
+
+        /// <summary>
+        /// A message shown when the sequence finished.
+        /// </summary>
+        public string FinishedMessage { get; protected set; }
+        #endregion
 
         #region Other methods and private properties in calling order
         /// <summary>
-        /// Run sequence to open serial port.
+        /// Call a sequence of.
         /// </summary>
-        /// <param name="Port">Port information to open.</param>
-        /// <returns></returns>
-        public virtual ComPortAccess RunConnectSequence(ComPort Port)
+        /// <param name="obj"></param>
+        public object StartSequence(ComPortAccess ComPortAcc)
         {
-            var PortAccess = this.StartConnectSequence(Port);
-            return PortAccess.Result;
+            return this.Sequence(ComPortAcc);
         }
 
         /// <summary>
-        /// Start task to open serial port.
-        /// This task returns ComPortAccess object.
+        /// Wait for Sequence method does finish.
         /// </summary>
-        /// <param name="Port">Port information to open.</param>
-        /// <returns>ComPortAccess instance contains opened port information.</returns>
-        public async Task<ComPortAccess> StartConnectSequence(ComPort Port)
+        public void StopSequence()
         {
-            ComPortAccess PortAccess = await Task.Run(() =>
+            if (this.IsRunning)
             {
-                //Notify the connection state changes into "Connecting".
-                this.OnConnectStateChanged(
-                    new ConnectStateChangedEventArgs(
-                        new ConnectState(ConnectionState.Connecting)));
-
-                ComPortAccess ComPortAcc = this.ConnectSequenceTask(Port);
-                if (ComPortAcc == null)
-                {
-                    //Port connection failed.
-                    this.OnConnectStateChanged(
-                        new ConnectStateChangedEventArgs(
-                            new ConnectState(ConnectionState.Disconnected)));
-                }
-                else
-                {
-                    //Port connection succeeded.
-                    this.OnConnectStateChanged(
-                        new ConnectStateChangedEventArgs(
-                            new ConnectState(ConnectionState.Connected)));
-                }
-                return ComPortAcc;
-            });
-            return PortAccess;
-        }
-
-        /// <summary>
-        /// Run a sequence to open serial port.
-        /// </summary>
-        /// <param name="Port">Port information to open.</param>
-        /// <returns>ComPortAccess instance contains opened port information.</returns>
-        public virtual ComPortAccess ConnectSequenceTask(ComPort Port)
-        {
-            ComPortAccess PortAccess = new ComPortAccess(Port);
-            if (!PortAccess.Connect())
-            {
-                /*
-                 * Failure of opening port means that the port can not access.
-                 * So, no way to access port should be provided.
-                 */
-                PortAccess.Disconnect();
-                PortAccess = null;
+                this.DoesContinue = false;
+                while (this.IsRunning);
             }
-            return PortAccess;
         }
 
         /// <summary>
-        /// Run a sequence to disconnect, close serial port specified
-        /// by argument PortAccess, ComPortAccess object.
+        /// Abstract method to run main sequence to access COM port.
         /// </summary>
-        /// <param name="PortAccess"></param>
-        public void RunDisconnectSequence(ComPortAccess PortAccess)
-        {
-            this.StartDisconnectSequence(PortAccess);
-        }
-
-        /// <summary>
-        /// Start task to disconnect, close serial port with creating other thread to do.
-        /// And after finishing the sequence, invoke event to notify the result.
-        /// </summary>
-        /// <param name="PortAccess"></param>
-        public async void StartDisconnectSequence(ComPortAccess PortAccess)
-        {
-            await Task.Run(() =>
-            {
-                //Notify the connection state changes into "Disconnecting".
-                this.OnConnectStateChanged(
-                    new ConnectStateChangedEventArgs(
-                        new ConnectState(ConnectionState.Disconnecting)));
-
-                this.DisconnectSequenceTask(PortAccess);
-
-                this.OnConnectStateChanged(
-                    new ConnectStateChangedEventArgs(
-                        new ConnectState(ConnectionState.Disconnected)));
-            });
-        }
-
-        /// <summary>
-        /// Run a sequence to disconnect, close serial port.
-        /// </summary>
-        /// <param name="PortAccess"></param>
-        public virtual void DisconnectSequenceTask(ComPortAccess PortAccess)
-        {
-            PortAccess.Disconnect();
-        }
-
-        /// <summary>
-        /// Raise ConnectStateChanged event, using specified information as
-        /// eventual connection state.
-        /// </summary>
-        /// <param name="e">Detail information and new connection state.</param>
-        public virtual void OnConnectStateChanged(ConnectStateChangedEventArgs e)
-        {
-            this.ConnectStateChanged?.Invoke(this, e);
-        }
-
-        public virtual void OnNotifyConnectSequenceFinished(EventArgs e)
-        {
-            this.NotifyConnectSequenceFinished(this, e);
-        }
-
-        public virtual void OnNotifyDisconnectSequenceFinished(EventArgs e)
-        {
-            this.NotifyDisconnectSequenceFinished(this, e);
-        }
+        /// <param name="ComPortAcc">ComPortAccess object used to access COM port.</param>
+        /// <returns>Result of the sequence.</returns>
+        public abstract object Sequence(ComPortAccess ComPortAcc);
         #endregion
     }
 }
