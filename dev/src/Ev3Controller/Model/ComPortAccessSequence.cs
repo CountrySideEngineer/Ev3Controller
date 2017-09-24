@@ -129,17 +129,24 @@ namespace Ev3Controller.Model
             Task ContinuationTask = task.ContinueWith((Antecedent) =>
             {
                 object Result = Antecedent.Result;
-                if (Result is bool)
+                if (Result != null)
                 {
-                    bool BoolRes = (bool)Result;
-                    if (BoolRes)
+                    if (Result is bool)
                     {
-                        this.OnTaskFinishedEvent(null);
+                        bool BoolRes = (bool)Result;
+                        if (BoolRes)
+                        {
+                            this.OnTaskFinishedEvent(null);
+                        }
+                        else
+                        {
+                            this.OnTaskFinishedEvent(null);
+                        }
                     }
-                    else
-                    {
-                        this.OnTaskFinishedEvent(null);
-                    }
+                }
+                else
+                {
+                    this.OnTaskFinishedEvent(null);
                 }
             });
             return ContinuationTask;

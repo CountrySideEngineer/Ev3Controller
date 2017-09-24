@@ -50,7 +50,7 @@ namespace Ev3Controller.Model
         /// <summary>
         /// Task accessing COM port.
         /// </summary>
-        public Task task;
+        public Task CurTask;
 
         /// <summary>
         /// Sequence now running.
@@ -95,6 +95,8 @@ namespace Ev3Controller.Model
         {
             this.ComPort = ComPort;
             this.ComPortAcc = new ComPortAccess(this.ComPort);
+
+            this.CurTask = null;
         }
         
         /// <summary>
@@ -103,7 +105,7 @@ namespace Ev3Controller.Model
         /// <param name="SeqName">Identifier of new sequence.</param>
         public void ChangeSequence(SequenceName SeqName)
         {
-            this.task = this.StartSequence(
+            this.CurTask = this.StartSequence(
                 ComPortAccessSequenceRunner.SequenceFactory(SeqName));
         }
 

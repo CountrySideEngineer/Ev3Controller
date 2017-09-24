@@ -30,7 +30,14 @@ namespace Ev3Controller.Model
         /// <returns></returns>
         public override object Sequence(ComPortAccess ComPortAcc)
         {
-            return ComPortAcc.Connect();
+            bool Result = false;
+            this.IsRunning = true;
+
+            Result = ComPortAcc.Connect();
+
+            this.IsRunning = false;
+
+            return Result;
         }
         #endregion
     }

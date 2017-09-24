@@ -31,6 +31,9 @@ namespace Ev3Controller.Model.Tests
             this.IsSequenceStartedEventHandler = false;
             this.IsSequenceStartingEventHandler = false;
             this.IsSequenceFinishedEventHandler = false;
+            this.IsSequenceStartingEventHandlerCount = 0;
+            this.IsSequenceStartedEventHandlerCount = 0;
+            this.IsSequenceStartingEventHandlerCount = 0;
             ComPortAccessSequenceRunner Runner =
                 new ComPortAccessSequenceRunner(new ComPort("COM41", "Device"));
 
@@ -39,15 +42,17 @@ namespace Ev3Controller.Model.Tests
             Runner.SequenceFinishedEvent += this.OnSequenceFinishedEventHandler;
             Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);
 
-            Thread.Sleep(10000);
+            while (!Runner.CurTask.Status.Equals(TaskStatus.RanToCompletion)) ;
 
             Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_DISCONNECT);
 
-            while (!this.IsSequenceFinishedEventHandler) { }
-
+            while (!Runner.CurTask.Status.Equals(TaskStatus.RanToCompletion)) ;
             Assert.IsTrue(this.IsSequenceStartedEventHandler);
             Assert.IsTrue(this.IsSequenceStartingEventHandler);
             Assert.IsTrue(this.IsSequenceFinishedEventHandler);
+            Assert.AreEqual(this.IsSequenceStartingEventHandlerCount, 2);
+            Assert.AreEqual(this.IsSequenceStartedEventHandlerCount, 2);
+            Assert.AreEqual(this.IsSequenceFinishedEventHandlerCount, 2);
 
             Runner.SequenceStartedEvent -= this.OnSequenceStartedEventHandler;
             Runner.SequenceStartingEvent -= this.OnSequenceStartingEventHandler;
@@ -55,19 +60,25 @@ namespace Ev3Controller.Model.Tests
         }
 
         protected bool IsSequenceStartingEventHandler;
+        protected int IsSequenceStartingEventHandlerCount;
         public void OnSequenceStartingEventHandler(object sender, EventArgs e)
         {
             IsSequenceStartingEventHandler = true;
+            IsSequenceStartingEventHandlerCount++;
         }
         protected bool IsSequenceStartedEventHandler;
+        protected int IsSequenceStartedEventHandlerCount;
         public void OnSequenceStartedEventHandler(object sender, EventArgs e)
         {
             IsSequenceStartedEventHandler = true;
+            IsSequenceStartedEventHandlerCount++;
         }
         protected bool IsSequenceFinishedEventHandler;
+        protected int IsSequenceFinishedEventHandlerCount;
         public void OnSequenceFinishedEventHandler(object sender, EventArgs e)
         {
             IsSequenceFinishedEventHandler = true;
+            IsSequenceFinishedEventHandlerCount++;
         }
     }
 }
