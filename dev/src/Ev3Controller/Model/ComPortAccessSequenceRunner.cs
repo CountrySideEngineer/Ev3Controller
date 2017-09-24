@@ -114,24 +114,26 @@ namespace Ev3Controller.Model
         /// <returns>Task newly run.</returns>
         public Task StartSequence(ComPortAccessSequence NextSequence)
         {
-            Task task = Task.Run(() =>
+            Task<object> task = Task<object>.Run(() =>
             {
                 this.OnSequenceStartingEvent(null);
 
                 if (null != this.CurSequence)
                 {
                     this.CurSequence.StopSequence();
+                    this.CurSequence.TaskFinishedEvent -= this.SequenceFinisedEvent;
+                    this.CurSequence = null;
                 }
 
                 this.CurSequence = NextSequence;
-                this.CurSequence.StartSequence(this.ComPortAcc);
+                this.CurSequence.TaskFinishedEvent += this.SequenceFinisedEvent;
+                Task MainTask = this.CurSequence.StartSequence(this.ComPortAcc);
 
-                this.OnSequenceStartingEvent(null);
-            }).ContinueWith((PreTask) =>
-            {
-                this.OnSequenceFinishedEvent(null);
+                this.OnSequenceStartedEvent(null);
+
+                return (object)MainTask;
             });
-            return task;
+            return (Task)(task.Result);
         }
 
         /// <summary>
@@ -159,6 +161,11 @@ namespace Ev3Controller.Model
         public void OnSequenceFinishedEvent(EventArgs e)
         {
             this.SequenceFinishedEvent?.Invoke(this, e);
+        }
+
+        public void SequenceFinisedEvent(object sender, EventArgs e)
+        {
+            this.OnSequenceFinishedEvent(e);
         }
         #endregion
     }

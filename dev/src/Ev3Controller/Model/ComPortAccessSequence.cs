@@ -34,6 +34,11 @@ namespace Ev3Controller.Model
         #endregion
 
         #region Public Properties
+        public delegate void TaskFinishedEventHandler(object sender, EventArgs e);
+        public event TaskFinishedEventHandler TaskFinishedEvent;
+        #endregion
+
+        #region Public Properties
         /// <summary>
         /// Flag show whether the object has message to show when the sequence starting.
         /// </summary>
@@ -112,12 +117,32 @@ namespace Ev3Controller.Model
             StateMessageDictionary = null;
         }
         /// <summary>
-        /// Call a sequence of.
+        /// Call a sequence method in other thread.
         /// </summary>
         /// <param name="obj"></param>
-        public object StartSequence(ComPortAccess ComPortAcc)
+        public Task StartSequence(ComPortAccess ComPortAcc)
         {
-            return this.Sequence(ComPortAcc);
+            Task<object> task = Task<object>.Run(() =>
+            {
+                return this.Sequence(ComPortAcc);
+            });
+            Task ContinuationTask = task.ContinueWith((Antecedent) =>
+            {
+                object Result = Antecedent.Result;
+                if (Result is bool)
+                {
+                    bool BoolRes = (bool)Result;
+                    if (BoolRes)
+                    {
+                        this.OnTaskFinishedEvent(null);
+                    }
+                    else
+                    {
+                        this.OnTaskFinishedEvent(null);
+                    }
+                }
+            });
+            return ContinuationTask;
         }
 
         /// <summary>
@@ -158,6 +183,11 @@ namespace Ev3Controller.Model
         protected string MessageArrayItem(StateIndex Index)
         {
             return StateMessageDictionary[Index].Message;
+        }
+
+        public void OnTaskFinishedEvent(EventArgs e)
+        {
+            this.TaskFinishedEvent?.Invoke(this, e); 
         }
 
         protected Dictionary<StateIndex, MessageInformation> StateMessageDictionary;

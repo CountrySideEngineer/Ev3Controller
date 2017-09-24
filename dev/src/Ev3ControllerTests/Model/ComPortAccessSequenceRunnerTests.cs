@@ -28,15 +28,46 @@ namespace Ev3Controller.Model.Tests
         [TestMethod()]
         public void ComPortAccessSequenceRunnerTest()
         {
+            this.IsSequenceStartedEventHandler = false;
+            this.IsSequenceStartingEventHandler = false;
+            this.IsSequenceFinishedEventHandler = false;
             ComPortAccessSequenceRunner Runner =
                 new ComPortAccessSequenceRunner(new ComPort("COM41", "Device"));
+
+            Runner.SequenceStartedEvent += this.OnSequenceStartedEventHandler;
+            Runner.SequenceStartingEvent += this.OnSequenceStartingEventHandler;
+            Runner.SequenceFinishedEvent += this.OnSequenceFinishedEventHandler;
             Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);
 
             Thread.Sleep(10000);
 
             Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_DISCONNECT);
 
-            Thread.Sleep(5000);
+            while (!this.IsSequenceFinishedEventHandler) { }
+
+            Assert.IsTrue(this.IsSequenceStartedEventHandler);
+            Assert.IsTrue(this.IsSequenceStartingEventHandler);
+            Assert.IsTrue(this.IsSequenceFinishedEventHandler);
+
+            Runner.SequenceStartedEvent -= this.OnSequenceStartedEventHandler;
+            Runner.SequenceStartingEvent -= this.OnSequenceStartingEventHandler;
+            Runner.SequenceFinishedEvent -= this.OnSequenceFinishedEventHandler;
+        }
+
+        protected bool IsSequenceStartingEventHandler;
+        public void OnSequenceStartingEventHandler(object sender, EventArgs e)
+        {
+            IsSequenceStartingEventHandler = true;
+        }
+        protected bool IsSequenceStartedEventHandler;
+        public void OnSequenceStartedEventHandler(object sender, EventArgs e)
+        {
+            IsSequenceStartedEventHandler = true;
+        }
+        protected bool IsSequenceFinishedEventHandler;
+        public void OnSequenceFinishedEventHandler(object sender, EventArgs e)
+        {
+            IsSequenceFinishedEventHandler = true;
         }
     }
 }
