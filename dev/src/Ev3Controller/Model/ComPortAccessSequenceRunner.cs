@@ -163,6 +163,11 @@ namespace Ev3Controller.Model
             this.SequenceFinishedEvent?.Invoke(this, e);
         }
 
+        /// <summary>
+        /// Raise event to notify the sequence has been finished.
+        /// </summary>
+        /// <param name="sender">Source of event. Not refered in this method.</param>
+        /// <param name="e">Detail information about this event.</param>
         public void SequenceFinisedEvent(object sender, EventArgs e)
         {
             this.OnSequenceFinishedEvent(e);
