@@ -58,6 +58,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Ev3Command\ACommand.cs" />
+    <Compile Include="Ev3Command\CommandException.cs" />
+    <Compile Include="Ev3Command\CommandInvalidParamException.cs" />
+    <Compile Include="Ev3Command\CommandLenException.cs" />
+    <Compile Include="Ev3Command\CommandOperationException.cs" />
+    <Compile Include="Ev3Command\CommandParamException.cs" />
+    <Compile Include="Ev3Command\CommandUnExpectedResponse.cs" />
+    <Compile Include="Ev3Command\Command_00_00.cs" />
     <Compile Include="Model\ComPort.cs" />
     <Compile Include="Model\ComPortAccess.cs" />
     <Compile Include="Model\ComPortAccessSequence.cs" />

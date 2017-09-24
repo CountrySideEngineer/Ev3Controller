@@ -51,6 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Ev3Command\ACommandTests.cs" />
     <Compile Include="Model\ComPortAccessSequenceRunnerTests.cs" />
     <Compile Include="Model\ComPortAccessSequenceTests.cs" />
     <Compile Include="Model\ComPortAccessTests.cs" />
