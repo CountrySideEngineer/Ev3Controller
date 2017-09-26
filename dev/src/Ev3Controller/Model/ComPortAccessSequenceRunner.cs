@@ -13,6 +13,7 @@ namespace Ev3Controller.Model
         {
             SEQUENCE_NAME_CONNECT,
             SEQUENCE_NAME_DISCONNECT,
+            SEQUENCE_NAME_SEND_AND_RECV,
             SEQUENCE_NAME_MAX,
         };
 
@@ -78,6 +79,11 @@ namespace Ev3Controller.Model
                 case SequenceName.SEQUENCE_NAME_DISCONNECT:
                     AccessSequence = new ComPortDisconnectSequence();
                     break;
+
+                case SequenceName.SEQUENCE_NAME_SEND_AND_RECV:
+                    AccessSequence = new EchoBackComPortSendRecvSequence();
+                    break;
+
                 default:
                     AccessSequence = null;
                     break;
@@ -123,6 +129,7 @@ namespace Ev3Controller.Model
                 if (null != this.CurSequence)
                 {
                     this.CurSequence.StopSequence();
+                    while (!this.CurTask.Status.Equals(TaskStatus.RanToCompletion)) { }
                     this.CurSequence.TaskFinishedEvent -= this.SequenceFinisedEvent;
                     this.CurSequence = null;
                 }

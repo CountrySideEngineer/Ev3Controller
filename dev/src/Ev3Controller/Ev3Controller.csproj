@@ -72,8 +72,10 @@
     <Compile Include="Model\ComPortAccessSequenceRunner.cs" />
     <Compile Include="Model\ComPortConnectSequence.cs" />
     <Compile Include="Model\ComPortDisconnectSequence.cs" />
+    <Compile Include="Model\ComPortSendRecvSequence.cs" />
     <Compile Include="Model\ConnectState.cs" />
     <Compile Include="Model\ConnectStateChangedEventArgs.cs" />
+    <Compile Include="Model\EchoBackComPortSendRecvSequence.cs" />
     <Compile Include="Model\IsConnectedChangedEventArgs.cs" />
     <Compile Include="ViewModel\ComPortViewModel.cs" />
     <Compile Include="ViewModel\DeviceViewModelBase.cs" />

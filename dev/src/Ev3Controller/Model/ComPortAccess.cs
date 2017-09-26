@@ -164,6 +164,17 @@ namespace Ev3Controller.Model
         }
 
         /// <summary>
+        /// Send data and store received into buffer RecvBuff.
+        /// </summary>
+        /// <param name="SendBuff">Buffer to data to send.</param>
+        /// <param name="RecvBuff">Buffer to buffer to store received data.</param>
+        public virtual void SendAndRecv(byte[] SendBuff, byte[] RecvBuff)
+        {
+            this.SendData(SendBuff);
+            this.RecvData(RecvBuff);
+        }
+
+        /// <summary>
         /// Send data through serial port.
         /// </summary>
         /// <param name="Data">Byte data to send.</param>

@@ -57,7 +57,9 @@
     <Compile Include="Model\ComPortAccessTests.cs" />
     <Compile Include="Model\ComPortConnectSequenceTests.cs" />
     <Compile Include="Model\ComPortDisconnectSequenceTests.cs" />
+    <Compile Include="Model\ComPortSendRecvSequenceTests.cs" />
     <Compile Include="Model\ComPortTests.cs" />
+    <Compile Include="Model\EchoBackComPortSendRecvSequenceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ComPortViewModelTests.cs" />
     <Compile Include="ViewModel\Ev3PortViewModelTests.cs" />
