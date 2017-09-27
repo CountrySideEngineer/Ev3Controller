@@ -68,6 +68,7 @@
     <Compile Include="Ev3Command\Command_00_00.cs" />
     <Compile Include="Ev3Command\Command_02_00.cs" />
     <Compile Include="Ev3Command\Command_04_00.cs" />
+    <Compile Include="Ev3Command\Command_06_00.cs" />
     <Compile Include="Model\ComPort.cs" />
     <Compile Include="Model\ComPortAccess.cs" />
     <Compile Include="Model\ComPortAccessSequence.cs" />
