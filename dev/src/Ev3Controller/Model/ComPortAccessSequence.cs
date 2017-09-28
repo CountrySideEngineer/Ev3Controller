@@ -43,7 +43,7 @@ namespace Ev3Controller.Model
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public delegate void NotifySendReceiveDataEventHandler(object sender, EventArgs e);
-        public event NotifySendReceiveDataEventHandler NotifySendReceiveEvent;
+        public event NotifySendReceiveDataEventHandler NotifySendReceiveDataEvent;
         #endregion
 
         #region Public Properties
@@ -203,6 +203,15 @@ namespace Ev3Controller.Model
         public void OnTaskFinishedEvent(EventArgs e)
         {
             this.TaskFinishedEvent?.Invoke(this, e); 
+        }
+
+        /// <summary>
+        /// Raise NotifySendReceiveEvent event.
+        /// </summary>
+        /// <param name="e"></param>
+        public void OnNotifySendDataReceive(EventArgs e)
+        {
+            this.NotifySendReceiveDataEvent?.Invoke(this, e);
         }
 
         protected Dictionary<StateIndex, MessageInformation> StateMessageDictionary;
