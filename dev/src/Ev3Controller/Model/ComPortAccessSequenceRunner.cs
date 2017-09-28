@@ -35,6 +35,14 @@ namespace Ev3Controller.Model
         /// </summary>
         public delegate void SequenceFinishedEventHandler(object sender, EventArgs e);
         public event SequenceFinishedEventHandler SequenceFinishedEvent;
+
+        /// <summary>
+        /// Delegate to notify a sent data and received data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void DataSendReceiveEventHandler(object sender, EventArgs e);
+        public event DataSendReceiveEventHandler DataSendReceiveEvent;
         #endregion
 
         #region Public Properties
@@ -180,6 +188,16 @@ namespace Ev3Controller.Model
         public void SequenceFinisedEvent(object sender, EventArgs e)
         {
             this.OnSequenceFinishedEvent(e);
+        }
+
+        /// <summary>
+        /// Raise event to notify the sent and received data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void NotifySendReceiveDataEventCallback(object sender, EventArgs e)
+        {
+            this.DataSendReceiveEvent?.Invoke(this, e);
         }
         #endregion
     }

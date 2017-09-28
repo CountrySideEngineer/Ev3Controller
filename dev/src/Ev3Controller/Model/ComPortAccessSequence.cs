@@ -36,6 +36,14 @@ namespace Ev3Controller.Model
         #region Public Properties
         public delegate void TaskFinishedEventHandler(object sender, EventArgs e);
         public event TaskFinishedEventHandler TaskFinishedEvent;
+
+        /// <summary>
+        /// Delegate to notify sent and received data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void NotifySendReceiveDataEventHandler(object sender, EventArgs e);
+        public event NotifySendReceiveDataEventHandler NotifySendReceiveEvent;
         #endregion
 
         #region Public Properties
