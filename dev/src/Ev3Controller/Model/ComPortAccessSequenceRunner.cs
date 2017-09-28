@@ -14,6 +14,7 @@ namespace Ev3Controller.Model
             SEQUENCE_NAME_CONNECT,
             SEQUENCE_NAME_DISCONNECT,
             SEQUENCE_NAME_SEND_AND_RECV,
+            SEQUENCE_NAME_UNKNOWN,
             SEQUENCE_NAME_MAX,
         };
 
@@ -65,6 +66,11 @@ namespace Ev3Controller.Model
         /// Sequence now running.
         /// </summary>
         public ComPortAccessSequence CurSequence { get; protected set; }
+
+        /// <summary>
+        /// Sequence name data of running currently.
+        /// </summary>
+        public SequenceName SeqName { get; protected set; }
         #endregion
 
         #region Factory Methods
@@ -75,7 +81,7 @@ namespace Ev3Controller.Model
         /// Identifier used int creating ComPortAccessSequence concrete object.
         /// </param>
         /// <returns>Concrete ComPortAccessSequence object.</returns>
-        protected static ComPortAccessSequence SequenceFactory(SequenceName SeqName)
+        public static ComPortAccessSequence SequenceFactory(SequenceName SeqName)
         {
             ComPortAccessSequence AccessSequence = null;
             switch (SeqName)
@@ -121,6 +127,14 @@ namespace Ev3Controller.Model
         {
             this.CurTask = this.StartSequence(
                 ComPortAccessSequenceRunner.SequenceFactory(SeqName));
+            if (null == this.CurTask)
+            {
+                this.SeqName = SequenceName.SEQUENCE_NAME_UNKNOWN;
+            }
+            else
+            {
+                this.SeqName = SeqName;
+            }
         }
 
         /// <summary>

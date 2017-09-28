@@ -81,5 +81,63 @@ namespace Ev3Controller.Model.Tests
             IsSequenceFinishedEventHandler = true;
             IsSequenceFinishedEventHandlerCount++;
         }
+        #region Unit test of SequenceFactory static method.
+
+        [TestMethod()]
+        [TestCategory("ComPortAccessSequenceRunner")]
+        [TestCategory("ComPortAccessSequenceRunner_SequenceFactory")]
+        public void SequenceFactoryTest_001()
+        {
+            var Sequence =
+                ComPortAccessSequenceRunner.SequenceFactory(
+                    ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);
+
+            Assert.IsInstanceOfType(Sequence, typeof(ComPortConnectSequence));
+        }
+        [TestMethod()]
+        [TestCategory("ComPortAccessSequenceRunner")]
+        [TestCategory("ComPortAccessSequenceRunner_SequenceFactory")]
+        public void SequenceFactoryTest_002()
+        {
+            var Sequence =
+                ComPortAccessSequenceRunner.SequenceFactory(
+                    ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_DISCONNECT);
+
+            Assert.IsInstanceOfType(Sequence, typeof(ComPortDisconnectSequence));
+        }
+        [TestMethod()]
+        [TestCategory("ComPortAccessSequenceRunner")]
+        [TestCategory("ComPortAccessSequenceRunner_SequenceFactory")]
+        public void SequenceFactoryTest_003()
+        {
+            var Sequence =
+                ComPortAccessSequenceRunner.SequenceFactory(
+                    ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
+
+            Assert.IsInstanceOfType(Sequence, typeof(EchoBackComPortSendRecvSequence));
+        }
+        [TestMethod()]
+        [TestCategory("ComPortAccessSequenceRunner")]
+        [TestCategory("ComPortAccessSequenceRunner_SequenceFactory")]
+        public void SequenceFactoryTest_004()
+        {
+            var Sequence =
+                ComPortAccessSequenceRunner.SequenceFactory(
+                    ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_UNKNOWN);
+
+            Assert.IsNull(Sequence);
+        }
+        [TestMethod()]
+        [TestCategory("ComPortAccessSequenceRunner")]
+        [TestCategory("ComPortAccessSequenceRunner_SequenceFactory")]
+        public void SequenceFactoryTest_005()
+        {
+            var Sequence =
+                ComPortAccessSequenceRunner.SequenceFactory(
+                    ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_MAX);
+
+            Assert.IsNull(Sequence);
+        }
+        #endregion
     }
 }
