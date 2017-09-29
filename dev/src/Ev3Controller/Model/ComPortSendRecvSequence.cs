@@ -58,6 +58,8 @@ namespace Ev3Controller.Model
                 foreach (ACommand Command in this.CommandQueue)
                 {
                     ComPortAcc.SendAndRecv(Command.CmdData, Command.ResData);
+                    this.OnNotifySendReceiveData(
+                        new NotifySendReceiveDataEventArgs(Command.CmdData, Command.ResData));
                 }
             }
             this.IsRunning = false;

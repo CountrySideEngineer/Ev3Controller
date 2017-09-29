@@ -209,7 +209,7 @@ namespace Ev3Controller.Model
         /// Raise NotifySendReceiveEvent event.
         /// </summary>
         /// <param name="e"></param>
-        public void OnNotifySendDataReceive(EventArgs e)
+        public void OnNotifySendReceiveData(EventArgs e)
         {
             this.NotifySendReceiveDataEvent?.Invoke(this, e);
         }

@@ -153,11 +153,15 @@ namespace Ev3Controller.Model
                     this.CurSequence.StopSequence();
                     while (!this.CurTask.Status.Equals(TaskStatus.RanToCompletion)) { }
                     this.CurSequence.TaskFinishedEvent -= this.SequenceFinisedEvent;
+                    this.CurSequence.NotifySendReceiveDataEvent -=
+                        this.NotifySendReceiveDataEventCallback;
                     this.CurSequence = null;
                 }
 
                 this.CurSequence = NextSequence;
                 this.CurSequence.TaskFinishedEvent += this.SequenceFinisedEvent;
+                this.CurSequence.NotifySendReceiveDataEvent += 
+                    this.NotifySendReceiveDataEventCallback;
                 Task MainTask = this.CurSequence.StartSequence(this.ComPortAcc);
 
                 this.OnSequenceStartedEvent(null);
@@ -205,11 +209,20 @@ namespace Ev3Controller.Model
         }
 
         /// <summary>
-        /// Raise event to notify the sent and received data.
+        /// Callback of notify send and Receive data event.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public void NotifySendReceiveDataEventCallback(object sender, EventArgs e)
+        {
+            this.OnDataSendReceiveEvent(e);
+        }
+
+        /// <summary>
+        /// Raise event to notify the sent and received data.
+        /// </summary>
+        /// <param name="e"></param>
+        public void OnDataSendReceiveEvent(EventArgs e)
         {
             this.DataSendReceiveEvent?.Invoke(this, e);
         }
