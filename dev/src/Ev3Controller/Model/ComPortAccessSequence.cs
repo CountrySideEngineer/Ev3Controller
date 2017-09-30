@@ -44,6 +44,14 @@ namespace Ev3Controller.Model
         /// <param name="e"></param>
         public delegate void NotifySendReceiveDataEventHandler(object sender, EventArgs e);
         public event NotifySendReceiveDataEventHandler NotifySendReceiveDataEvent;
+
+        /// <summary>
+        /// Delegata to notify an exception raised.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void NotifyRecvExceptionEventHandler(object sender, EventArgs e);
+        public event NotifyRecvExceptionEventHandler NotifyRecvExceptionEvent;
         #endregion
 
         #region Public Properties
@@ -214,6 +222,14 @@ namespace Ev3Controller.Model
             this.NotifySendReceiveDataEvent?.Invoke(this, e);
         }
 
+        /// <summary>
+        /// Raise NotifyRecvExceptionEvent
+        /// </summary>
+        /// <param name="e"></param>
+        public void OnNotifyRecvExceptionEvent(EventArgs e)
+        {
+            this.NotifyRecvExceptionEvent(this, e);
+        }
         protected Dictionary<StateIndex, MessageInformation> StateMessageDictionary;
         #endregion
 

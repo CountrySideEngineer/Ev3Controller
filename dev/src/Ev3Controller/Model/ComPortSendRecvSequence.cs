@@ -57,11 +57,19 @@ namespace Ev3Controller.Model
             {
                 foreach (ACommand Command in this.CommandQueue)
                 {
-                    byte[] ResData;
-                    ComPortAcc.SendAndRecv(Command.CmdData, out ResData);
-                    Command.ResData = ResData;
-                    this.OnNotifySendReceiveData(
-                        new NotifySendReceiveDataEventArgs(Command.CmdData, Command.ResData));
+                    try
+                    {
+                        byte[] ResData;
+                        ComPortAcc.SendAndRecv(Command.CmdData, out ResData);
+                        Command.ResData = ResData;
+                        Command.Check();
+                        this.OnNotifySendReceiveData(
+                            new NotifySendReceiveDataEventArgs(Command.CmdData, Command.ResData));
+                    }
+                    catch   (CommandException CmdExpt)
+                    {
+                        this.OnNotifyRecvExceptionEvent(new NotifyCommandException(CmdExpt)) ;
+                    }
                 }
             }
             this.IsRunning = false;

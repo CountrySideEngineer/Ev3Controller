@@ -83,6 +83,7 @@
     <Compile Include="Model\ConnectStateChangedEventArgs.cs" />
     <Compile Include="Model\EchoBackComPortSendRecvSequence.cs" />
     <Compile Include="Model\IsConnectedChangedEventArgs.cs" />
+    <Compile Include="Model\NotifyCommandException.cs" />
     <Compile Include="Model\NotifySendReceiveDataEventArgs.cs" />
     <Compile Include="ViewModel\ComPortViewModel.cs" />
     <Compile Include="ViewModel\DeviceViewModelBase.cs" />
