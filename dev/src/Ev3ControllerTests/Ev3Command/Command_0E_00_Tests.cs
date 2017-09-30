@@ -29,7 +29,7 @@ namespace Ev3ControllerTests.Ev3Command
         }
         #endregion
 
-        #region Unit test of Command_0E_00 Constructor.
+        #region Unit test of Command_0E_00 Check method.
         [TestMethod]
         [TestCategory("Command_0E_00")]
         [TestCategory("Command_0E_00_Check")]
