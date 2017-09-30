@@ -61,7 +61,7 @@ namespace Ev3Controller.Ev3Command
                          */
                         throw new CommandOperationException(
                             string.Format(
-                                "Invalid Port Number:[Code = {0}-{1} Name = {2}]",
+                                "InvalidPortNumber",
                                 this.Cmd, this.SubCmd, this.Name));
                     }
                     if ((IsListen != 0) && (IsListen != 1))

@@ -43,7 +43,7 @@ namespace Ev3Controller.Ev3Command
             {
                 throw new CommandLenException(
                     string.Format(
-                        "Command or response data Len error:[Code = {0}-{1} Name = {2}]",
+                        "SomeParameterInvalid",
                         this.Cmd, this.SubCmd, this.Name));
             }
             base.CheckParam();

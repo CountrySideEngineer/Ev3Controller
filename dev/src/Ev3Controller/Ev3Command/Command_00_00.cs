@@ -52,7 +52,7 @@ namespace Ev3Controller.Ev3Command
             {
                 throw new CommandLenException(
                     string.Format(
-                        "Command or response data Len error:[Code = {0}-{1} Name = {2}]",
+                            "CommandOrResponseLenError",
                         this.Cmd, this.SubCmd, this.Name));
             }
             for (int index = 0; index < ResLen; index++)
@@ -61,7 +61,7 @@ namespace Ev3Controller.Ev3Command
                 {
                     throw new CommandParamException(
                         string.Format(
-                            "One or some parameter in data invalid:[Code = {0}-{1} Name = {2}]",
+                            "SomeParameterInvalid",
                             this.Cmd, this.SubCmd, this.Name));
                 }
             }

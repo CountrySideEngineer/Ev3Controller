@@ -52,7 +52,7 @@ namespace Ev3Controller.Ev3Command
                     default:
                         throw new CommandOperationException(
                             string.Format(
-                                "Receive unexpected sensor tpye:[Code = {0}-{1} Name = {2}]",
+                                "ReceiveUnexpectedSensorType",
                                 this.Cmd, this.SubCmd, this.Name));
                 }
             }

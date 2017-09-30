@@ -14,6 +14,11 @@ namespace Ev3Controller.Ev3Command
             : base(message) { }
         public CommandInvalidParamException(string message, Exception inner)
             : base(message, inner) { }
+        public CommandInvalidParamException(string message, byte Cmd, byte SubCmd, string Name)
+            : base(message) { }
+        public CommandInvalidParamException(
+            string message, Exception inner, byte Cmd, byte SubCmd, string Name)
+            : base(message, inner, Cmd, SubCmd, Name) { } 
         #endregion
     }
 }

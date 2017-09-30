@@ -46,7 +46,7 @@ namespace Ev3Controller.Ev3Command
             {
                 throw new CommandLenException(
                     string.Format(
-                        "Command or response data Len error:[Code = {0}-{1} Name = {2}]",
+                        "SomeParameterInvalid",
                         this.Cmd, this.SubCmd, this.Name));
             }
             byte SafeState = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP];
@@ -60,7 +60,7 @@ namespace Ev3Controller.Ev3Command
                 default:
                     throw new CommandOperationException(
                         string.Format(
-                            "Receive unexpected safe state in response data:[Code = {0}-{1} Name = {2}]",
+                            "ReceiveUnexpectedSafeState",
                             this.Cmd, this.SubCmd, this.Name));
             }
             base.CheckParam();

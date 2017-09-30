@@ -141,7 +141,7 @@ namespace Ev3Controller.Ev3Command
             {
                 throw new CommandUnExpectedResponse(
                     string.Format(
-                        "Command error:[Code = {0}-{1} Name = {2}]",
+                        "CommandError",
                         this.Cmd, this.SubCmd, this.Name));
             }
         }
@@ -159,25 +159,25 @@ namespace Ev3Controller.Ev3Command
                 case 0xFF:
                     throw new CommandOperationException(
                         string.Format(
-                            "Command error:[Code = {0}-{1} Name = {2}]",
+                            "CommandError",
                             this.Cmd, this.SubCmd, this.Name));
 
                 case 0xFE:
                     throw new CommandLenException(
                         string.Format(
-                            "Command or response data Len error:[Code = {0}-{1} Name = {2}]",
+                            "CommandOrResponseLenError",
                             this.Cmd, this.SubCmd, this.Name));
 
                 case 0xFD:
                     throw new CommandInvalidParamException(
                         string.Format(
-                            "Invalid sub command code:[Code = {0}-{1} Name = {2}]",
+                            "InvalidSubCommandCode",
                             this.Cmd, this.SubCmd, this.Name));
 
                 case 0xFC:
                     throw new CommandParamException(
                         string.Format(
-                            "One or some parameter in data invalid:[Code = {0}-{1} Name = {2}]",
+                            "SomeParameterInvalid",
                             this.Cmd, this.SubCmd, this.Name));
             }
         }

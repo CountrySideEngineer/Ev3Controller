@@ -14,6 +14,11 @@ namespace Ev3Controller.Ev3Command
             : base(message) { }
         public CommandOperationException(string message, Exception inner)
             : base(message, inner) { }
+        public CommandOperationException(string message, byte Cmd, byte SubCmd, string Name)
+            : base(message) { }
+        public CommandOperationException(
+            string message, Exception inner, byte Cmd, byte SubCmd, string Name)
+            : base(message, inner, Cmd, SubCmd, Name) { }
         #endregion
     }
 }

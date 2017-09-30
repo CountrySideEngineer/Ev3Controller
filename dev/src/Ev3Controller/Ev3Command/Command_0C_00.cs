@@ -46,7 +46,7 @@ namespace Ev3Controller.Ev3Command
             {
                 throw new CommandLenException(
                     string.Format(
-                        "Command or response data Len error:[Code = {0}-{1} Name = {2}]",
+                        "CommandOrResponseLenError",
                         this.Cmd, this.SubCmd, this.Name));
             }
 
@@ -66,7 +66,7 @@ namespace Ev3Controller.Ev3Command
                     default:
                         throw new CommandOperationException(
                             string.Format(
-                                "Receive unexpected motor tpye:[Code = {0}-{1} Name = {2}]",
+                                "ReceiveUnexpectedMotorType",
                                 this.Cmd, this.SubCmd, this.Name));
                 }
             }
