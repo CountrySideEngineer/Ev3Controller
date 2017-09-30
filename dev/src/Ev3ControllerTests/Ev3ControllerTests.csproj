@@ -59,6 +59,7 @@
     <Compile Include="Ev3Command\Command_06_00_Tests.cs" />
     <Compile Include="Ev3Command\Command_0C_00_Tests.cs" />
     <Compile Include="Ev3Command\Command_0E_00_Tests.cs" />
+    <Compile Include="Ev3Command\Command_0E_10_Tests.cs" />
     <Compile Include="Model\ComPortAccessSequenceRunnerTests.cs" />
     <Compile Include="Model\ComPortAccessSequenceTestBase.cs" />
     <Compile Include="Model\ComPortAccessSequenceTests.cs" />
