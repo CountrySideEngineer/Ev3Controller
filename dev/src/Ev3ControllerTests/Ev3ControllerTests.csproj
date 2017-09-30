@@ -54,6 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Ev3Command\ACommandTests.cs" />
+    <Compile Include="Ev3Command\CommandExceptionTests.cs" />
     <Compile Include="Ev3Command\Command_02_00Tests.cs" />
     <Compile Include="Ev3Command\Command_04_00Tests.cs" />
     <Compile Include="Ev3Command\Command_06_00_Tests.cs" />
