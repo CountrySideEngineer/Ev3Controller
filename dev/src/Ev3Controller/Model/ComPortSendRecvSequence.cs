@@ -57,7 +57,9 @@ namespace Ev3Controller.Model
             {
                 foreach (ACommand Command in this.CommandQueue)
                 {
-                    ComPortAcc.SendAndRecv(Command.CmdData, Command.ResData);
+                    byte[] ResData;
+                    ComPortAcc.SendAndRecv(Command.CmdData, out ResData);
+                    Command.ResData = ResData;
                     this.OnNotifySendReceiveData(
                         new NotifySendReceiveDataEventArgs(Command.CmdData, Command.ResData));
                 }

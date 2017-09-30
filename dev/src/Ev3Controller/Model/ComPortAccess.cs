@@ -168,10 +168,10 @@ namespace Ev3Controller.Model
         /// </summary>
         /// <param name="SendBuff">Buffer to data to send.</param>
         /// <param name="RecvBuff">Buffer to buffer to store received data.</param>
-        public virtual void SendAndRecv(byte[] SendBuff, byte[] RecvBuff)
+        public virtual void SendAndRecv(byte[] SendBuff, out byte[] RecvBuff)
         {
             this.SendData(SendBuff);
-            this.RecvData(RecvBuff);
+            this.RecvData(out RecvBuff);
         }
 
         /// <summary>
@@ -202,24 +202,28 @@ namespace Ev3Controller.Model
         /// </summary>
         /// <param name="Data">Reference to buffer to store read data.</param>
         /// <returns>Size of read data.</returns>
-        public virtual int RecvData(byte[] Data)
+        public virtual int RecvData(out byte[] Data)
         {
             int LengthRead = 0;
+            Data = null;
             if ((this.Port != null) && (this.Port.IsOpen))
             {
                 do
                 {
                     int LengthToRead = this.Port.BytesToRead;
-                    Data = new byte[LengthToRead];
+                    if (LengthToRead > 0)
+                    {
+                        Data = new byte[LengthToRead];
 
-                    while (LengthRead < LengthToRead)
-                    {
-                        int ReadLen = this.Port.Read(Data, LengthRead, LengthToRead - LengthRead);
-                        LengthRead += ReadLen;
-                    }
-                    if (LengthRead > 0)
-                    {
-                        break;
+                        while (LengthRead < LengthToRead)
+                        {
+                            int ReadLen = this.Port.Read(Data, LengthRead, LengthToRead - LengthRead);
+                            LengthRead += ReadLen;
+                        }
+                        if (LengthRead > 0)
+                        {
+                            break;
+                        }
                     }
                 } while (this.Port.IsOpen);
             }

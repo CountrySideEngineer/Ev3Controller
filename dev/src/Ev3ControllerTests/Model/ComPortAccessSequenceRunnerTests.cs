@@ -41,9 +41,17 @@ namespace Ev3Controller.Model.Tests
             Runner.SequenceStartedEvent += this.OnSequenceStartedEventHandler;
             Runner.SequenceStartingEvent += this.OnSequenceStartingEventHandler;
             Runner.SequenceFinishedEvent += this.OnSequenceFinishedEventHandler;
+            Runner.DataSendReceiveEvent += this.OnDataSendRecvEventHandler;
             Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);
 
             while (!Runner.CurTask.Status.Equals(TaskStatus.RanToCompletion)) ;
+
+            Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
+
+            Thread.Sleep(3000);
+            Assert.IsTrue(this.IsSequenceStartedEventHandler);
+            Assert.IsTrue(this.IsSequenceStartingEventHandler);
+            Assert.IsTrue(this.IsSequenceFinishedEventHandler);
 
             Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_DISCONNECT);
 
@@ -51,13 +59,15 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(this.IsSequenceStartedEventHandler);
             Assert.IsTrue(this.IsSequenceStartingEventHandler);
             Assert.IsTrue(this.IsSequenceFinishedEventHandler);
-            Assert.AreEqual(this.IsSequenceStartingEventHandlerCount, 2);
-            Assert.AreEqual(this.IsSequenceStartedEventHandlerCount, 2);
-            Assert.AreEqual(this.IsSequenceFinishedEventHandlerCount, 2);
+            Assert.IsTrue(this.IsDataSendRecvEventHandler);
+            Assert.AreEqual(this.IsSequenceStartingEventHandlerCount, 3);
+            Assert.AreEqual(this.IsSequenceStartedEventHandlerCount, 3);
+            Assert.AreEqual(this.IsSequenceFinishedEventHandlerCount, 3);
 
             Runner.SequenceStartedEvent -= this.OnSequenceStartedEventHandler;
             Runner.SequenceStartingEvent -= this.OnSequenceStartingEventHandler;
             Runner.SequenceFinishedEvent -= this.OnSequenceFinishedEventHandler;
+            Runner.DataSendReceiveEvent -= this.OnDataSendRecvEventHandler;
         }
 
         protected bool IsSequenceStartingEventHandler;
@@ -81,6 +91,33 @@ namespace Ev3Controller.Model.Tests
             IsSequenceFinishedEventHandler = true;
             IsSequenceFinishedEventHandlerCount++;
         }
+        protected bool IsDataSendRecvEventHandler;
+        protected int DataSendRecvEventHandlerCount;
+        public void OnDataSendRecvEventHandler(object sender, EventArgs e)
+        {
+            IsDataSendRecvEventHandler = true;
+            DataSendRecvEventHandlerCount++;
+
+            if (e is NotifySendReceiveDataEventArgs)
+            {
+                var EventArg = e as NotifySendReceiveDataEventArgs;
+
+                Console.WriteLine(@"Send:");
+                foreach (byte ByteData in EventArg.SendData)
+                {
+                    Console.Write(string.Format("0x{0:x2} ", ByteData));
+                }
+                Console.WriteLine(@"");
+
+                Console.WriteLine(@"Recv:");
+                foreach (byte ByteData in EventArg.RecvData)
+                {
+                    Console.Write(string.Format("0x{0:x2} ", ByteData));
+                }
+                Console.WriteLine(@"");
+            }
+        }
+
         #region Unit test of SequenceFactory static method.
 
         [TestMethod()]
