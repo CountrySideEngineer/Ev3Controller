@@ -40,9 +40,8 @@ namespace Ev3Controller.Ev3Command
             if ((Len != ResLen + 4) || (ResLen != ((DevNum * 2) + 1)))
             {
                 throw new CommandLenException(
-                    string.Format(
-                        "Command or response data Len error:[Code = 0x{0:X2}-0x{1:X2} Name = {2}]",
-                        this.Cmd, this.SubCmd, this.Name));
+                        "Command or response data Len error",
+                        this.Cmd, this.SubCmd, this.Name);
             }
             if (DevNum != 0)
             {
