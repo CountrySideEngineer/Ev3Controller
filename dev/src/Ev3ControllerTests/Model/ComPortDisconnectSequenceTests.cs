@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 namespace Ev3Controller.Model.Tests
 {
     [TestClass()]
-    public class ComPortConnectSequenceTests
+    public class ComPortDisconnectSequenceTests
     {
         [TestMethod()]
-        [TestCategory("ComPortConnectSequence_ComPortConnectSequence")]
-        public void ComPortConnectSequenceTest()
+        [TestCategory("ComPortDisconnectSequence_ComPortDisconnectSequence")]
+        public void ComPortDisconnectSequenceTest_001()
         {
-            var TestTarget = new ComPortConnectSequence();
+            var TestTarget = new ComPortDisconnectSequence();
 
             Assert.IsTrue(TestTarget.HasStartingMessage);
             Assert.IsTrue(TestTarget.HasStartedMessage);
             Assert.IsTrue(TestTarget.HasFinishedMessage);
-            Assert.AreEqual(TestTarget.StartingMessage, "Connecting");
-            Assert.AreEqual(TestTarget.StartedMessage, "Connecting");
-            Assert.AreEqual(TestTarget.FinishedMessage, "Connected");
+            Assert.AreEqual(TestTarget.StartingMessage, "Disconnecting");
+            Assert.AreEqual(TestTarget.StartedMessage, "Disconnecting");
+            Assert.AreEqual(TestTarget.FinishedMessage, "Disconnected");
         }
     }
 }
