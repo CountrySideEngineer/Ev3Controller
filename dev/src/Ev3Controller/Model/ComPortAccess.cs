@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ev3Controller.Model
@@ -205,6 +206,7 @@ namespace Ev3Controller.Model
         public virtual int RecvData(out byte[] Data)
         {
             int LengthRead = 0;
+            int WaitCount = 0;
             Data = null;
             if ((this.Port != null) && (this.Port.IsOpen))
             {
@@ -224,6 +226,15 @@ namespace Ev3Controller.Model
                         {
                             break;
                         }
+                    }
+                    else
+                    {
+                        if (WaitCount > 20)
+                        {
+                            break;
+                        }
+                        Thread.Sleep(1);
+                        WaitCount++;
                     }
                 } while (this.Port.IsOpen);
             }
