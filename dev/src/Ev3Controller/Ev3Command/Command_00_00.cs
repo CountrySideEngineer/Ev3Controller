@@ -51,18 +51,16 @@ namespace Ev3Controller.Ev3Command
             if ((ResLen != this.ResLen) || (Len != ResLen + 4))
             {
                 throw new CommandLenException(
-                    string.Format(
-                            "CommandOrResponseLenError",
-                        this.Cmd, this.SubCmd, this.Name));
+                        "CommandOrResponseLenError",
+                        this.Cmd, this.SubCmd, this.Name);
             }
             for (int index = 0; index < ResLen; index++)
             {
                 if (ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP + index] == index)
                 {
                     throw new CommandParamException(
-                        string.Format(
-                            "SomeParameterInvalid",
-                            this.Cmd, this.SubCmd, this.Name));
+                        "SomeParameterInvalid",
+                        this.Cmd, this.SubCmd, this.Name);
                 }
             }
         }

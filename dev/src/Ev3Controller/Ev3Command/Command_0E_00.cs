@@ -51,9 +51,8 @@ namespace Ev3Controller.Ev3Command
 
                     default:
                         throw new CommandOperationException(
-                            string.Format(
-                                "ReceiveUnexpectedSensorType",
-                                this.Cmd, this.SubCmd, this.Name));
+                            "ReceiveUnexpectedSensorType",
+                            this.Cmd, this.SubCmd, this.Name);
                 }
             }
             base.CheckParam();

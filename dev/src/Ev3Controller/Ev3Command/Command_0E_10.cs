@@ -59,16 +59,14 @@ namespace Ev3Controller.Ev3Command
                          * So, lower than 0 does not need to check.
                          */
                         throw new CommandOperationException(
-                            string.Format(
-                                "InvalidPortNumber",
-                                this.Cmd, this.SubCmd, this.Name));
+                            "InvalidPortNumber",
+                            this.Cmd, this.SubCmd, this.Name);
                     }
                     if ((IsListen != 0) && (IsListen != 1))
                     {
                         throw new CommandOperationException(
-                            string.Format(
-                                "Invalid listen state:[Code = {0}-{1} Name = {2}]",
-                                this.Cmd, this.SubCmd, this.Name));
+                            "InvalidListenState",
+                            this.Cmd, this.SubCmd, this.Name);
                     }
                 }
             }

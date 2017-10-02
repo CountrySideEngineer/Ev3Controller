@@ -44,9 +44,8 @@ namespace Ev3Controller.Ev3Command
             if ((ResLen != this.ResLen) || (Len != ResLen + 4))
             {
                 throw new CommandLenException(
-                    string.Format(
-                        "SomeParameterInvalid",
-                        this.Cmd, this.SubCmd, this.Name));
+                    "SomeParameterInvalid",
+                    this.Cmd, this.SubCmd, this.Name);
             }
             base.CheckParam();
         }

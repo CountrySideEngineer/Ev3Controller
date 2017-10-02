@@ -45,9 +45,8 @@ namespace Ev3Controller.Ev3Command
             if ((ResLen != this.ResLen) || (Len != ResLen + 4))
             {
                 throw new CommandLenException(
-                    string.Format(
-                        "CommandOrResponseLenError",
-                        this.Cmd, this.SubCmd, this.Name));
+                    "CommandOrResponseLenError",
+                    this.Cmd, this.SubCmd, this.Name);
             }
 
             byte MotorData = 0x00;
@@ -65,9 +64,8 @@ namespace Ev3Controller.Ev3Command
 
                     default:
                         throw new CommandOperationException(
-                            string.Format(
-                                "ReceiveUnexpectedMotorType",
-                                this.Cmd, this.SubCmd, this.Name));
+                            "ReceiveUnexpectedMotorType",
+                            this.Cmd, this.SubCmd, this.Name);
                 }
             }
 

@@ -58,9 +58,8 @@ namespace Ev3Controller.Ev3Command
                          * So, lower than 0 does not need to check.
                          */
                         throw new CommandOperationException(
-                            string.Format(
-                                "InvalidPortNumber",
-                                this.Cmd, this.SubCmd, this.Name));
+                            "InvalidPortNumber",
+                            this.Cmd, this.SubCmd, this.Name);
                     }
                 }
             }

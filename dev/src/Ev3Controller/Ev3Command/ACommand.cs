@@ -134,16 +134,27 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         protected void CheckRes()
         {
-            byte Res = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_CODE];
-            byte SubRes = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_SUB_CODE];
-
-            if ((Res != this.Res) || (SubRes != this.SubRes))
+            try
             {
-                throw new CommandUnExpectedResponse(
-                    string.Format(
+                byte Res = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_CODE];
+                byte SubRes =
+                    this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_SUB_CODE];
+
+                if ((Res != this.Res) || (SubRes != this.SubRes))
+                {
+                    throw new CommandUnExpectedResponse(
                         "CommandError",
-                        this.Cmd, this.SubCmd, this.Name));
+                        this.Cmd, this.SubCmd, this.Name);
+                }
             }
+#pragma warning disable 0168
+            catch (NullReferenceException ex)
+            {
+                throw new CommandNoResponseException(
+                    "NoResponseReceived",
+                    this.Cmd, this.SubCmd, this.Name);
+            }
+#pragma warning restore 0168
         }
 
         /// <summary>
@@ -158,27 +169,23 @@ namespace Ev3Controller.Ev3Command
             {
                 case 0xFF:
                     throw new CommandOperationException(
-                        string.Format(
-                            "CommandError",
-                            this.Cmd, this.SubCmd, this.Name));
+                        "CommandError",
+                        this.Cmd, this.SubCmd, this.Name);
 
                 case 0xFE:
                     throw new CommandLenException(
-                        string.Format(
-                            "CommandOrResponseLenError",
-                            this.Cmd, this.SubCmd, this.Name));
+                        "CommandOrResponseLenError",
+                        this.Cmd, this.SubCmd, this.Name);
 
                 case 0xFD:
                     throw new CommandInvalidParamException(
-                        string.Format(
-                            "InvalidSubCommandCode",
-                            this.Cmd, this.SubCmd, this.Name));
+                        "InvalidSubCommandCode",
+                        this.Cmd, this.SubCmd, this.Name);
 
                 case 0xFC:
                     throw new CommandParamException(
-                        string.Format(
-                            "SomeParameterInvalid",
-                            this.Cmd, this.SubCmd, this.Name));
+                        "SomeParameterInvalid",
+                        this.Cmd, this.SubCmd, this.Name);
             }
         }
         #endregion

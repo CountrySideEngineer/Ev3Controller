@@ -45,9 +45,8 @@ namespace Ev3Controller.Ev3Command
             if ((ResLen != this.ResLen) || (Len != ResLen + 4))
             {
                 throw new CommandLenException(
-                    string.Format(
-                        "SomeParameterInvalid",
-                        this.Cmd, this.SubCmd, this.Name));
+                    "SomeParameterInvalid",
+                    this.Cmd, this.SubCmd, this.Name);
             }
             byte SafeState = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP];
             switch (SafeState)
@@ -59,9 +58,8 @@ namespace Ev3Controller.Ev3Command
                     break;
                 default:
                     throw new CommandOperationException(
-                        string.Format(
-                            "ReceiveUnexpectedSafeState",
-                            this.Cmd, this.SubCmd, this.Name));
+                        "ReceiveUnexpectedSafeState",
+                        this.Cmd, this.SubCmd, this.Name);
             }
             base.CheckParam();
         }
