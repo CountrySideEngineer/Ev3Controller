@@ -46,7 +46,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandUnExpectedResponse))]
         public void Command_00_00Test_003()
         {
@@ -67,7 +67,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandUnExpectedResponse))]
         public void Command_00_00Test_004()
         {
@@ -88,7 +88,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandUnExpectedResponse))]
         public void Command_00_00Test_005()
         {
@@ -109,7 +109,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandUnExpectedResponse))]
         public void Command_00_00Test_006()
         {
@@ -130,7 +130,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandOperationException))]
         public void Command_00_00Test_007()
         {
@@ -151,7 +151,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandLenException))]
         public void Command_00_00Test_008()
         {
@@ -172,7 +172,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandInvalidParamException))]
         public void Command_00_00Test_009()
         {
@@ -193,7 +193,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandParamException))]
         public void Command_00_00Test_010()
         {
@@ -214,7 +214,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandLenException))]
         public void Command_00_00Test_011()
         {
@@ -235,7 +235,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandLenException))]
         public void Command_00_00Test_012()
         {
@@ -256,7 +256,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandLenException))]
         public void Command_00_00Test_013()
         {
@@ -277,7 +277,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandLenException))]
         public void Command_00_00Test_014()
         {
@@ -298,7 +298,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandParamException))]
         public void Command_00_00Test_015()
         {
@@ -320,7 +320,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandParamException))]
         public void Command_00_00Test_016()
         {
@@ -342,7 +342,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandParamException))]
         public void Command_00_00Test_017()
         {
@@ -364,7 +364,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Constructor")]
+        [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandParamException))]
         public void Command_00_00Test_018()
         {
@@ -384,8 +384,17 @@ namespace Ev3Controller.Ev3Command.Tests
             //In the method below, the exception will be raised.
             Command.Check();
         }
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_Check")]
+        [ExpectedExceptionAttribute(typeof(CommandNoResponseException))]
+        public void Command_00_00Test_019()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = null;
 
-
+            //In the method below, the exception will be raised.
+            Command.Check();
+        }
         #endregion
     }
 }
