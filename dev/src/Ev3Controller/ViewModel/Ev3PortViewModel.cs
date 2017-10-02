@@ -124,6 +124,16 @@ namespace Ev3Controller.ViewModel
         }
 
         /// <summary>
+        /// Handle data sending and response receiving event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public virtual void DataSendAndReceivedFinishedCallback(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
         /// Inner class contains label and status whether the connection state can change or not.
         /// </summary>
         protected class LabelAndEnable

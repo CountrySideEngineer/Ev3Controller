@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ev3Controller.Model
@@ -164,6 +165,17 @@ namespace Ev3Controller.Model
         }
 
         /// <summary>
+        /// Send data and store received into buffer RecvBuff.
+        /// </summary>
+        /// <param name="SendBuff">Buffer to data to send.</param>
+        /// <param name="RecvBuff">Buffer to buffer to store received data.</param>
+        public virtual void SendAndRecv(byte[] SendBuff, out byte[] RecvBuff)
+        {
+            this.SendData(SendBuff);
+            this.RecvData(out RecvBuff);
+        }
+
+        /// <summary>
         /// Send data through serial port.
         /// </summary>
         /// <param name="Data">Byte data to send.</param>
@@ -191,24 +203,38 @@ namespace Ev3Controller.Model
         /// </summary>
         /// <param name="Data">Reference to buffer to store read data.</param>
         /// <returns>Size of read data.</returns>
-        public virtual int RecvData(byte[] Data)
+        public virtual int RecvData(out byte[] Data)
         {
             int LengthRead = 0;
+            int WaitCount = 0;
+            Data = null;
             if ((this.Port != null) && (this.Port.IsOpen))
             {
                 do
                 {
                     int LengthToRead = this.Port.BytesToRead;
-                    Data = new byte[LengthToRead];
+                    if (LengthToRead > 0)
+                    {
+                        Data = new byte[LengthToRead];
 
-                    while (LengthRead < LengthToRead)
-                    {
-                        int ReadLen = this.Port.Read(Data, LengthRead, LengthToRead - LengthRead);
-                        LengthRead += ReadLen;
+                        while (LengthRead < LengthToRead)
+                        {
+                            int ReadLen = this.Port.Read(Data, LengthRead, LengthToRead - LengthRead);
+                            LengthRead += ReadLen;
+                        }
+                        if (LengthRead > 0)
+                        {
+                            break;
+                        }
                     }
-                    if (LengthRead > 0)
+                    else
                     {
-                        break;
+                        if (WaitCount > 20)
+                        {
+                            break;
+                        }
+                        Thread.Sleep(1);
+                        WaitCount++;
                     }
                 } while (this.Port.IsOpen);
             }
