@@ -64,6 +64,7 @@
     <Compile Include="Ev3Command\CommandException.cs" />
     <Compile Include="Ev3Command\CommandInvalidParamException.cs" />
     <Compile Include="Ev3Command\CommandLenException.cs" />
+    <Compile Include="Ev3Command\CommandNoResponseException.cs" />
     <Compile Include="Ev3Command\CommandOperationException.cs" />
     <Compile Include="Ev3Command\CommandParamException.cs" />
     <Compile Include="Ev3Command\CommandUnExpectedResponse.cs" />
