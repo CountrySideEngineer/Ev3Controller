@@ -384,6 +384,7 @@ namespace Ev3Controller.Ev3Command.Tests
             //In the method below, the exception will be raised.
             Command.Check();
         }
+        [TestMethod()]
         [TestCategory("Command_00_00")]
         [TestCategory("Command_00_00_Check")]
         [ExpectedExceptionAttribute(typeof(CommandNoResponseException))]
@@ -394,6 +395,266 @@ namespace Ev3Controller.Ev3Command.Tests
 
             //In the method below, the exception will be raised.
             Command.Check();
+        }
+        [TestMethod()]
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_Check")]
+        public void Command_00_00Test_020()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = new byte[8];
+            Command.ResData[0] = 0x01;
+            Command.ResData[1] = 0x00;
+            Command.ResData[2] = 0x00;
+            Command.ResData[3] = 0x04;
+            Command.ResData[4] = 0x00;//The number of connected device.
+            Command.ResData[5] = 0x00;
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x06;
+
+            var PrivateCommand = new PrivateObject(Command);
+            int DevNum = (int)PrivateCommand.Invoke("CheckDevNumAndThrowException", 4);
+
+            Assert.AreEqual(0, DevNum);
+        }
+        [TestMethod()]
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_CheckDevNumAndThrowException")]
+        public void Command_00_00Test_CheckDevNumAndThrowException_001()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = new byte[8];
+            Command.ResData[0] = 0x01;
+            Command.ResData[1] = 0x00;
+            Command.ResData[2] = 0x00;
+            Command.ResData[3] = 0x04;
+            Command.ResData[4] = 0x03;//The number of connected device.
+            Command.ResData[5] = 0x00;
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x06;
+
+            var PrivateCommand = new PrivateObject(Command);
+            int DevNum = (int)PrivateCommand.Invoke("CheckDevNumAndThrowException", 4);
+
+            Assert.AreEqual(3, DevNum);
+        }
+        [TestMethod()]
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_CheckDevNumAndThrowException")]
+        public void Command_00_00Test_CheckDevNumAndThrowException_002()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = new byte[8];
+            Command.ResData[0] = 0x01;
+            Command.ResData[1] = 0x00;
+            Command.ResData[2] = 0x00;
+            Command.ResData[3] = 0x04;
+            Command.ResData[4] = 0x00;//The number of connected device.
+            Command.ResData[5] = 0x00;
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x06;
+
+            var PrivateCommand = new PrivateObject(Command);
+            int DevNum = (int)PrivateCommand.Invoke("CheckDevNumAndThrowException", 4);
+
+            Assert.AreEqual(0, DevNum);
+        }
+        [TestMethod()]
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_CheckDevNumAndThrowException")]
+        public void Command_00_00Test_CheckDevNumAndThrowException_003()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = new byte[8];
+            Command.ResData[0] = 0x01;
+            Command.ResData[1] = 0x00;
+            Command.ResData[2] = 0x00;
+            Command.ResData[3] = 0x04;
+            Command.ResData[4] = 0x04;//The number of connected device.
+            Command.ResData[5] = 0x00;
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x06;
+
+            var PrivateCommand = new PrivateObject(Command);
+            int DevNum = (int)PrivateCommand.Invoke("CheckDevNumAndThrowException", 4);
+
+            Assert.AreEqual(4, DevNum);
+        }
+        [TestMethod()]
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_CheckDevNumAndThrowException")]
+        [ExpectedExceptionAttribute(typeof(CommandOperationException))]
+        public void Command_00_00Test_CheckDevNumAndThrowException_004()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = new byte[8];
+            Command.ResData[0] = 0x01;
+            Command.ResData[1] = 0x00;
+            Command.ResData[2] = 0x00;
+            Command.ResData[3] = 0x04;
+            Command.ResData[4] = 0x05;//The number of connected device.
+            Command.ResData[5] = 0x00;
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x06;
+
+            var PrivateCommand = new PrivateObject(Command);
+            int DevNum = (int)PrivateCommand.Invoke("CheckDevNumAndThrowException", 4);
+        }
+        [TestMethod()]
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_CheckLenAndThrowException")]
+        public void Command_00_00Test_CheckLenAndThrowException_001()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = new byte[10];
+            Command.ResData[0] = 0x01;
+            Command.ResData[1] = 0x00;
+            Command.ResData[2] = 0x00;
+            Command.ResData[3] = 0x06;
+            Command.ResData[4] = 0x00;//The number of connected device.
+            Command.ResData[5] = 0x00;
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x00;
+            Command.ResData[8] = 0x00;
+            Command.ResData[9] = 0x00;
+
+            var PrivateCommand = new PrivateObject(Command);
+            int DevNum = (int)PrivateCommand.Invoke("CheckLenAndThrowException", 4);
+        }
+        [TestMethod()]
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_CheckLenAndThrowException")]
+        public void Command_00_00Test_CheckLenAndThrowException_002()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = new byte[10];
+            Command.ResData[0] = 0x01;
+            Command.ResData[1] = 0x00;
+            Command.ResData[2] = 0x00;
+            Command.ResData[3] = 0x06;
+            Command.ResData[4] = 0x00;//The number of connected device.
+            Command.ResData[5] = 0x00;
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x00;
+            Command.ResData[8] = 0x00;
+            Command.ResData[9] = 0x00;
+
+            var PrivateCommand = new PrivateObject(Command);
+            int ResLen = (int)PrivateCommand.Invoke("CheckLenAndThrowException", 4);
+
+            Assert.AreEqual(6, ResLen);
+        }
+        [TestMethod()]
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_CheckLenAndThrowException")]
+        [ExpectedExceptionAttribute(typeof(CommandLenException))]
+        public void Command_00_00Test_CheckLenAndThrowException_003()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = new byte[10];
+            Command.ResData[0] = 0x01;
+            Command.ResData[1] = 0x00;
+            Command.ResData[2] = 0x00;
+            Command.ResData[3] = 0x05;
+            Command.ResData[4] = 0x00;//The number of connected device.
+            Command.ResData[5] = 0x00;
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x00;
+            Command.ResData[8] = 0x00;
+            Command.ResData[9] = 0x00;
+
+            var PrivateCommand = new PrivateObject(Command);
+            int ResLen = (int)PrivateCommand.Invoke("CheckLenAndThrowException", 4);
+        }
+        [TestMethod()]
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_CheckLenAndThrowException")]
+        [ExpectedExceptionAttribute(typeof(CommandLenException))]
+        public void Command_00_00Test_CheckLenAndThrowException_004()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = new byte[10];
+            Command.ResData[0] = 0x01;
+            Command.ResData[1] = 0x00;
+            Command.ResData[2] = 0x00;
+            Command.ResData[3] = 0x07;
+            Command.ResData[4] = 0x00;//The number of connected device.
+            Command.ResData[5] = 0x00;
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x00;
+            Command.ResData[8] = 0x00;
+            Command.ResData[9] = 0x00;
+
+            var PrivateCommand = new PrivateObject(Command);
+            int ResLen = (int)PrivateCommand.Invoke("CheckLenAndThrowException", 4);
+        }
+        [TestMethod()]
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_CheckPortAndThrowException")]
+        public void Command_00_00Test_CheckPortAndThrowException_001()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = new byte[10];
+            Command.ResData[0] = 0x01;
+            Command.ResData[1] = 0x00;
+            Command.ResData[2] = 0x00;
+            Command.ResData[3] = 0x06;
+            Command.ResData[4] = 0x00;//The number of connected device.
+            Command.ResData[5] = 0x00;//The port number, 0
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x00;
+            Command.ResData[8] = 0x00;
+            Command.ResData[9] = 0x00;
+
+            var PrivateCommand = new PrivateObject(Command);
+            byte PortNum = (byte)PrivateCommand.Invoke("CheckPortAndThrowException", 5);
+
+            Assert.AreEqual(0, PortNum);
+        }
+        [TestMethod()]
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_CheckPortAndThrowException")]
+        public void Command_00_00Test_CheckPortAndThrowException_002()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = new byte[10];
+            Command.ResData[0] = 0x01;
+            Command.ResData[1] = 0x00;
+            Command.ResData[2] = 0x00;
+            Command.ResData[3] = 0x06;
+            Command.ResData[4] = 0x00;//The number of connected device.
+            Command.ResData[5] = 0x03;//The port number, 3
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x00;
+            Command.ResData[8] = 0x00;
+            Command.ResData[9] = 0x00;
+
+            var PrivateCommand = new PrivateObject(Command);
+            byte PortNum = (byte)PrivateCommand.Invoke("CheckPortAndThrowException", 5);
+
+            Assert.AreEqual(3, PortNum);
+        }
+        [TestMethod()]
+        [TestCategory("Command_00_00")]
+        [TestCategory("Command_00_00_CheckPortAndThrowException")]
+        [ExpectedExceptionAttribute(typeof(CommandOperationException))]
+        public void Command_00_00Test_CheckPortAndThrowException_003()
+        {
+            var Command = new Command_00_00();
+            Command.ResData = new byte[10];
+            Command.ResData[0] = 0x01;
+            Command.ResData[1] = 0x00;
+            Command.ResData[2] = 0x00;
+            Command.ResData[3] = 0x06;
+            Command.ResData[4] = 0x00;//The number of connected device.
+            Command.ResData[5] = 0x04;//The port number, 4
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x00;
+            Command.ResData[8] = 0x00;
+            Command.ResData[9] = 0x00;
+
+            var PrivateCommand = new PrivateObject(Command);
+            byte PortNum = (byte)PrivateCommand.Invoke("CheckPortAndThrowException", 5);
         }
         #endregion
     }

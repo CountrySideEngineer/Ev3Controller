@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,7 +83,7 @@ namespace Ev3Controller.Ev3Command
         /// <summary>
         /// Expected length of response data len.
         /// If the value is unmatch in reponse data, a exception will be raised.
-        /// And if the value is -1, this value will be not checked.
+        /// And if the value is -1(In hex, 0xFF), this value will be not checked.
         /// </summary>
         public byte ResLen { get; protected set; }
 
@@ -187,6 +188,79 @@ namespace Ev3Controller.Ev3Command
                         "SomeParameterInvalid",
                         this.Cmd, this.SubCmd, this.Name);
             }
+        }
+
+        /// <summary>
+        /// Check whether number of device written in reponse data is valid or not.
+        /// If it is larger than 4, it shows invalid and CommandOperationException
+        /// will be thrown.
+        /// </summary>
+        /// <param name="DataIndex">Index of data in response.</param>
+        /// <returns>Number of device</returns>
+        protected virtual int CheckDevNumAndThrowException(int DataIndex)
+        {
+            Debug.Assert(this.ResData != null);
+
+            byte DevNum = this.ResData[DataIndex];
+            if (4 < DevNum)
+            {
+                throw new CommandOperationException(
+                    "InvalidDeviceNumber",
+                    this.Cmd, this.SubCmd, this.Name);
+            }
+            return (int)DevNum;
+        }
+
+        /// <summary>
+        /// Check whether size of response data buffer and length set in reponse data is match.
+        /// (To be more precise, the size is 4 byte more than the length.)
+        /// If it is not match, CommandLenException will be thrown.
+        /// </summary>
+        /// <param name="OptDataIndex">Index of option data.</param>
+        /// <returns>Length written in response data.</returns>
+        protected virtual int CheckLenAndThrowException(int OptDataIndex)
+        {
+            Debug.Assert(this.ResData != null);
+
+            int Len = this.ResData.Length;
+            int ResLen = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_LEN];
+            bool IsLenValid = false;
+
+            IsLenValid = (Len != (ResLen + 4));//Check all command commonly.
+
+            if (0xFF != this.ResLen)
+            {
+                //The case that the length is fixed.
+                IsLenValid |= (ResLen != this.ResLen);
+            }
+            if (IsLenValid)
+            {
+                throw new CommandLenException(
+                        "Command or response data Len error",
+                        this.Cmd, this.SubCmd, this.Name);
+            }
+            return ResLen;//WANT!!Change using TAPLE.
+        }
+
+        /// <summary>
+        /// Check whether the port number in response data is valid or not.
+        /// If it is invalid, CommandOperationException will be thrown.
+        /// </summary>
+        /// <param name="DataIndex">Index of data in response data.</param>
+        /// <returns>Port number</returns>
+        protected virtual byte CheckPortAndThrowException(int DataIndex)
+        {
+            Debug.Assert(this.ResData != null);
+
+            byte PortNum = this.ResData[DataIndex];
+            if (4 <= PortNum)
+            {
+                throw new CommandOperationException(
+                    "InvalidPortNumber",
+                    this.Cmd, this.SubCmd, this.Name);
+            }
+
+            return PortNum;
         }
         #endregion
     }
