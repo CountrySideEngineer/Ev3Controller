@@ -17,6 +17,8 @@ namespace Ev3Controller.Ev3Command
             this.SubRes = 0x11;
             this.ResLen = 0xFF;
 
+            this.OneDataLen = 0x03;
+
             base.Init();
         }
 
@@ -33,34 +35,17 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         protected override void CheckParam()
         {
-            int Len = this.ResData.Length;
-            int ResLen = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_LEN];
-            int DevNum = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP];
+            base.CheckParam();
+            this.CheckLenAndThrowException();
 
-            if ((Len != ResLen + 4) || (ResLen != ((DevNum * 3) + 1)))
-            {
-                throw new CommandLenException(
-                            "CommandOrResponseLenError",
-                            this.Cmd, this.SubCmd, this.Name);
-            }
+            int DevNum = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP];
             if (DevNum != 0)
             {
-                int PortDataTop = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP + 1;
+                int PortIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP + 1;
                 for (int index = 0; index < DevNum; index++)
                 {
-                    int PortIndex = PortDataTop + (index * 3);
-                    int DevInfoIndex = PortDataTop + (index * 3) + 1;
-                    byte Port = this.ResData[PortIndex];
-                    if (4 <= Port)
-                    {
-                        /*
-                         * PortNumber is byte and starts 0 to 3.
-                         * So, lower than 0 does not need to check.
-                         */
-                        throw new CommandOperationException(
-                            "InvalidPortNumber",
-                            this.Cmd, this.SubCmd, this.Name);
-                    }
+                    this.CheckPortAndThrowException(PortIndex);
+                    PortIndex += 3;
                 }
             }
             base.CheckParam();

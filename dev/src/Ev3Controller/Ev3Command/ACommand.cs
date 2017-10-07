@@ -218,6 +218,10 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         /// <param name="OptDataIndex">Index of option data.</param>
         /// <returns>Length written in response data.</returns>
+        protected virtual int CheckLenAndThrowException()
+        {
+            return this.CheckLenAndThrowException(0);
+        }
         protected virtual int CheckLenAndThrowException(int OptDataIndex)
         {
             Debug.Assert(this.ResData != null);
