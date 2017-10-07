@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Ev3Command\ACommand.cs" />
     <Compile Include="Ev3Command\CommandException.cs" />
     <Compile Include="Ev3Command\CommandInvalidParamException.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Model\NotifySendReceiveDataEventArgs.cs" />
     <Compile Include="ViewModel\ComPortViewModel.cs" />
     <Compile Include="ViewModel\DeviceViewModelBase.cs" />
+    <Compile Include="ViewModel\Ev3ControllerMainViewModel.cs" />
     <Compile Include="ViewModel\Ev3PortViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
