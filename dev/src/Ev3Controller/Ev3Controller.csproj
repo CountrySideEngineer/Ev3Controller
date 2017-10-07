@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Ev3Command\ACommand.cs" />
     <Compile Include="Ev3Command\CommandException.cs" />
     <Compile Include="Ev3Command\CommandInvalidParamException.cs" />
