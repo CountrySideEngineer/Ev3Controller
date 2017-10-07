@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Ev3Command
 {
-    public class Command_0E_11 : Command_0E
+    public class Command_0E_20 : Command_0E
     {
         #region Other methods and private properties in calling order
         protected override void Init()
         {
-            this.SubCmd = 0x11;
+            this.SubCmd = 0x20;
             this.CmdLen = 0x00;
 
-            this.SubRes = 0x11;
+            this.SubRes = 0x20;
             this.ResLen = 0xFF;
 
             this.OneDataLen = 0x03;

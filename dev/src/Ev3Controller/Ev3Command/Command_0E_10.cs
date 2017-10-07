@@ -17,6 +17,8 @@ namespace Ev3Controller.Ev3Command
             this.SubRes = 0x10;
             this.ResLen = 0xFF;//Length of response can not be determined.
 
+            this.OneDataLen = 0x02;
+
             base.Init();
         }
 
@@ -33,35 +35,19 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         protected override void CheckParam()
         {
-            int Len = this.ResData.Length;
-            int ResLen = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_LEN];
-            int DevNum = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP];
+            base.CheckParam();
+            this.CheckLenAndThrowException();
 
-            if ((Len != ResLen + 4) || (ResLen != ((DevNum * 2) + 1)))
-            {
-                throw new CommandLenException(
-                        "Command or response data Len error",
-                        this.Cmd, this.SubCmd, this.Name);
-            }
+            int DataIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP;
+            int DevNum = this.ResData[DataIndex++];
+
             if (DevNum != 0)
             {
-                int PortDataTop = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP + 1;
                 for (int index = 0; index < DevNum; index++)
                 {
-                    int PortIndex = PortDataTop + (index * 2);
-                    int DevInfoIndex = PortDataTop + (index * 2) + 1;
-                    byte Port = this.ResData[PortIndex];
-                    byte IsListen = this.ResData[DevInfoIndex];
-                    if (4 <= Port)
-                    {
-                        /*
-                         * PortNumber is byte and starts 0 to 3.
-                         * So, lower than 0 does not need to check.
-                         */
-                        throw new CommandOperationException(
-                            "InvalidPortNumber",
-                            this.Cmd, this.SubCmd, this.Name);
-                    }
+                    this.CheckPortAndThrowException(DataIndex++);
+
+                    byte IsListen = this.ResData[DataIndex++];
                     if ((IsListen != 0) && (IsListen != 1))
                     {
                         throw new CommandOperationException(
@@ -70,7 +56,6 @@ namespace Ev3Controller.Ev3Command
                     }
                 }
             }
-            base.CheckParam();
         }
         #endregion
     }

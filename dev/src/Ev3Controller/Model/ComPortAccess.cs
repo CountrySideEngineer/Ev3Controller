@@ -229,11 +229,16 @@ namespace Ev3Controller.Model
                     }
                     else
                     {
+                        /*
+                         *  Command receiving task run each 10 milli seconds.
+                         *  So, wait twice the time, it will be enough to handle all command data and
+                         *  create and send response data.
+                         */
                         if (WaitCount > 20)
                         {
                             break;
                         }
-                        Thread.Sleep(1);
+                        Thread.Sleep(1);//Stop the task while one million second.
                         WaitCount++;
                     }
                 } while (this.Port.IsOpen);
