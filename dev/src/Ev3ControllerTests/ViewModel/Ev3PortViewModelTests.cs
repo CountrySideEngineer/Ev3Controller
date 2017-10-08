@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ev3Controller.Model;
+using System.Threading;
 
 namespace Ev3Controller.ViewModel.Tests
 {
@@ -156,6 +157,22 @@ namespace Ev3Controller.ViewModel.Tests
             Assert.IsTrue(this.TestVM.CanChangePort);
             Assert.AreEqual(this.TestVM.ActionName, "不明");
             Assert.AreEqual(this.TestVM.StateLabel, "不明");
+        }
+        #endregion
+
+        #region Unit test of PortConnectExecute method in Ev3PortViewModel class.
+        [TestMethod()]
+        [TestCategory("Ev3PortViewModel")]
+        [TestCategory("Ev3PortViewModel_PortConnectExecute")]
+        public void Ev3PortViewModel_PortConnectExecuteTest_001()
+        {
+            var ViewModel = new Ev3PortViewModel();
+            ViewModel.SelectedComPortVM = ComPortViewModel.Create("COM41", "Device");
+
+            ViewModel.PortConnectExecute();
+            Thread.Sleep(3000);
+
+            ViewModel.PortDisconnectExecute();
         }
         #endregion
     }
