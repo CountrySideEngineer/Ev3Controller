@@ -34,6 +34,7 @@ namespace Ev3Controller.ViewModel
         public Ev3PortViewModel()
         {
             this.ConnectState = new ConnectState(ConnectionState.Disconnected);
+            this.AvailableComPortVM = ComPortViewModel.Create();
         }
         #endregion
 
@@ -97,6 +98,30 @@ namespace Ev3Controller.ViewModel
         }
 
         /// <summary>
+        /// List of available COM port.
+        /// </summary>
+        public IEnumerable<ComPortViewModel> AvailableComPortVM { get; protected set; }
+
+        /// <summary>
+        /// Current selected ComPortViewModel
+        /// </summary>
+        protected ComPortViewModel _SelectedComPortVM;
+        public ComPortViewModel SelectedComPortVM
+        {
+            get { return this._SelectedComPortVM; }
+            set
+            {
+                this._SelectedComPortVM = value;
+                this.RaisePropertyChanged("SelectedComPortVM");
+            }
+        }
+
+        /// <summary>
+        /// ComPortAccessSequenceRunner object to access COM port.
+        /// </summary>
+        public ComPortAccessSequenceRunner AccessRunner { get; protected set; }
+
+        /// <summary>
         /// Represents whether the port used to connect with device can be changed or not.
         /// </summary>
         protected bool _CanChangePort;
@@ -111,7 +136,22 @@ namespace Ev3Controller.ViewModel
         }
         #endregion
 
-        #region Other methods and private properties in calling order
+        #region Other methods and private properties in calling order.
+        public void PortConnectExecute()
+        {
+            if (this.IsConnected) { return; }//Nothing to do if the port has been connected.
+
+            this.AccessRunner = new ComPortAccessSequenceRunner(this.SelectedComPortVM.ComPort);
+            this.AccessRunner.ChangeAndStartSequence(
+                ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);
+        }
+        public void PortDisconnectExecute()
+        {
+            if (!this.IsConnected) { return; }//Nothing to do if the port has not been connected.
+            this.AccessRunner.ChangeAndStartSequence(
+                ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_DISCONNECT);
+        }
+
         /// <summary>
         /// Callback method called when ConnectStateChanged event raised.
         /// </summary>

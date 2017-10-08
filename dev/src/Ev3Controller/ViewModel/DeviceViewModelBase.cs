@@ -14,7 +14,10 @@ namespace Ev3Controller.ViewModel
     public class DeviceViewModelBase : ViewModelBase
     {
         #region Constructors and the Finalizer
-
+        public DeviceViewModelBase()
+        {
+            this.IsConnected = false;
+        }
         #endregion
 
         #region Events

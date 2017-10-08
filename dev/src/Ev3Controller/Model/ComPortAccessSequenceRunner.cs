@@ -123,7 +123,7 @@ namespace Ev3Controller.Model
         /// Stop current running sequence and start new one.
         /// </summary>
         /// <param name="SeqName">Identifier of new sequence.</param>
-        public void ChangeSequence(SequenceName SeqName)
+        public void ChangeAndStartSequence(SequenceName SeqName)
         {
             this.CurTask = this.StartSequence(
                 ComPortAccessSequenceRunner.SequenceFactory(SeqName));

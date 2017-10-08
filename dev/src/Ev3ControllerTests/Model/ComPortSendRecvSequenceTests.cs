@@ -19,7 +19,7 @@ namespace Ev3Controller.Model.Tests
         {
             this.Init();
 
-            Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);
+            Runner.ChangeAndStartSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);
             while (!Runner.CurTask.Status.Equals(TaskStatus.RanToCompletion)) ;
 
             Assert.IsTrue(this.IsSequenceStartedEventHandler);
@@ -30,7 +30,7 @@ namespace Ev3Controller.Model.Tests
             Assert.AreEqual(this.IsSequenceFinishedEventHandlerCount, 1);
 
             this.Init();
-            Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
+            Runner.ChangeAndStartSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
 
             Thread.Sleep(1000);
 
@@ -42,7 +42,7 @@ namespace Ev3Controller.Model.Tests
             Assert.AreEqual(this.IsSequenceFinishedEventHandlerCount, 0);
 
             this.Init();
-            Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_DISCONNECT);
+            Runner.ChangeAndStartSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_DISCONNECT);
 
             while (!Runner.CurTask.Status.Equals(TaskStatus.RanToCompletion)) ;
 
