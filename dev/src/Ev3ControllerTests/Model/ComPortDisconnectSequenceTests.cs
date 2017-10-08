@@ -23,6 +23,9 @@ namespace Ev3Controller.Model.Tests
             Assert.AreEqual(TestTarget.StartingMessage, "Disconnecting");
             Assert.AreEqual(TestTarget.StartedMessage, "Disconnecting");
             Assert.AreEqual(TestTarget.FinishedMessage, "Disconnected");
+            Assert.AreEqual(TestTarget.StartingConnectionState, ConnectionState.Disconnecting);
+            Assert.AreEqual(TestTarget.StartedConnectionState, ConnectionState.Disconnecting);
+            Assert.AreEqual(TestTarget.FinishedConnectionState, ConnectionState.Disconnected);
         }
     }
 }
