@@ -170,9 +170,43 @@ namespace Ev3Controller.ViewModel.Tests
             ViewModel.SelectedComPortVM = ComPortViewModel.Create("COM41", "Device");
 
             ViewModel.PortConnectExecute();
-            Thread.Sleep(3000);
+            Assert.AreEqual(ConnectionState.Connecting, ViewModel.ConnectState.State);
+            Thread.Sleep(4000);
+            Assert.AreEqual(ConnectionState.Connected, ViewModel.ConnectState.State);
 
             ViewModel.PortDisconnectExecute();
+            Assert.AreEqual(ConnectionState.Disconnecting, ViewModel.ConnectState.State);
+            Thread.Sleep(3000);
+            Assert.AreEqual(ConnectionState.Disconnected, ViewModel.ConnectState.State);
+        }
+        [TestMethod()]
+        [TestCategory("Ev3PortViewModel")]
+        [TestCategory("Ev3PortViewModel_PortConnectExecute")]
+        public void Ev3PortViewModel_PortConnectExecuteTest_002()
+        {
+            var ViewModel = new Ev3PortViewModel();
+            ViewModel.SelectedComPortVM = ComPortViewModel.Create("COM41", "Device");
+
+            ViewModel.PortConnectExecute();
+            Assert.AreEqual(ConnectionState.Connecting, ViewModel.ConnectState.State);
+            Thread.Sleep(4000);
+            Assert.AreEqual(ConnectionState.Connected, ViewModel.ConnectState.State);
+
+            ViewModel.PortDisconnectExecute();
+            Assert.AreEqual(ConnectionState.Disconnecting, ViewModel.ConnectState.State);
+            Thread.Sleep(3000);
+            Assert.AreEqual(ConnectionState.Disconnected, ViewModel.ConnectState.State);
+
+            Thread.Sleep(1000);
+            ViewModel.PortConnectExecute();
+            Assert.AreEqual(ConnectionState.Connecting, ViewModel.ConnectState.State);
+            Thread.Sleep(4000);
+            Assert.AreEqual(ConnectionState.Connected, ViewModel.ConnectState.State);
+
+            ViewModel.PortDisconnectExecute();
+            Assert.AreEqual(ConnectionState.Disconnecting, ViewModel.ConnectState.State);
+            Thread.Sleep(3000);
+            Assert.AreEqual(ConnectionState.Disconnected, ViewModel.ConnectState.State);
         }
         #endregion
     }
