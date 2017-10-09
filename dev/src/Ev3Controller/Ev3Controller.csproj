@@ -92,6 +92,7 @@
     <Compile Include="Model\IsConnectedChangedEventArgs.cs" />
     <Compile Include="Model\NotifyCommandException.cs" />
     <Compile Include="Model\NotifySendReceiveDataEventArgs.cs" />
+    <Compile Include="Model\SequenceChangedEventArgs.cs" />
     <Compile Include="ViewModel\ComPortViewModel.cs" />
     <Compile Include="ViewModel\DeviceViewModelBase.cs" />
     <Compile Include="ViewModel\Ev3ControllerMainViewModel.cs" />

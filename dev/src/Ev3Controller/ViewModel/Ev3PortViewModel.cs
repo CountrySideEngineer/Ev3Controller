@@ -141,7 +141,9 @@ namespace Ev3Controller.ViewModel
         {
             if (this.IsConnected) { return; }//Nothing to do if the port has been connected.
 
+            this.ReleaseEventHandler();
             this.AccessRunner = new ComPortAccessSequenceRunner(this.SelectedComPortVM.ComPort);
+            this.SetupEventHandler();
             this.AccessRunner.ChangeAndStartSequence(
                 ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);
         }
@@ -157,10 +159,50 @@ namespace Ev3Controller.ViewModel
         /// </summary>
         /// <param name="sender">Event sender</param>
         /// <param name="e">Value to represent event data.</param>
-        public virtual void ConnectedStateChangedCallback(object sender, ConnectStateChangedEventArgs e)
+        public virtual void ConnectedStateChangedCallback(object sender, EventArgs e)
         {
-            this.ConnectState = e.NewValue;
+            if (e is ConnectStateChangedEventArgs)
+            {
+                var Args = e as ConnectStateChangedEventArgs;
+                this.ConnectState = Args.NewValue;
+                switch (this.ConnectState.State)
+                {
+                    case ConnectionState.Connected:
+                    case ConnectionState.Disconnecting:
+                    case ConnectionState.Sending:
+                    case ConnectionState.Receiving:
+                        this.IsConnected = true;
+                        break;
+
+                    case ConnectionState.Connecting:
+                    case ConnectionState.Disconnected:
+                    case ConnectionState.Unknown:
+                    default:
+                        this.IsConnected = false;
+                        break;
+
+                }
+            }
             //Other properties are update in ConnectState setter.
+        }
+
+        public void SetupEventHandler()
+        {
+            if (null != this.AccessRunner)
+            {
+                this.AccessRunner.SequenceStartingEvent += this.ConnectedStateChangedCallback;
+                this.AccessRunner.SequenceStartedEvent += this.ConnectedStateChangedCallback;
+                this.AccessRunner.SequenceFinishedEvent += this.ConnectedStateChangedCallback;
+            }
+        }
+        public void ReleaseEventHandler()
+        {
+            if (null != this.AccessRunner)
+            {
+                this.AccessRunner.SequenceStartingEvent -= this.ConnectedStateChangedCallback;
+                this.AccessRunner.SequenceStartedEvent -= this.ConnectedStateChangedCallback;
+                this.AccessRunner.SequenceFinishedEvent -= this.ConnectedStateChangedCallback;
+            }
         }
 
         /// <summary>
@@ -170,9 +212,10 @@ namespace Ev3Controller.ViewModel
         /// <param name="e"></param>
         public virtual void DataSendAndReceivedFinishedCallback(object sender, EventArgs e)
         {
-
+            Console.WriteLine("DataSendAndReceivedFinishedCallback called");
         }
 
+        #region Inner class
         /// <summary>
         /// Inner class contains label and status whether the connection state can change or not.
         /// </summary>
@@ -210,7 +253,7 @@ namespace Ev3Controller.ViewModel
             public string ConnLabel { get; protected set; }
             #endregion
         }
-
+        #endregion
         #endregion
     }
 }
