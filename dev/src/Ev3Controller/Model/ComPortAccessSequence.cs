@@ -185,17 +185,20 @@ namespace Ev3Controller.Model
                         bool BoolRes = (bool)Result;
                         if (BoolRes)
                         {
-                            this.OnTaskFinishedEvent(null);
+                            this.OnTaskFinishedEvent(
+                                new SequenceChangedEventArgs(this.FinishedConnectionState));
                         }
                         else
                         {
-                            this.OnTaskFinishedEvent(null);
+                            this.OnTaskFinishedEvent(
+                                new SequenceChangedEventArgs(this.FinishedConnectionState));
                         }
                     }
                 }
                 else
                 {
-                    this.OnTaskFinishedEvent(null);
+                    this.OnTaskFinishedEvent(
+                        new SequenceChangedEventArgs(this.FinishedConnectionState));
                 }
             });
             return ContinuationTask;

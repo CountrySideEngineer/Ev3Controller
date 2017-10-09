@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -144,12 +145,17 @@ namespace Ev3Controller.Model
         /// <returns>Task newly run.</returns>
         public Task StartSequence(ComPortAccessSequence NextSequence)
         {
+            Debug.Assert(null != NextSequence);
+
             Task<object> task = Task<object>.Run(() =>
             {
-                this.OnSequenceStartingEvent(null);
+                this.OnSequenceStartingEvent(
+                    new ConnectStateChangedEventArgs(
+                        new ConnectState(NextSequence.StartingConnectionState)));
 
                 if (null != this.CurSequence)
                 {
+
                     this.CurSequence.StopSequence();
                     while (!this.CurTask.Status.Equals(TaskStatus.RanToCompletion)) { }
                     this.CurSequence.TaskFinishedEvent -= this.SequenceFinisedEvent;
@@ -160,11 +166,12 @@ namespace Ev3Controller.Model
 
                 this.CurSequence = NextSequence;
                 this.CurSequence.TaskFinishedEvent += this.SequenceFinisedEvent;
-                this.CurSequence.NotifySendReceiveDataEvent += 
+                this.CurSequence.NotifySendReceiveDataEvent +=
                     this.NotifySendReceiveDataEventCallback;
                 Task MainTask = this.CurSequence.StartSequence(this.ComPortAcc);
-
-                this.OnSequenceStartedEvent(null);
+                this.OnSequenceStartedEvent(
+                        new ConnectStateChangedEventArgs(
+                            new ConnectState(this.CurSequence.StartedConnectionState)));
 
                 return (object)MainTask;
             });
@@ -205,7 +212,9 @@ namespace Ev3Controller.Model
         /// <param name="e">Detail information about this event.</param>
         public void SequenceFinisedEvent(object sender, EventArgs e)
         {
-            this.OnSequenceFinishedEvent(e);
+            this.OnSequenceFinishedEvent(
+                new ConnectStateChangedEventArgs(
+                    new ConnectState(this.CurSequence.FinishedConnectionState)));
         }
 
         /// <summary>
