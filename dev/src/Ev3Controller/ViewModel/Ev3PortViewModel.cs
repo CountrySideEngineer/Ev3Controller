@@ -18,7 +18,7 @@ namespace Ev3Controller.ViewModel
             new Dictionary<ConnectionState, LabelAndEnable>
         {
             {ConnectionState.Disconnected, new LabelAndEnable(true, @"接続", @"未接続") },
-            {ConnectionState.Disconnecting, new LabelAndEnable(false, @"接続", @"切断中") },
+            {ConnectionState.Disconnecting, new LabelAndEnable(false, @"切断", @"切断中") },
             {ConnectionState.Connecting, new LabelAndEnable(false, @"接続", @"接続中") },
             {ConnectionState.Connected, new LabelAndEnable(true, @"切断", @"接続済み") },
             {ConnectionState.Sending, new LabelAndEnable(false, @"切断", @"送信中") },

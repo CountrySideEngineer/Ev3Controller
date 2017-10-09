@@ -170,13 +170,25 @@ namespace Ev3Controller.ViewModel.Tests
             ViewModel.SelectedComPortVM = ComPortViewModel.Create("COM41", "Device");
 
             ViewModel.PortConnectExecute();
+            Assert.IsFalse(ViewModel.CanChangePort);
+            Assert.AreEqual("接続", ViewModel.ActionName);
+            Assert.AreEqual("接続中", ViewModel.StateLabel);
             Assert.AreEqual(ConnectionState.Connecting, ViewModel.ConnectState.State);
             Thread.Sleep(4000);
+            Assert.IsTrue(ViewModel.CanChangePort);
+            Assert.AreEqual("切断", ViewModel.ActionName);
+            Assert.AreEqual("接続済み", ViewModel.StateLabel);
             Assert.AreEqual(ConnectionState.Connected, ViewModel.ConnectState.State);
 
             ViewModel.PortDisconnectExecute();
+            Assert.IsFalse(ViewModel.CanChangePort);
+            Assert.AreEqual("切断", ViewModel.ActionName);
+            Assert.AreEqual("切断中", ViewModel.StateLabel);
             Assert.AreEqual(ConnectionState.Disconnecting, ViewModel.ConnectState.State);
             Thread.Sleep(3000);
+            Assert.IsTrue(ViewModel.CanChangePort);
+            Assert.AreEqual("接続", ViewModel.ActionName);
+            Assert.AreEqual("未接続", ViewModel.StateLabel);
             Assert.AreEqual(ConnectionState.Disconnected, ViewModel.ConnectState.State);
         }
         [TestMethod()]
