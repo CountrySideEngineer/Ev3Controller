@@ -155,7 +155,6 @@ namespace Ev3Controller.Model
 
                 if (null != this.CurSequence)
                 {
-
                     this.CurSequence.StopSequence();
                     while (!this.CurTask.Status.Equals(TaskStatus.RanToCompletion)) { }
                     this.CurSequence.TaskFinishedEvent -= this.SequenceFinisedEvent;
