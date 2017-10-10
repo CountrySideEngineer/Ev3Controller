@@ -157,14 +157,14 @@ namespace Ev3Controller.Model
                 {
                     this.CurSequence.StopSequence();
                     while (!this.CurTask.Status.Equals(TaskStatus.RanToCompletion)) { }
-                    this.CurSequence.TaskFinishedEvent -= this.SequenceFinisedEvent;
+                    this.CurSequence.TaskFinishedEvent -= this.SequenceFinisedEventCallback;
                     this.CurSequence.NotifySendReceiveDataEvent -=
                         this.NotifySendReceiveDataEventCallback;
                     this.CurSequence = null;
                 }
 
                 this.CurSequence = NextSequence;
-                this.CurSequence.TaskFinishedEvent += this.SequenceFinisedEvent;
+                this.CurSequence.TaskFinishedEvent += this.SequenceFinisedEventCallback;
                 this.CurSequence.NotifySendReceiveDataEvent +=
                     this.NotifySendReceiveDataEventCallback;
                 Task MainTask = this.CurSequence.StartSequence(this.ComPortAcc);
@@ -209,7 +209,7 @@ namespace Ev3Controller.Model
         /// </summary>
         /// <param name="sender">Source of event. Not refered in this method.</param>
         /// <param name="e">Detail information about this event.</param>
-        public void SequenceFinisedEvent(object sender, EventArgs e)
+        public void SequenceFinisedEventCallback(object sender, EventArgs e)
         {
             this.OnSequenceFinishedEvent(
                 new ConnectStateChangedEventArgs(
