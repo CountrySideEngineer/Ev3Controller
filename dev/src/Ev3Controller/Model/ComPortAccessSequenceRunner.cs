@@ -165,16 +165,12 @@ namespace Ev3Controller.Model
                 {
                     this.CurSequence.StopSequence();
                     while (!this.CurTask.Status.Equals(TaskStatus.RanToCompletion)) { }
-                    this.CurSequence.TaskFinishedEvent -= this.SequenceFinisedEventCallback;
-                    this.CurSequence.NotifySendReceiveDataEvent -=
-                        this.NotifySendReceiveDataEventCallback;
+                    this.ReleaseEventHandler(this.CurSequence);
                     this.CurSequence = null;
                 }
 
                 this.CurSequence = NextSequence;
-                this.CurSequence.TaskFinishedEvent += this.SequenceFinisedEventCallback;
-                this.CurSequence.NotifySendReceiveDataEvent +=
-                    this.NotifySendReceiveDataEventCallback;
+                this.SetupEventHandler(this.CurSequence);
                 Task MainTask = this.CurSequence.StartSequence(this.ComPortAcc);
                 this.OnSequenceStartedEvent(
                         new ConnectStateChangedEventArgs(
@@ -183,6 +179,28 @@ namespace Ev3Controller.Model
                 return (object)MainTask;
             });
             return (Task)(task.Result);
+        }
+
+        /// <summary>
+        /// Setup event handler to sequence passed by arguemnt.
+        /// </summary>
+        /// <param name="Sequence"></param>
+        public void SetupEventHandler(ComPortAccessSequence Sequence)
+        {
+            Sequence.TaskFinishedEvent += this.SequenceFinisedEventCallback;
+            Sequence.NotifySendReceiveDataEvent += this.NotifySendReceiveDataEventCallback;
+            Sequence.NotifyRecvExceptionEvent += this.NotifyRecvExceptionEventCallback;
+        }
+
+        /// <summary>
+        /// Release event handler from sequence passed by arguemnt.
+        /// </summary>
+        /// <param name="Sequence"></param>
+        public void ReleaseEventHandler(ComPortAccessSequence Sequence)
+        {
+            Sequence.TaskFinishedEvent -= this.SequenceFinisedEventCallback;
+            Sequence.NotifySendReceiveDataEvent -= this.NotifySendReceiveDataEventCallback;
+            Sequence.NotifyRecvExceptionEvent -= this.NotifyRecvExceptionEventCallback;
         }
 
         /// <summary>
