@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.ViewModel
 {
+    using Command;
     using Model;
 
     public class Ev3PortViewModel : DeviceViewModelBase
@@ -134,9 +135,50 @@ namespace Ev3Controller.ViewModel
                 this.RaisePropertyChanged("CanChangePort");
             }
         }
+
+        /// <summary>
+        /// Command to access COM port.
+        /// </summary>
+        protected DelegateCommand _ComPortAccessCommand;
+        public DelegateCommand ComPortAccessCommand
+        {
+            get
+            {
+                if (null == this._ComPortAccessCommand)
+                {
+                    this._ComPortAccessCommand = new DelegateCommand(
+                        this.PortConnectAndDisConnectExecute,
+                        this.CanPortConnectAndDisConnectExecute);
+                }
+                return this._ComPortAccessCommand;
+            }
+        }
+
+        /// <summary>
+        /// Flag shows whether the command to access COM port can execute or not.
+        /// </summary>
+        public bool CanComPortAccessCommand { get; protected set; }
         #endregion
 
         #region Other methods and private properties in calling order.
+        /// <summary>
+        /// Body of command to connect and disconnect port.
+        /// </summary>
+        public void PortConnectAndDisConnectExecute()
+        {
+            if (this.IsConnected)
+            {
+                this.PortDisconnectExecute();
+            }
+            else
+            {
+                this.PortConnectExecute();
+            }
+        }
+
+        /// <summary>
+        /// Body of command to connect port.
+        /// </summary>
         public void PortConnectExecute()
         {
             if (this.IsConnected) { return; }//Nothing to do if the port has been connected.
@@ -147,12 +189,18 @@ namespace Ev3Controller.ViewModel
             this.AccessRunner.ChangeAndStartSequence(
                 ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);
         }
+
+        /// <summary>
+        /// Body of command to disconnect port.
+        /// </summary>
         public void PortDisconnectExecute()
         {
             if (!this.IsConnected) { return; }//Nothing to do if the port has not been connected.
             this.AccessRunner.ChangeAndStartSequence(
                 ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_DISCONNECT);
         }
+
+        public bool CanPortConnectAndDisConnectExecute() { return this.CanComPortAccessCommand; }
 
         /// <summary>
         /// Callback method called when ConnectStateChanged event raised.
@@ -165,6 +213,8 @@ namespace Ev3Controller.ViewModel
             {
                 var Args = e as ConnectStateChangedEventArgs;
                 this.ConnectState = Args.NewValue;
+                
+                //Change connection state, connected or not.
                 switch (this.ConnectState.State)
                 {
                     case ConnectionState.Connected:
@@ -180,7 +230,24 @@ namespace Ev3Controller.ViewModel
                     default:
                         this.IsConnected = false;
                         break;
+                }
 
+                //Change the flag shows the COM port access command can excecte or not.
+                switch (this.ConnectState.State)
+                {
+                    case ConnectionState.Connected:
+                    case ConnectionState.Disconnected:
+                    case ConnectionState.Sending:
+                    case ConnectionState.Receiving:
+                        this.CanComPortAccessCommand = true;
+                        break;
+
+                    case ConnectionState.Disconnecting:
+                    case ConnectionState.Connecting:
+                    case ConnectionState.Unknown:
+                    default:
+                        this.CanComPortAccessCommand = false;
+                        break;
                 }
             }
             //Other properties are update in ConnectState setter.
