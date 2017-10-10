@@ -186,6 +186,10 @@ namespace Ev3Controller.ViewModel
             //Other properties are update in ConnectState setter.
         }
 
+        /// <summary>
+        /// Setup event handler to sequence passed by arguemnt.
+        /// </summary>
+        /// <param name="Sequence"></param>
         public void SetupEventHandler()
         {
             if (null != this.AccessRunner)
@@ -195,6 +199,11 @@ namespace Ev3Controller.ViewModel
                 this.AccessRunner.SequenceFinishedEvent += this.ConnectedStateChangedCallback;
             }
         }
+
+        /// <summary>
+        /// Release event handler from sequence passed by arguemnt.
+        /// </summary>
+        /// <param name="Sequence"></param>
         public void ReleaseEventHandler()
         {
             if (null != this.AccessRunner)
