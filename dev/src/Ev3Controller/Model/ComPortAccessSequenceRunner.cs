@@ -45,6 +45,14 @@ namespace Ev3Controller.Model
         /// <param name="e"></param>
         public delegate void DataSendReceiveEventHandler(object sender, EventArgs e);
         public event DataSendReceiveEventHandler DataSendReceiveEvent;
+
+        /// <summary>
+        /// Delegate to notify an exception occurred.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void ExceptionReceivedEventHandler(object sender, EventArgs e);
+        public event ExceptionReceivedEventHandler ExceptionReceivedEvent;
         #endregion
 
         #region Public Properties
@@ -205,6 +213,15 @@ namespace Ev3Controller.Model
         }
 
         /// <summary>
+        /// Raise event to notify an exception has occurred.
+        /// </summary>
+        /// <param name="e"></param>
+        public void OnExceptionReceiveEvent(EventArgs e)
+        {
+            this.ExceptionReceivedEvent?.Invoke(this, e);
+        }
+
+        /// <summary>
         /// Raise event to notify the sequence has been finished.
         /// </summary>
         /// <param name="sender">Source of event. Not refered in this method.</param>
@@ -226,6 +243,15 @@ namespace Ev3Controller.Model
             this.OnDataSendReceiveEvent(e);
         }
 
+        /// <summary>
+        /// Callback to notify an exception has been occurred.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void NotifyRecvExceptionEventCallback(object sender, EventArgs e)
+        {
+            this.OnExceptionReceiveEvent(e);
+        }
         /// <summary>
         /// Raise event to notify the sent and received data.
         /// </summary>
