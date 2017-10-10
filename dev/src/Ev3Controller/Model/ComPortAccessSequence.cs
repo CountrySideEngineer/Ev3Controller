@@ -120,6 +120,39 @@ namespace Ev3Controller.Model
                 return this.MessageArrayItem(StateIndex.STATE_INDEX_FINISHED);
             }
         }
+
+        /// <summary>
+        /// ConnectionState notified while starting sequence.
+        /// </summary>
+        public ConnectionState StartingConnectionState
+        {
+            get
+            {
+                return this.ConnectinoStateArrayItem(StateIndex.STATE_INDEX_STARTING);
+            }
+        }
+
+        /// <summary>
+        /// ConnectionState notified when the sequence started.
+        /// </summary>
+        public ConnectionState StartedConnectionState
+        {
+            get
+            {
+                return this.ConnectinoStateArrayItem(StateIndex.STATE_INDEX_STARTED);
+            }
+        }
+
+        /// <summary>
+        /// ConnectionState notified when the sequence finished.
+        /// </summary>
+        public ConnectionState FinishedConnectionState
+        {
+            get
+            {
+                return this.ConnectinoStateArrayItem(StateIndex.STATE_INDEX_FINISHED);
+            }
+        }
         #endregion
 
         #region Constructors and the Finalizer
@@ -130,7 +163,7 @@ namespace Ev3Controller.Model
         #region Other methods and private properties in calling order
         protected virtual void Init()
         {
-            StateMessageDictionary = null;
+            ConnectionStateInformationDictionary = null;
         }
         /// <summary>
         /// Call a sequence method in other thread.
@@ -152,17 +185,20 @@ namespace Ev3Controller.Model
                         bool BoolRes = (bool)Result;
                         if (BoolRes)
                         {
-                            this.OnTaskFinishedEvent(null);
+                            this.OnTaskFinishedEvent(
+                                new SequenceChangedEventArgs(this.FinishedConnectionState));
                         }
                         else
                         {
-                            this.OnTaskFinishedEvent(null);
+                            this.OnTaskFinishedEvent(
+                                new SequenceChangedEventArgs(this.FinishedConnectionState));
                         }
                     }
                 }
                 else
                 {
-                    this.OnTaskFinishedEvent(null);
+                    this.OnTaskFinishedEvent(
+                        new SequenceChangedEventArgs(this.FinishedConnectionState));
                 }
             });
             return ContinuationTask;
@@ -195,7 +231,7 @@ namespace Ev3Controller.Model
         /// <returns></returns>
         protected bool HasMessageArrayItem(StateIndex Index)
         {
-            return StateMessageDictionary[Index].HasMessage;
+            return ConnectionStateInformationDictionary[Index].HasMessage;
         }
 
         /// <summary>
@@ -205,7 +241,17 @@ namespace Ev3Controller.Model
         /// <returns></returns>
         protected string MessageArrayItem(StateIndex Index)
         {
-            return StateMessageDictionary[Index].Message;
+            return ConnectionStateInformationDictionary[Index].Message;
+        }
+
+        /// <summary>
+        /// Amethod returns a ConnectionState.
+        /// </summary>
+        /// <param name="Index"></param>
+        /// <returns></returns>
+        protected ConnectionState ConnectinoStateArrayItem(StateIndex Index)
+        {
+            return ConnectionStateInformationDictionary[Index].ConnState;
         }
 
         public void OnTaskFinishedEvent(EventArgs e)
@@ -230,19 +276,26 @@ namespace Ev3Controller.Model
         {
             this.NotifyRecvExceptionEvent(this, e);
         }
-        protected Dictionary<StateIndex, MessageInformation> StateMessageDictionary;
+        protected Dictionary<StateIndex, ConnectionStateInformation> ConnectionStateInformationDictionary;
         #endregion
 
         #region Inner class
-        protected class MessageInformation
+        protected class ConnectionStateInformation
         {
             public bool HasMessage { get; protected set; }
             public string Message { get; protected set; }
+            public ConnectionState ConnState { get; protected set; }
 
-            public MessageInformation(bool HasMessage, string Message)
+            public ConnectionStateInformation(bool HasMessage, string Message)
             {
                 this.HasMessage = HasMessage;
                 this.Message = Message;
+            }
+            public ConnectionStateInformation(bool HasMessage, string Message, ConnectionState ConnState)
+            {
+                this.HasMessage = HasMessage;
+                this.Message = Message;
+                this.ConnState = ConnState;
             }
         }
         #endregion

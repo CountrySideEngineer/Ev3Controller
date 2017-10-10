@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -44,6 +45,14 @@ namespace Ev3Controller.Model
         /// <param name="e"></param>
         public delegate void DataSendReceiveEventHandler(object sender, EventArgs e);
         public event DataSendReceiveEventHandler DataSendReceiveEvent;
+
+        /// <summary>
+        /// Delegate to notify an exception occurred.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void ExceptionReceivedEventHandler(object sender, EventArgs e);
+        public event ExceptionReceivedEventHandler ExceptionReceivedEvent;
         #endregion
 
         #region Public Properties
@@ -123,7 +132,7 @@ namespace Ev3Controller.Model
         /// Stop current running sequence and start new one.
         /// </summary>
         /// <param name="SeqName">Identifier of new sequence.</param>
-        public void ChangeSequence(SequenceName SeqName)
+        public void ChangeAndStartSequence(SequenceName SeqName)
         {
             this.CurTask = this.StartSequence(
                 ComPortAccessSequenceRunner.SequenceFactory(SeqName));
@@ -144,31 +153,54 @@ namespace Ev3Controller.Model
         /// <returns>Task newly run.</returns>
         public Task StartSequence(ComPortAccessSequence NextSequence)
         {
+            Debug.Assert(null != NextSequence);
+
             Task<object> task = Task<object>.Run(() =>
             {
-                this.OnSequenceStartingEvent(null);
+                this.OnSequenceStartingEvent(
+                    new ConnectStateChangedEventArgs(
+                        new ConnectState(NextSequence.StartingConnectionState)));
 
                 if (null != this.CurSequence)
                 {
                     this.CurSequence.StopSequence();
                     while (!this.CurTask.Status.Equals(TaskStatus.RanToCompletion)) { }
-                    this.CurSequence.TaskFinishedEvent -= this.SequenceFinisedEvent;
-                    this.CurSequence.NotifySendReceiveDataEvent -=
-                        this.NotifySendReceiveDataEventCallback;
+                    this.ReleaseEventHandler(this.CurSequence);
                     this.CurSequence = null;
                 }
 
                 this.CurSequence = NextSequence;
-                this.CurSequence.TaskFinishedEvent += this.SequenceFinisedEvent;
-                this.CurSequence.NotifySendReceiveDataEvent += 
-                    this.NotifySendReceiveDataEventCallback;
+                this.SetupEventHandler(this.CurSequence);
                 Task MainTask = this.CurSequence.StartSequence(this.ComPortAcc);
-
-                this.OnSequenceStartedEvent(null);
+                this.OnSequenceStartedEvent(
+                        new ConnectStateChangedEventArgs(
+                            new ConnectState(this.CurSequence.StartedConnectionState)));
 
                 return (object)MainTask;
             });
             return (Task)(task.Result);
+        }
+
+        /// <summary>
+        /// Setup event handler to sequence passed by arguemnt.
+        /// </summary>
+        /// <param name="Sequence"></param>
+        public void SetupEventHandler(ComPortAccessSequence Sequence)
+        {
+            Sequence.TaskFinishedEvent += this.SequenceFinisedEventCallback;
+            Sequence.NotifySendReceiveDataEvent += this.NotifySendReceiveDataEventCallback;
+            Sequence.NotifyRecvExceptionEvent += this.NotifyRecvExceptionEventCallback;
+        }
+
+        /// <summary>
+        /// Release event handler from sequence passed by arguemnt.
+        /// </summary>
+        /// <param name="Sequence"></param>
+        public void ReleaseEventHandler(ComPortAccessSequence Sequence)
+        {
+            Sequence.TaskFinishedEvent -= this.SequenceFinisedEventCallback;
+            Sequence.NotifySendReceiveDataEvent -= this.NotifySendReceiveDataEventCallback;
+            Sequence.NotifyRecvExceptionEvent -= this.NotifyRecvExceptionEventCallback;
         }
 
         /// <summary>
@@ -199,13 +231,24 @@ namespace Ev3Controller.Model
         }
 
         /// <summary>
+        /// Raise event to notify an exception has occurred.
+        /// </summary>
+        /// <param name="e"></param>
+        public void OnExceptionReceiveEvent(EventArgs e)
+        {
+            this.ExceptionReceivedEvent?.Invoke(this, e);
+        }
+
+        /// <summary>
         /// Raise event to notify the sequence has been finished.
         /// </summary>
         /// <param name="sender">Source of event. Not refered in this method.</param>
         /// <param name="e">Detail information about this event.</param>
-        public void SequenceFinisedEvent(object sender, EventArgs e)
+        public void SequenceFinisedEventCallback(object sender, EventArgs e)
         {
-            this.OnSequenceFinishedEvent(e);
+            this.OnSequenceFinishedEvent(
+                new ConnectStateChangedEventArgs(
+                    new ConnectState(this.CurSequence.FinishedConnectionState)));
         }
 
         /// <summary>
@@ -218,6 +261,15 @@ namespace Ev3Controller.Model
             this.OnDataSendReceiveEvent(e);
         }
 
+        /// <summary>
+        /// Callback to notify an exception has been occurred.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void NotifyRecvExceptionEventCallback(object sender, EventArgs e)
+        {
+            this.OnExceptionReceiveEvent(e);
+        }
         /// <summary>
         /// Raise event to notify the sent and received data.
         /// </summary>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ev3Controller.Model;
+using System.Threading;
 
 namespace Ev3Controller.ViewModel.Tests
 {
@@ -156,6 +157,68 @@ namespace Ev3Controller.ViewModel.Tests
             Assert.IsTrue(this.TestVM.CanChangePort);
             Assert.AreEqual(this.TestVM.ActionName, "不明");
             Assert.AreEqual(this.TestVM.StateLabel, "不明");
+        }
+        #endregion
+
+        #region Unit test of PortConnectExecute method in Ev3PortViewModel class.
+        [TestMethod()]
+        [TestCategory("Ev3PortViewModel")]
+        [TestCategory("Ev3PortViewModel_PortConnectExecute")]
+        public void Ev3PortViewModel_PortConnectExecuteTest_001()
+        {
+            var ViewModel = new Ev3PortViewModel();
+            ViewModel.SelectedComPortVM = ComPortViewModel.Create("COM41", "Device");
+
+            ViewModel.PortConnectExecute();
+            Assert.IsFalse(ViewModel.CanChangePort);
+            Assert.AreEqual("接続", ViewModel.ActionName);
+            Assert.AreEqual("接続中", ViewModel.StateLabel);
+            Assert.AreEqual(ConnectionState.Connecting, ViewModel.ConnectState.State);
+            Thread.Sleep(4000);
+            Assert.IsTrue(ViewModel.CanChangePort);
+            Assert.AreEqual("切断", ViewModel.ActionName);
+            Assert.AreEqual("接続済み", ViewModel.StateLabel);
+            Assert.AreEqual(ConnectionState.Connected, ViewModel.ConnectState.State);
+
+            ViewModel.PortDisconnectExecute();
+            Assert.IsFalse(ViewModel.CanChangePort);
+            Assert.AreEqual("切断", ViewModel.ActionName);
+            Assert.AreEqual("切断中", ViewModel.StateLabel);
+            Assert.AreEqual(ConnectionState.Disconnecting, ViewModel.ConnectState.State);
+            Thread.Sleep(3000);
+            Assert.IsTrue(ViewModel.CanChangePort);
+            Assert.AreEqual("接続", ViewModel.ActionName);
+            Assert.AreEqual("未接続", ViewModel.StateLabel);
+            Assert.AreEqual(ConnectionState.Disconnected, ViewModel.ConnectState.State);
+        }
+        [TestMethod()]
+        [TestCategory("Ev3PortViewModel")]
+        [TestCategory("Ev3PortViewModel_PortConnectExecute")]
+        public void Ev3PortViewModel_PortConnectExecuteTest_002()
+        {
+            var ViewModel = new Ev3PortViewModel();
+            ViewModel.SelectedComPortVM = ComPortViewModel.Create("COM41", "Device");
+
+            ViewModel.PortConnectExecute();
+            Assert.AreEqual(ConnectionState.Connecting, ViewModel.ConnectState.State);
+            Thread.Sleep(4000);
+            Assert.AreEqual(ConnectionState.Connected, ViewModel.ConnectState.State);
+
+            ViewModel.PortDisconnectExecute();
+            Assert.AreEqual(ConnectionState.Disconnecting, ViewModel.ConnectState.State);
+            Thread.Sleep(3000);
+            Assert.AreEqual(ConnectionState.Disconnected, ViewModel.ConnectState.State);
+
+            Thread.Sleep(1000);
+            ViewModel.PortConnectExecute();
+            Assert.AreEqual(ConnectionState.Connecting, ViewModel.ConnectState.State);
+            Thread.Sleep(4000);
+            Assert.AreEqual(ConnectionState.Connected, ViewModel.ConnectState.State);
+
+            ViewModel.PortDisconnectExecute();
+            Assert.AreEqual(ConnectionState.Disconnecting, ViewModel.ConnectState.State);
+            Thread.Sleep(3000);
+            Assert.AreEqual(ConnectionState.Disconnected, ViewModel.ConnectState.State);
         }
         #endregion
     }
