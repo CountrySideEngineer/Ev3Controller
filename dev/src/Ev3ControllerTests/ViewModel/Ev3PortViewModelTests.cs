@@ -91,6 +91,8 @@ namespace Ev3Controller.ViewModel.Tests
             Assert.IsTrue(this.TestVM.CanChangePort);
             Assert.AreEqual(this.TestVM.ActionName, "接続");
             Assert.AreEqual(this.TestVM.StateLabel, "未接続");
+            Assert.IsFalse(this.TestVM.IsConnected);
+            Assert.IsTrue(this.TestVM.CanComPortAccessCommand);
         }
         [TestMethod()]
         [TestCategory("ConnectedStateChangedCallback")]
@@ -100,8 +102,10 @@ namespace Ev3Controller.ViewModel.Tests
                 new ConnectState(ConnectionState.Disconnecting)));
             Assert.AreEqual(this.TestVM.ConnectState.State, ConnectionState.Disconnecting);
             Assert.IsFalse(this.TestVM.CanChangePort);
-            Assert.AreEqual(this.TestVM.ActionName, "接続");
+            Assert.AreEqual(this.TestVM.ActionName, "切断");
             Assert.AreEqual(this.TestVM.StateLabel, "切断中");
+            Assert.IsTrue(this.TestVM.IsConnected);
+            Assert.IsFalse(this.TestVM.CanComPortAccessCommand);
         }
         [TestMethod()]
         [TestCategory("ConnectedStateChangedCallback")]
@@ -113,6 +117,8 @@ namespace Ev3Controller.ViewModel.Tests
             Assert.IsFalse(this.TestVM.CanChangePort);
             Assert.AreEqual(this.TestVM.ActionName, "接続");
             Assert.AreEqual(this.TestVM.StateLabel, "接続中");
+            Assert.IsFalse(this.TestVM.IsConnected);
+            Assert.IsFalse(this.TestVM.CanComPortAccessCommand);
         }
         [TestMethod()]
         [TestCategory("ConnectedStateChangedCallback")]
@@ -124,6 +130,8 @@ namespace Ev3Controller.ViewModel.Tests
             Assert.IsTrue(this.TestVM.CanChangePort);
             Assert.AreEqual(this.TestVM.ActionName, "切断");
             Assert.AreEqual(this.TestVM.StateLabel, "接続済み");
+            Assert.IsTrue(this.TestVM.IsConnected);
+            Assert.IsTrue(this.TestVM.CanComPortAccessCommand);
         }
         [TestMethod()]
         [TestCategory("ConnectedStateChangedCallback")]
@@ -135,6 +143,8 @@ namespace Ev3Controller.ViewModel.Tests
             Assert.IsFalse(this.TestVM.CanChangePort);
             Assert.AreEqual(this.TestVM.ActionName, "切断");
             Assert.AreEqual(this.TestVM.StateLabel, "送信中");
+            Assert.IsTrue(this.TestVM.IsConnected);
+            Assert.IsTrue(this.TestVM.CanComPortAccessCommand);
         }
         [TestMethod()]
         [TestCategory("ConnectedStateChangedCallback")]
@@ -146,6 +156,8 @@ namespace Ev3Controller.ViewModel.Tests
             Assert.IsFalse(this.TestVM.CanChangePort);
             Assert.AreEqual(this.TestVM.ActionName, "切断");
             Assert.AreEqual(this.TestVM.StateLabel, "受信中");
+            Assert.IsTrue(this.TestVM.IsConnected);
+            Assert.IsTrue(this.TestVM.CanComPortAccessCommand);
         }
         [TestMethod()]
         [TestCategory("ConnectedStateChangedCallback")]
@@ -157,6 +169,8 @@ namespace Ev3Controller.ViewModel.Tests
             Assert.IsTrue(this.TestVM.CanChangePort);
             Assert.AreEqual(this.TestVM.ActionName, "不明");
             Assert.AreEqual(this.TestVM.StateLabel, "不明");
+            Assert.IsFalse(this.TestVM.IsConnected);
+            Assert.IsFalse(this.TestVM.CanComPortAccessCommand);
         }
         #endregion
 

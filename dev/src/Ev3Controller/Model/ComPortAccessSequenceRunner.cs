@@ -82,6 +82,26 @@ namespace Ev3Controller.Model
         public SequenceName SeqName { get; protected set; }
         #endregion
 
+        #region Constructors and the Finalizer
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public ComPortAccessSequenceRunner()
+        {
+            this.ComPort = null;
+            this.ComPortAcc = null;
+            this.CurTask = null;
+        }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="ComPort">ComPort contains port name and its configuration.</param>
+        public ComPortAccessSequenceRunner(ComPort ComPort)
+        {
+            this.SetComPort(ComPort);
+        }
+        #endregion
+
         #region Factory Methods
         /// <summary>
         /// A factory method to create concrete ComPortAccessSequence object.
@@ -117,10 +137,11 @@ namespace Ev3Controller.Model
 
         #region Other methods and private properties in calling order
         /// <summary>
-        /// Constructor
+        /// Setup ComPort object, contains COM port information used to accesss, 
+        /// and ComPortAccesss object.
         /// </summary>
-        /// <param name="ComPort">ComPort contains port name and its configuration.</param>
-        public ComPortAccessSequenceRunner(ComPort ComPort)
+        /// <param name="ComPort"></param>
+        public void SetComPort(ComPort ComPort)
         {
             this.ComPort = ComPort;
             this.ComPortAcc = new ComPortAccess(this.ComPort);
