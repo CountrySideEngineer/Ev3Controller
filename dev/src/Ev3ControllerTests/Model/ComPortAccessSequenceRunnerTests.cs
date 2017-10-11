@@ -176,5 +176,22 @@ namespace Ev3Controller.Model.Tests
             Assert.IsNull(Sequence);
         }
         #endregion
+
+        #region Unit test of SetComPort method
+        [TestMethod()]
+        [TestCategory("ComPortAccessSequenceRunner")]
+        [TestCategory("ComPortAccessSequenceRunner_SetComPort")]
+        public void SetComPortTest_001()
+        {
+            var Runner = new ComPortAccessSequenceRunner();
+            Runner.SetComPort(new ComPort("COM41", "Device"));
+
+            Assert.AreEqual("COM41", Runner.ComPort.Name);
+            Assert.AreEqual("Device", Runner.ComPort.Device);
+            Assert.AreEqual("COM41", Runner.ComPortAcc.ComPort.Name);
+            Assert.AreEqual("Device", Runner.ComPortAcc.ComPort.Device);
+            Assert.AreEqual(null, Runner.CurTask);
+        }
+        #endregion
     }
 }
