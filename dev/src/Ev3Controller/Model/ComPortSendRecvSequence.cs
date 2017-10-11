@@ -23,14 +23,17 @@ namespace Ev3Controller.Model
         /// </summary>
         protected override void Init()
         {
-            this.StateMessageDictionary = new Dictionary<StateIndex, MessageInformation>
+            this.ConnectionStateInformationDictionary = new Dictionary<StateIndex, ConnectionStateInformation>
             {
                 { StateIndex.STATE_INDEX_STARTING,
-                    new MessageInformation(true, "Starting send and receive sequence.") },
+                    new ConnectionStateInformation(
+                        true, "Starting send and receive sequence.", ConnectionState.Connected) },
                 { StateIndex.STATE_INDEX_STARTED,
-                    new MessageInformation(true, "Started send and receive sequence.") },
+                    new ConnectionStateInformation(
+                        true, "Started send and receive sequence.", ConnectionState.Connected) },
                 { StateIndex.STATE_INDEX_FINISHED,
-                    new MessageInformation(true, "Finished send and receive sequence.") },
+                    new ConnectionStateInformation(
+                        true, "Finished send and receive sequence.", ConnectionState.Connected) },
             };
 
             this.CommandQueue = new Queue<ACommand>();
