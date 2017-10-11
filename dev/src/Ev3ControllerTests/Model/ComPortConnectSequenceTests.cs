@@ -23,6 +23,9 @@ namespace Ev3Controller.Model.Tests
             Assert.AreEqual(TestTarget.StartingMessage, "Connecting");
             Assert.AreEqual(TestTarget.StartedMessage, "Connecting");
             Assert.AreEqual(TestTarget.FinishedMessage, "Connected");
+            Assert.AreEqual(TestTarget.StartingConnectionState, ConnectionState.Connecting);
+            Assert.AreEqual(TestTarget.StartedConnectionState, ConnectionState.Connecting);
+            Assert.AreEqual(TestTarget.FinishedConnectionState, ConnectionState.Connected);
         }
     }
 }

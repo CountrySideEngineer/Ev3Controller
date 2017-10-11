@@ -11,11 +11,17 @@ namespace Ev3Controller.Model
         #region Other methods and private properties in calling order
         protected override void Init()
         {
-            this.StateMessageDictionary = new Dictionary<StateIndex, MessageInformation>
+            this.ConnectionStateInformationDictionary = new Dictionary<StateIndex, ConnectionStateInformation>
             {
-                { StateIndex.STATE_INDEX_STARTING, new MessageInformation(true, "Disconnecting") },
-                { StateIndex.STATE_INDEX_STARTED,  new MessageInformation(true, "Disconnecting") },
-                { StateIndex.STATE_INDEX_FINISHED, new MessageInformation(true, "Disconnected") },
+                { StateIndex.STATE_INDEX_STARTING,
+                    new ConnectionStateInformation(
+                        true, "Disconnecting", ConnectionState.Disconnecting) },
+                { StateIndex.STATE_INDEX_STARTED,
+                    new ConnectionStateInformation(
+                        true, "Disconnecting", ConnectionState.Disconnecting) },
+                { StateIndex.STATE_INDEX_FINISHED,
+                    new ConnectionStateInformation(
+                        true, "Disconnected", ConnectionState.Disconnected) },
             };
         }
 

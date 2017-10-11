@@ -42,18 +42,18 @@ namespace Ev3Controller.Model.Tests
             Runner.SequenceStartingEvent += this.OnSequenceStartingEventHandler;
             Runner.SequenceFinishedEvent += this.OnSequenceFinishedEventHandler;
             Runner.DataSendReceiveEvent += this.OnDataSendRecvEventHandler;
-            Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);
+            Runner.ChangeAndStartSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);
 
             while (!Runner.CurTask.Status.Equals(TaskStatus.RanToCompletion)) ;
 
-            Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
+            Runner.ChangeAndStartSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
 
             Thread.Sleep(3000);
             Assert.IsTrue(this.IsSequenceStartedEventHandler);
             Assert.IsTrue(this.IsSequenceStartingEventHandler);
             Assert.IsTrue(this.IsSequenceFinishedEventHandler);
 
-            Runner.ChangeSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_DISCONNECT);
+            Runner.ChangeAndStartSequence(ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_DISCONNECT);
 
             while (!Runner.CurTask.Status.Equals(TaskStatus.RanToCompletion)) ;
             Assert.IsTrue(this.IsSequenceStartedEventHandler);
@@ -174,6 +174,23 @@ namespace Ev3Controller.Model.Tests
                     ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_MAX);
 
             Assert.IsNull(Sequence);
+        }
+        #endregion
+
+        #region Unit test of SetComPort method
+        [TestMethod()]
+        [TestCategory("ComPortAccessSequenceRunner")]
+        [TestCategory("ComPortAccessSequenceRunner_SetComPort")]
+        public void SetComPortTest_001()
+        {
+            var Runner = new ComPortAccessSequenceRunner();
+            Runner.SetComPort(new ComPort("COM41", "Device"));
+
+            Assert.AreEqual("COM41", Runner.ComPort.Name);
+            Assert.AreEqual("Device", Runner.ComPort.Device);
+            Assert.AreEqual("COM41", Runner.ComPortAcc.ComPort.Name);
+            Assert.AreEqual("Device", Runner.ComPortAcc.ComPort.Device);
+            Assert.AreEqual(null, Runner.CurTask);
         }
         #endregion
     }
