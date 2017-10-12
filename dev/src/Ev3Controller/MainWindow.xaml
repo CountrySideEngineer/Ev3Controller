@@ -3,10 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Ev3Controller"
+        xmlns:local="clr-namespace:Ev3Controller.UserControlView"
+        xmlns:vm="clr-namespace:Ev3Controller.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="128" Width="384">
+    <Window.DataContext>
+        <vm:Ev3ControllerMainViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <local:Ev3PortView x:Name="Ev3PortView"
+                           Grid.Row="1" Grid.RowSpan="2"
+                           Grid.Column="0" Grid.ColumnSpan="5"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Stretch"
+                           DataContext="{Binding Path=PortViewModel}"
+                           />
     </Grid>
 </Window>
