@@ -35,7 +35,9 @@ namespace Ev3Controller.ViewModel
         public Ev3PortViewModel()
         {
             this.ConnectState = new ConnectState(ConnectionState.Disconnected);
-            this.AvailableComPortVM = ComPortViewModel.Create();
+            this.AvailableComPorts = ComPortViewModel.Create();
+            this.SelectedComPort = this.AvailableComPorts.First();
+            this.CanChangePort = true;
         }
         #endregion
 
@@ -101,19 +103,19 @@ namespace Ev3Controller.ViewModel
         /// <summary>
         /// List of available COM port.
         /// </summary>
-        public IEnumerable<ComPortViewModel> AvailableComPortVM { get; protected set; }
+        public IEnumerable<ComPortViewModel> AvailableComPorts { get; protected set; }
 
         /// <summary>
         /// Current selected ComPortViewModel
         /// </summary>
-        protected ComPortViewModel _SelectedComPortVM;
-        public ComPortViewModel SelectedComPortVM
+        protected ComPortViewModel _SelectedComPort;
+        public ComPortViewModel SelectedComPort
         {
-            get { return this._SelectedComPortVM; }
+            get { return this._SelectedComPort; }
             set
             {
-                this._SelectedComPortVM = value;
-                this.RaisePropertyChanged("SelectedComPortVM");
+                this._SelectedComPort = value;
+                this.RaisePropertyChanged("SelectedComPort");
             }
         }
 
@@ -184,7 +186,7 @@ namespace Ev3Controller.ViewModel
             if (this.IsConnected) { return; }//Nothing to do if the port has been connected.
 
             this.ReleaseEventHandler();
-            this.AccessRunner = new ComPortAccessSequenceRunner(this.SelectedComPortVM.ComPort);
+            this.AccessRunner = new ComPortAccessSequenceRunner(this.SelectedComPort.ComPort);
             this.SetupEventHandler();
             this.AccessRunner.ChangeAndStartSequence(
                 ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);

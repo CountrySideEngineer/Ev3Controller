@@ -181,7 +181,7 @@ namespace Ev3Controller.ViewModel.Tests
         public void Ev3PortViewModel_PortConnectExecuteTest_001()
         {
             var ViewModel = new Ev3PortViewModel();
-            ViewModel.SelectedComPortVM = ComPortViewModel.Create("COM41", "Device");
+            ViewModel.SelectedComPort = ComPortViewModel.Create("COM41", "Device");
 
             ViewModel.PortConnectExecute();
             Assert.IsFalse(ViewModel.CanChangePort);
@@ -211,7 +211,7 @@ namespace Ev3Controller.ViewModel.Tests
         public void Ev3PortViewModel_PortConnectExecuteTest_002()
         {
             var ViewModel = new Ev3PortViewModel();
-            ViewModel.SelectedComPortVM = ComPortViewModel.Create("COM41", "Device");
+            ViewModel.SelectedComPort = ComPortViewModel.Create("COM41", "Device");
 
             ViewModel.PortConnectExecute();
             Assert.AreEqual(ConnectionState.Connecting, ViewModel.ConnectState.State);
