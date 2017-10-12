@@ -6,13 +6,12 @@
              xmlns:local="clr-namespace:Ev3Controller.UserControlView"
              xmlns:VM="clr-namespace:Ev3Controller.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="32" d:DesignWidth="192">
+             d:DesignHeight="64" d:DesignWidth="192">
     <Border BorderBrush="Black" BorderThickness="0"
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid Width="Auto"
                 Height="Auto" Background="White">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
@@ -26,15 +25,28 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <ComboBox x:Name="PortComboBox"
-                        Grid.Column="0" Grid.ColumnSpan="4"
-                        Grid.Row="1" Grid.RowSpan="3"
-                        />
+                      Grid.Column="0" Grid.ColumnSpan="4"
+                      Grid.Row="1" Grid.RowSpan="2" 
+                      IsEnabled="{Binding Path=CanChangePort}"
+                      ItemsSource="{Binding Path=AvailableComPorts}"
+                      SelectedItem="{Binding Path=SelectedComPort}"
+                      SelectedIndex="0"
+                      VerticalAlignment="Stretch"
+                      HorizontalAlignment="Stretch">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=PortName}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Image x:Name="ConnectStateImage"
-                    Grid.Column="4" Grid.ColumnSpan="1"
-                    Grid.Row="0" Grid.RowSpan="5"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    />
+                   Grid.Column="4" Grid.ColumnSpan="1"
+                   Grid.Row="0" Grid.RowSpan="5"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   />
         </Grid>
     </Border>
 </UserControl>
