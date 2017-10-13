@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Ev3Controller.UserControlView"
         xmlns:vm="clr-namespace:Ev3Controller.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="128" Width="384">
+        Title="MainWindow" Height="128" Width="310">
     <Window.DataContext>
         <vm:Ev3ControllerMainViewModel/>
     </Window.DataContext>
@@ -29,6 +29,8 @@
                            Grid.Column="0" Grid.ColumnSpan="5"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Stretch"
+                           HorizontalContentAlignment="Stretch"
+                           VerticalContentAlignment="Stretch"
                            DataContext="{Binding Path=PortViewModel}"
                            />
     </Grid>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Ev3Controller.Model
 {
@@ -43,6 +44,34 @@ namespace Ev3Controller.Model
     /// </summary>
     public class ConnectState
     {
+        #region Private fields and constants (in a region)
+        protected static Dictionary<ConnectionState, BitmapImage> ResourceDictionary = 
+            new Dictionary<ConnectionState, BitmapImage>
+        {
+            { ConnectionState.Disconnected,
+                new BitmapImage(
+                    new Uri(@"../Resource/pict/disconnected.png", UriKind.Relative)) },
+            { ConnectionState.Disconnecting,
+                new BitmapImage(
+                    new Uri(@"../Resource/pict/disconnecting.png", UriKind.Relative)) },
+            { ConnectionState.Connecting,
+                new BitmapImage(
+                    new Uri(@"../Resource/pict/connecting.png", UriKind.Relative)) },
+            { ConnectionState.Connected,
+                new BitmapImage(
+                    new Uri(@"../Resource/pict/connected.png", UriKind.Relative)) },
+            { ConnectionState.Sending,
+                new BitmapImage(
+                    new Uri(@"../Resource/pict/connected.png", UriKind.Relative)) },
+            { ConnectionState.Receiving,
+                new BitmapImage(
+                    new Uri(@"../Resource/pict/connected.png", UriKind.Relative)) },
+            { ConnectionState.Unknown,
+                new BitmapImage(
+                    new Uri(@"../Resource/pict/disconnected.png", UriKind.Relative)) },
+        };
+        #endregion
+
         #region Constructors and the Finalizer
         /// <summary>
         /// Constructor
@@ -51,6 +80,7 @@ namespace Ev3Controller.Model
         public ConnectState(ConnectionState State)
         {
             this.State = State;
+            this.StateImage = ConnectState.ResourceDictionary[this.State];
         }
         #endregion
 
@@ -59,6 +89,14 @@ namespace Ev3Controller.Model
         /// Represent state of connection with device.
         /// </summary>
         public ConnectionState State { get; protected set; }
+
+        /// <summary>
+        /// Bitmap image which shows state.
+        /// </summary>
+        public BitmapImage StateImage { get; protected set; }
+        #endregion
+
+        #region Other methods and private properties in calling order.
         #endregion
     }
 }

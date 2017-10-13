@@ -8,6 +8,7 @@ namespace Ev3Controller.ViewModel
 {
     using Command;
     using Model;
+    using System.Windows.Media.Imaging;
 
     public class Ev3PortViewModel : DeviceViewModelBase
     {
@@ -72,6 +73,8 @@ namespace Ev3Controller.ViewModel
                 this.CanChangePort = MapValue.CanChange;
                 this.ActionName = MapValue.ActionLabel;
                 this.StateLabel = MapValue.ConnLabel;
+
+                this.ImageResource = this._ConnectState.StateImage;
             }
         }
 
@@ -160,6 +163,23 @@ namespace Ev3Controller.ViewModel
         /// Flag shows whether the command to access COM port can execute or not.
         /// </summary>
         public bool CanComPortAccessCommand { get; protected set; }
+
+        /// <summary>
+        /// Image source for connect state.
+        /// </summary>
+        protected BitmapImage _ImageResource;
+        public BitmapImage ImageResource
+        {
+            get
+            {
+                return this._ImageResource;
+            }
+            protected set
+            {
+                this._ImageResource = value;
+                this.RaisePropertyChanged("ImageResource");
+            }
+        }
         #endregion
 
         #region Other methods and private properties in calling order.
