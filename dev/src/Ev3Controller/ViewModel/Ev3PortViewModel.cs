@@ -23,8 +23,8 @@ namespace Ev3Controller.ViewModel
             {ConnectionState.Disconnecting, new LabelAndEnable(false, @"切断", @"切断中") },
             {ConnectionState.Connecting, new LabelAndEnable(false, @"接続", @"接続中") },
             {ConnectionState.Connected, new LabelAndEnable(false, @"切断", @"接続済み") },
-            {ConnectionState.Sending, new LabelAndEnable(false, @"切断", @"送信中") },
-            {ConnectionState.Receiving, new LabelAndEnable(false, @"切断", @"受信中") },
+            {ConnectionState.Sending, new LabelAndEnable(true, @"切断", @"送信中") },
+            {ConnectionState.Receiving, new LabelAndEnable(true, @"切断", @"受信中") },
             {ConnectionState.Unknown, new LabelAndEnable(true, @"不明", @"不明") },
         };
         #endregion
@@ -235,8 +235,17 @@ namespace Ev3Controller.ViewModel
             if (e is ConnectStateChangedEventArgs)
             {
                 var Args = e as ConnectStateChangedEventArgs;
-                this.ConnectState = Args.NewValue;
+                var OldVar = this.ConnectState;
+                var NewVar = Args.NewValue;
+                this.ConnectState = NewVar;
                 this.UpdateState();
+
+                if ((OldVar.State.Equals(ConnectionState.Connecting))
+                    && (NewVar.State.Equals(ConnectionState.Connected)))
+                {
+                    this.AccessRunner.ChangeAndStartSequence(
+                        ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
+                }
             }
             //Other properties are update in ConnectState setter.
         }
@@ -252,6 +261,7 @@ namespace Ev3Controller.ViewModel
                 this.AccessRunner.SequenceStartingEvent += this.ConnectedStateChangedCallback;
                 this.AccessRunner.SequenceStartedEvent += this.ConnectedStateChangedCallback;
                 this.AccessRunner.SequenceFinishedEvent += this.ConnectedStateChangedCallback;
+                this.AccessRunner.DataSendReceiveEvent += this.DataSendAndReceivedFinishedCallback;
             }
         }
 
@@ -266,6 +276,7 @@ namespace Ev3Controller.ViewModel
                 this.AccessRunner.SequenceStartingEvent -= this.ConnectedStateChangedCallback;
                 this.AccessRunner.SequenceStartedEvent -= this.ConnectedStateChangedCallback;
                 this.AccessRunner.SequenceFinishedEvent -= this.ConnectedStateChangedCallback;
+                this.AccessRunner.DataSendReceiveEvent -= this.DataSendAndReceivedFinishedCallback;
             }
         }
 
