@@ -96,6 +96,7 @@
     <Compile Include="UserControlView\Ev3PortView.xaml.cs">
       <DependentUpon>Ev3PortView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Util\Ev3Utility.cs" />
     <Compile Include="ViewModel\ComPortViewModel.cs" />
     <Compile Include="ViewModel\DeviceViewModelBase.cs" />
     <Compile Include="ViewModel\Ev3ControllerMainViewModel.cs" />

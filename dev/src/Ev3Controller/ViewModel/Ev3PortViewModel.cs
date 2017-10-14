@@ -10,6 +10,7 @@ namespace Ev3Controller.ViewModel
     using Ev3Command;
     using Model;
     using System.Windows.Media.Imaging;
+    using Ev3Controller.Util;
 
     public class Ev3PortViewModel : DeviceViewModelBase
     {
@@ -182,6 +183,8 @@ namespace Ev3Controller.ViewModel
                 this.RaisePropertyChanged("ImageResource");
             }
         }
+
+        public object Ev3Util { get; private set; }
         #endregion
 
         #region Other methods and private properties in calling order.
@@ -290,7 +293,12 @@ namespace Ev3Controller.ViewModel
         /// <param name="e"></param>
         public virtual void DataSendAndReceivedFinishedCallback(object sender, EventArgs e)
         {
-            Console.WriteLine("DataSendAndReceivedFinishedCallback called");
+            if (e is NotifySendReceiveDataEventArgs)
+            {
+                var Args = e as NotifySendReceiveDataEventArgs;
+                Console.WriteLine(@"Snd:" + Ev3Utility.Buff2String(Args.SendData));
+                Console.WriteLine(@"Rcv:" + Ev3Utility.Buff2String(Args.RecvData));
+            }
         }
 
         /// <summary>
