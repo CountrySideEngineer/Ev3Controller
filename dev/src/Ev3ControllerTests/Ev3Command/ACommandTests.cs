@@ -357,7 +357,7 @@ namespace Ev3Controller.Ev3Command.Tests
             {
                 Command.ResData[(byte)(4 + index)] = (byte)index;
             }
-            Command.ResData[9] = 0x05;
+            Command.ResData[9] = 0x06;
 
             //In the method below, the exception will be raised.
             Command.Check();

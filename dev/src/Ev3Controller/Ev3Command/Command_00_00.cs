@@ -56,7 +56,7 @@ namespace Ev3Controller.Ev3Command
             }
             for (int index = 0; index < ResLen; index++)
             {
-                if (ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP + index] == index)
+                if (ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP + index] != index)
                 {
                     throw new CommandParamException(
                         "SomeParameterInvalid",
