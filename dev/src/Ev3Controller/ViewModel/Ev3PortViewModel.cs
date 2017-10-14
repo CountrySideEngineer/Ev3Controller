@@ -75,6 +75,8 @@ namespace Ev3Controller.ViewModel
                 this.StateLabel = MapValue.ConnLabel;
 
                 this.ImageResource = this._ConnectState.StateImage;
+
+                this.CanComPortAccessCommand = true;
             }
         }
 
