@@ -22,7 +22,7 @@ namespace Ev3Controller.ViewModel
             {ConnectionState.Disconnected, new LabelAndEnable(true, @"接続", @"未接続") },
             {ConnectionState.Disconnecting, new LabelAndEnable(false, @"切断", @"切断中") },
             {ConnectionState.Connecting, new LabelAndEnable(false, @"接続", @"接続中") },
-            {ConnectionState.Connected, new LabelAndEnable(true, @"切断", @"接続済み") },
+            {ConnectionState.Connected, new LabelAndEnable(false, @"切断", @"接続済み") },
             {ConnectionState.Sending, new LabelAndEnable(false, @"切断", @"送信中") },
             {ConnectionState.Receiving, new LabelAndEnable(false, @"切断", @"受信中") },
             {ConnectionState.Unknown, new LabelAndEnable(true, @"不明", @"不明") },
