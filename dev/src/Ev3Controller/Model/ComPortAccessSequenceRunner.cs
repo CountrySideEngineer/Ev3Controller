@@ -185,7 +185,7 @@ namespace Ev3Controller.Model
                 if (null != this.CurSequence)
                 {
                     this.CurSequence.StopSequence();
-                    while (!this.CurTask.Status.Equals(TaskStatus.RanToCompletion)) { }
+                    //while (!this.CurTask.Status.Equals(TaskStatus.RanToCompletion)) { }
                     this.ReleaseEventHandler(this.CurSequence);
                     this.CurSequence = null;
                 }
