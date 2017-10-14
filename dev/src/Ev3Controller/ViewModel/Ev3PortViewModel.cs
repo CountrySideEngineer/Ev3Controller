@@ -36,9 +36,10 @@ namespace Ev3Controller.ViewModel
         public Ev3PortViewModel()
         {
             this.ConnectState = new ConnectState(ConnectionState.Disconnected);
+            this.UpdateState();
+
             this.AvailableComPorts = ComPortViewModel.Create();
             this.SelectedComPort = this.AvailableComPorts.First();
-            this.CanChangePort = true;
         }
         #endregion
 
@@ -75,8 +76,6 @@ namespace Ev3Controller.ViewModel
                 this.StateLabel = MapValue.ConnLabel;
 
                 this.ImageResource = this._ConnectState.StateImage;
-
-                this.CanComPortAccessCommand = true;
             }
         }
 
@@ -237,42 +236,7 @@ namespace Ev3Controller.ViewModel
             {
                 var Args = e as ConnectStateChangedEventArgs;
                 this.ConnectState = Args.NewValue;
-                
-                //Change connection state, connected or not.
-                switch (this.ConnectState.State)
-                {
-                    case ConnectionState.Connected:
-                    case ConnectionState.Disconnecting:
-                    case ConnectionState.Sending:
-                    case ConnectionState.Receiving:
-                        this.IsConnected = true;
-                        break;
-
-                    case ConnectionState.Connecting:
-                    case ConnectionState.Disconnected:
-                    case ConnectionState.Unknown:
-                    default:
-                        this.IsConnected = false;
-                        break;
-                }
-
-                //Change the flag shows the COM port access command can excecte or not.
-                switch (this.ConnectState.State)
-                {
-                    case ConnectionState.Connected:
-                    case ConnectionState.Disconnected:
-                    case ConnectionState.Sending:
-                    case ConnectionState.Receiving:
-                        this.CanComPortAccessCommand = true;
-                        break;
-
-                    case ConnectionState.Disconnecting:
-                    case ConnectionState.Connecting:
-                    case ConnectionState.Unknown:
-                    default:
-                        this.CanComPortAccessCommand = false;
-                        break;
-                }
+                this.UpdateState();
             }
             //Other properties are update in ConnectState setter.
         }
@@ -313,6 +277,56 @@ namespace Ev3Controller.ViewModel
         public virtual void DataSendAndReceivedFinishedCallback(object sender, EventArgs e)
         {
             Console.WriteLine("DataSendAndReceivedFinishedCallback called");
+        }
+
+        /// <summary>
+        /// Update parameters.
+        /// </summary>
+        public void UpdateState()
+        {
+            LabelAndEnable MapValue =
+                Ev3PortViewModel.StateLabelMap[this.ConnectState.State];
+            this.CanChangePort = MapValue.CanChange;
+            this.ActionName = MapValue.ActionLabel;
+            this.StateLabel = MapValue.ConnLabel;
+
+            this.ImageResource = this.ConnectState.StateImage;
+
+            //Change connection state, connected or not.
+            switch (this.ConnectState.State)
+            {
+                case ConnectionState.Connected:
+                case ConnectionState.Disconnecting:
+                case ConnectionState.Sending:
+                case ConnectionState.Receiving:
+                    this.IsConnected = true;
+                    break;
+
+                case ConnectionState.Connecting:
+                case ConnectionState.Disconnected:
+                case ConnectionState.Unknown:
+                default:
+                    this.IsConnected = false;
+                    break;
+            }
+
+            //Change the flag shows the COM port access command can excecte or not.
+            switch (this.ConnectState.State)
+            {
+                case ConnectionState.Connected:
+                case ConnectionState.Disconnected:
+                case ConnectionState.Sending:
+                case ConnectionState.Receiving:
+                    this.CanComPortAccessCommand = true;
+                    break;
+
+                case ConnectionState.Disconnecting:
+                case ConnectionState.Connecting:
+                case ConnectionState.Unknown:
+                default:
+                    this.CanComPortAccessCommand = false;
+                    break;
+            }
         }
 
         #region Inner class
