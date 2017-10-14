@@ -42,10 +42,10 @@ namespace Ev3Controller.Ev3Command
         #endregion
 
         #region Constructors and the Finalizer
-        public ACommand()
+        public ACommand(ICommandParam CommandParam = null)
         {
             this.Init();
-            this.SetUp();
+            this.SetUp(CommandParam);
         }
         #endregion
 
@@ -118,7 +118,7 @@ namespace Ev3Controller.Ev3Command
         /// <summary>
         /// Setup command data format.
         /// </summary>
-        protected abstract void SetUp();
+        protected abstract void SetUp(ICommandParam CommandParam);
 
         /// <summary>
         /// Check response data.

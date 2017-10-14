@@ -28,7 +28,7 @@ namespace Ev3Controller.Ev3Command
         /// <summary>
         /// Setup command data for GetBattery original response data.
         /// </summary>
-        protected override void SetUp()
+        protected override void SetUp(ICommandParam CommandParam)
         {
             this.CmdData[(int)COMMAND_BUFF_INDEX.COMMAND_BUFF_INDEX_CMD_DATA_LEN] = this.CmdLen;
         }
