@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Ev3Controller.ViewModel
 {
     using Command;
+    using Ev3Command;
     using Model;
     using System.Windows.Media.Imaging;
 
@@ -262,6 +263,7 @@ namespace Ev3Controller.ViewModel
                 this.AccessRunner.SequenceStartedEvent += this.ConnectedStateChangedCallback;
                 this.AccessRunner.SequenceFinishedEvent += this.ConnectedStateChangedCallback;
                 this.AccessRunner.DataSendReceiveEvent += this.DataSendAndReceivedFinishedCallback;
+                this.AccessRunner.ExceptionReceivedEvent += this.ExceptionRaisedCallback;
             }
         }
 
@@ -277,6 +279,7 @@ namespace Ev3Controller.ViewModel
                 this.AccessRunner.SequenceStartedEvent -= this.ConnectedStateChangedCallback;
                 this.AccessRunner.SequenceFinishedEvent -= this.ConnectedStateChangedCallback;
                 this.AccessRunner.DataSendReceiveEvent -= this.DataSendAndReceivedFinishedCallback;
+                this.AccessRunner.ExceptionReceivedEvent -= this.ExceptionRaisedCallback;
             }
         }
 
@@ -288,6 +291,24 @@ namespace Ev3Controller.ViewModel
         public virtual void DataSendAndReceivedFinishedCallback(object sender, EventArgs e)
         {
             Console.WriteLine("DataSendAndReceivedFinishedCallback called");
+        }
+
+        /// <summary>
+        /// Handle exception raised in command sequence. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public virtual void ExceptionRaisedCallback(object sender, EventArgs e)
+        {
+            if (e is NotifyCommandException)
+            {
+                var Except = e as NotifyCommandException;
+                var CmdExcept = Except.Except as CommandException;
+                Console.WriteLine(
+                    string.Format(
+                        @"{0} Name:{1} Code:0x{2:x2}-0x{3:x2}",
+                            CmdExcept.Message, CmdExcept.Name, CmdExcept.Cmd, CmdExcept.SubCmd));
+            }
         }
 
         /// <summary>
