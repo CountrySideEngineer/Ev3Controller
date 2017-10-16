@@ -69,6 +69,7 @@
     <Compile Include="Ev3Command\CommandOperationException.cs" />
     <Compile Include="Ev3Command\CommandParamException.cs" />
     <Compile Include="Ev3Command\CommandParam_12_00.cs" />
+    <Compile Include="Ev3Command\CommandParam_16_00.cs" />
     <Compile Include="Ev3Command\CommandUnExpectedResponse.cs" />
     <Compile Include="Ev3Command\Command_00_00.cs" />
     <Compile Include="Ev3Command\Command_02_00.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Ev3Command\Command_0E_20.cs" />
     <Compile Include="Ev3Command\Command_10_00.cs" />
     <Compile Include="Ev3Command\Command_12_00.cs" />
+    <Compile Include="Ev3Command\Command_16_00.cs" />
     <Compile Include="Ev3Command\ICommandParam.cs" />
     <Compile Include="Model\ComPort.cs" />
     <Compile Include="Model\ComPortAccess.cs" />
