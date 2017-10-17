@@ -224,7 +224,7 @@ namespace Ev3Controller.Ev3Command
         /// If it is not match, CommandLenException will be thrown.
         /// </summary>
         /// <param name="OptDataIndex">Index of option data.</param>
-        /// <returns>Length written in response data.</returns>
+        /// <returns>Data part Length in response data.</returns>
         protected virtual int CheckLen()
         {
             return this.CheckLen(0);
