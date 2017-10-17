@@ -36,9 +36,6 @@ namespace Ev3Controller.Ev3Command
 
         protected override void CheckParam()
         {
-            base.CheckParam();
-            this.CheckLenAndThrowException();
-
             int DataIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP;
             int DevNum = 4;
             for (int DevNumIndex = 0; DevNumIndex < DevNum; DevNumIndex++)

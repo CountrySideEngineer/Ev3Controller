@@ -69,6 +69,8 @@ namespace Ev3Controller.Ev3Command
                 this.CmdData[DataIndex] = 0;
             }
         }
+
+        protected override void CheckParam() { }
         #endregion
 
         #region Public Properties

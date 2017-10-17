@@ -48,6 +48,8 @@ namespace Ev3Controller.Ev3Command
             this.CmdData[DataIndex++] = (CommandParam as CommandParam_12_00).Power;
             this.CmdData[DataIndex] = (CommandParam as CommandParam_12_00).Direction;
         }
+
+        protected override void CheckParam() { }
         #endregion
 
         #region Public Properties

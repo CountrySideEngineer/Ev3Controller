@@ -8,6 +8,10 @@ namespace Ev3Controller.Ev3Command
 {
     public class Command_20_00 : Command_20
     {
+        protected override void CheckParam()
+        {
+            throw new NotImplementedException();
+        }
         #region Other methods and private properties in calling order
         /// <summary>
         /// Initialize command and response code, and its command name.

@@ -39,17 +39,6 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         protected override void CheckParam()
         {
-            base.CheckParam();
-
-            int Len = this.ResData.Length;
-            int ResLen = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_LEN];
-
-            if ((ResLen != this.ResLen) || (Len != ResLen + 4))
-            {
-                throw new CommandLenException(
-                    "SomeParameterInvalid",
-                    this.Cmd, this.SubCmd, this.Name);
-            }
             byte SafeState = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP];
             switch (SafeState)
             {

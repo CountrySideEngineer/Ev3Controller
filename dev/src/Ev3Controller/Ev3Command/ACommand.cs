@@ -125,7 +125,9 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         public void Check()
         {
-            this.CheckRes();
+            this.CheckResCode();
+            this.CheckResult();
+            this.CheckLen();
             this.CheckParam();
         }
 
@@ -133,7 +135,7 @@ namespace Ev3Controller.Ev3Command
         /// Check response and sub response code.
         /// If these values are invalid, CommandUnExpected will be raised.
         /// </summary>
-        protected void CheckRes()
+        protected void CheckResCode()
         {
             try
             {
@@ -162,7 +164,7 @@ namespace Ev3Controller.Ev3Command
         /// Check result code in response data.
         /// If the data is invalid, corresponding exception will be raised.
         /// </summary>
-        protected virtual void CheckParam()
+        protected virtual void CheckResult()
         {
             byte Result = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_RESULT];
 
@@ -189,6 +191,11 @@ namespace Ev3Controller.Ev3Command
                         this.Cmd, this.SubCmd, this.Name);
             }
         }
+
+        /// <summary>
+        /// Check response parameter.
+        /// </summary>
+        protected abstract void CheckParam();
 
         /// <summary>
         /// Check whether number of device written in reponse data is valid or not.
@@ -218,11 +225,11 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         /// <param name="OptDataIndex">Index of option data.</param>
         /// <returns>Length written in response data.</returns>
-        protected virtual int CheckLenAndThrowException()
+        protected virtual int CheckLen()
         {
-            return this.CheckLenAndThrowException(0);
+            return this.CheckLen(0);
         }
-        protected virtual int CheckLenAndThrowException(int OptDataIndex)
+        protected virtual int CheckLen(int OptDataIndex)
         {
             Debug.Assert(this.ResData != null);
 
@@ -252,7 +259,7 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         /// <param name="DataIndex">Index of data in response data.</param>
         /// <returns>Port number</returns>
-        protected virtual byte CheckPortAndThrowException(int DataIndex)
+        protected virtual byte CheckPort(int DataIndex)
         {
             Debug.Assert(this.ResData != null);
 

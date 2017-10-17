@@ -35,9 +35,6 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         protected override void CheckParam()
         {
-            base.CheckParam();
-            this.CheckLenAndThrowException();
-
             int DataIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP;
             int DevNum = this.ResData[DataIndex++];
 
@@ -45,7 +42,7 @@ namespace Ev3Controller.Ev3Command
             {
                 for (int index = 0; index < DevNum; index++)
                 {
-                    this.CheckPortAndThrowException(DataIndex++);
+                    this.CheckPort(DataIndex++);
 
                     byte IsListen = this.ResData[DataIndex++];
                     if ((IsListen != 0) && (IsListen != 1))

@@ -35,9 +35,9 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         /// <param name="OptDataIndex">Index of option data.</param>
         /// <returns>Length written in response data.</returns>
-        protected override int CheckLenAndThrowException(int OptDataIndex)
+        protected override int CheckLen(int OptDataIndex)
         {
-            int ResLen = base.CheckLenAndThrowException(OptDataIndex);
+            int ResLen = base.CheckLen(OptDataIndex);
             int DataIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP;
             int DevNum = this.ResData[DataIndex];
 
