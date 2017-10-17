@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Ev3Command
 {
-    public abstract class Command_20 : ACommand
+    public abstract class Command_20 : ACommand_ResLenFix
     {
         #region Public Properties
         public byte OneDataLen { get; protected set; }
