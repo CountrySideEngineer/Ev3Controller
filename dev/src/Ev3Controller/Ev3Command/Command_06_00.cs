@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Ev3Command
 {
-    public class Command_06_00 : ACommand
+    public class Command_06_00 : ACommand_ResLenFix
     {
         #region Other methods and private properties in calling order
         /// <summary>
