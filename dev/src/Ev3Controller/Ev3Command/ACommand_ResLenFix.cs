@@ -24,9 +24,8 @@ namespace Ev3Controller.Ev3Command
         {
             Debug.Assert(this.ResData != null);
 
-            int Len = this.ResData.Length;
-            int ResLen = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_LEN];
-            if (Len != (ResLen + 4))
+            int ResLen = base.CheckLen(OptDataIndex);
+            if (ResLen != this.ResLen)
             {
                 throw new CommandLenException(
                         "Command or response data Len error",

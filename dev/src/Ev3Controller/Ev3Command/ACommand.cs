@@ -235,16 +235,8 @@ namespace Ev3Controller.Ev3Command
 
             int Len = this.ResData.Length;
             int ResLen = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_LEN];
-            bool IsLenValid = false;
 
-            IsLenValid = (Len != (ResLen + 4));//Check all command commonly.
-
-            if (0xFF != this.ResLen)
-            {
-                //The case that the length is fixed.
-                IsLenValid |= (ResLen != this.ResLen);
-            }
-            if (IsLenValid)
+            if (Len != (ResLen + 4)) //Check all command commonly.
             {
                 throw new CommandLenException(
                         "Command or response data Len error",
