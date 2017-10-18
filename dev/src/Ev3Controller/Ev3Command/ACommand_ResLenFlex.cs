@@ -10,7 +10,11 @@ namespace Ev3Controller.Ev3Command
     public abstract class ACommand_ResLenFlex : ACommand
     {
         #region Constructors and the Finalizer
-        public ACommand_ResLenFlex(ICommandParam CommandParam) : base(CommandParam) { }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="CommandParam"></param>
+        public ACommand_ResLenFlex(ICommandParam CommandParam = null) : base(CommandParam) { }
         #endregion
 
         #region Other methods and private properties in calling order
@@ -27,6 +31,7 @@ namespace Ev3Controller.Ev3Command
         {
             Debug.Assert(this.ResData != null);
 
+            int ResLen = base.CheckLen();
             int DataIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP;
             int DevNum = this.ResData[DataIndex];
 
