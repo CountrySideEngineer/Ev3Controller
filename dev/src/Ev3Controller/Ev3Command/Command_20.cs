@@ -9,6 +9,10 @@ namespace Ev3Controller.Ev3Command
     public abstract class Command_20 : ACommand_ResLenFlex
     {
         #region Constructors and the Finalizer
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="CommandParam"></param>
         public Command_20(ICommandParam CommandParam) : base(CommandParam) { }
         #endregion
 
