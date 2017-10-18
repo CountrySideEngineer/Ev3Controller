@@ -518,8 +518,8 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[8] = 0x00;
             Command.ResData[9] = 0x00;
 
-            var PrivateCommand = new PrivateObject(Command);
-            int DevNum = (int)PrivateCommand.Invoke("CheckLen", 4);
+            var PrivateCommand = new PrivateObject(Command as ACommand_ResLenFix);
+            int DevNum = (int)PrivateCommand.Invoke("CheckLen");
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
@@ -539,8 +539,8 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[8] = 0x00;
             Command.ResData[9] = 0x00;
 
-            var PrivateCommand = new PrivateObject(Command);
-            int ResLen = (int)PrivateCommand.Invoke("CheckLen", 4);
+            var PrivateCommand = new PrivateObject(Command as ACommand_ResLenFix);
+            int ResLen = (int)PrivateCommand.Invoke("CheckLen");
 
             Assert.AreEqual(6, ResLen);
         }
@@ -563,8 +563,8 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[8] = 0x00;
             Command.ResData[9] = 0x00;
 
-            var PrivateCommand = new PrivateObject(Command);
-            int ResLen = (int)PrivateCommand.Invoke("CheckLen", 4);
+            var PrivateCommand = new PrivateObject(Command as ACommand_ResLenFix);
+            int ResLen = (int)PrivateCommand.Invoke("CheckLen");
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
@@ -586,7 +586,7 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[9] = 0x00;
 
             var PrivateCommand = new PrivateObject(Command);
-            int ResLen = (int)PrivateCommand.Invoke("CheckLen", 4);
+            int ResLen = (int)PrivateCommand.Invoke("CheckLen");
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]

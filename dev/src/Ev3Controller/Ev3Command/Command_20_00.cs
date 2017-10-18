@@ -16,9 +16,18 @@ namespace Ev3Controller.Ev3Command
         public Command_20_00(ICommandParam CommandParam = null) : base(CommandParam) { }
         #endregion
 
+        /// <summary>
+        /// Check parameters.
+        /// </summary>
         protected override void CheckParam()
         {
-            throw new NotImplementedException();
+            int DataIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP;
+            int DevNum = this.ResData[DataIndex++];
+            for (int DevIndex = 0; DevIndex < DevNum; DevIndex++)
+            {
+                base.CheckPort(DataIndex);
+                DataIndex += this.OneDataLen;
+            }
         }
         #region Other methods and private properties in calling order
         /// <summary>
