@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Ev3Command
 {
-    public class Command_16_00 : ACommand
+    public class Command_16_00 : ACommand_ResLenFix
     {
         #region Constructors and the Finalizer
         public Command_16_00() : this(new CommandParam_16_00(0)) { }
@@ -69,6 +69,8 @@ namespace Ev3Controller.Ev3Command
                 this.CmdData[DataIndex] = 0;
             }
         }
+
+        protected override void CheckParam() { }
         #endregion
 
         #region Public Properties

@@ -35,20 +35,16 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         protected override void CheckParam()
         {
-            base.CheckParam();
-            this.CheckLenAndThrowException();
-
             int DevNum = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP];
             if (DevNum != 0)
             {
                 int PortIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP + 1;
                 for (int index = 0; index < DevNum; index++)
                 {
-                    this.CheckPortAndThrowException(PortIndex);
+                    this.CheckPort(PortIndex);
                     PortIndex += 3;
                 }
             }
-            base.CheckParam();
         }
         #endregion
     }

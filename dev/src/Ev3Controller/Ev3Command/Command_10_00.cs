@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Ev3Command
 {
-    public class Command_10_00 : ACommand
+    public class Command_10_00 : ACommand_ResLenFix
     {
         #region Other methods and private properties in calling order
         /// <summary>
@@ -36,9 +36,6 @@ namespace Ev3Controller.Ev3Command
 
         protected override void CheckParam()
         {
-            base.CheckParam();
-            this.CheckLenAndThrowException();
-
             int DataIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP;
             int DevNum = 4;
             for (int DevNumIndex = 0; DevNumIndex < DevNum; DevNumIndex++)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Ev3Command
 {
-    public abstract class Command_20 : ACommand
+    public abstract class Command_20 : ACommand_ResLenFix
     {
         #region Public Properties
         public byte OneDataLen { get; protected set; }
@@ -29,10 +29,10 @@ namespace Ev3Controller.Ev3Command
         /// Check reponse data of GetSonicSensor and get ultrasonic sensor listening data,
         /// distance or ultrasonic listening.
         /// </summary>
-        protected override void CheckParam()
+        protected override void CheckResult()
         {
-            base.CheckParam();
-            this.CheckLenAndThrowException();
+            base.CheckResult();
+            this.CheckLen();
 
             int DevNum = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP];
             if (0 != DevNum)
@@ -41,7 +41,7 @@ namespace Ev3Controller.Ev3Command
                     this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP + 1];
                 for (int index = 0; index < DevNum; index++)
                 {
-                    this.CheckPortAndThrowException(PortIndex);
+                    this.CheckPort(PortIndex);
                     PortIndex += this.OneDataLen;
                 }
             }
@@ -55,9 +55,9 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         /// <param name="OptDataIndex">Index of option data.</param>
         /// <returns>Length written in response data.</returns>
-        protected override int CheckLenAndThrowException(int OptDataIndex)
+        protected override int CheckLen(int OptDataIndex)
         {
-            int ResLen = base.CheckLenAndThrowException(OptDataIndex);
+            int ResLen = base.CheckLen(OptDataIndex);
             int DataIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP;
             int DevNum = this.ResData[DataIndex];
 

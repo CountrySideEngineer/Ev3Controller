@@ -502,7 +502,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Command_00_00_CheckLenAndThrowException")]
+        [TestCategory("Command_00_00_CheckLen")]
         public void Command_00_00Test_CheckLenAndThrowException_001()
         {
             var Command = new Command_00_00();
@@ -519,11 +519,11 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[9] = 0x00;
 
             var PrivateCommand = new PrivateObject(Command);
-            int DevNum = (int)PrivateCommand.Invoke("CheckLenAndThrowException", 4);
+            int DevNum = (int)PrivateCommand.Invoke("CheckLen", 4);
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Command_00_00_CheckLenAndThrowException")]
+        [TestCategory("Command_00_00_CheckLen")]
         public void Command_00_00Test_CheckLenAndThrowException_002()
         {
             var Command = new Command_00_00();
@@ -540,13 +540,13 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[9] = 0x00;
 
             var PrivateCommand = new PrivateObject(Command);
-            int ResLen = (int)PrivateCommand.Invoke("CheckLenAndThrowException", 4);
+            int ResLen = (int)PrivateCommand.Invoke("CheckLen", 4);
 
             Assert.AreEqual(6, ResLen);
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Command_00_00_CheckLenAndThrowException")]
+        [TestCategory("Command_00_00_CheckLen")]
         [ExpectedExceptionAttribute(typeof(CommandLenException))]
         public void Command_00_00Test_CheckLenAndThrowException_003()
         {
@@ -564,7 +564,7 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[9] = 0x00;
 
             var PrivateCommand = new PrivateObject(Command);
-            int ResLen = (int)PrivateCommand.Invoke("CheckLenAndThrowException", 4);
+            int ResLen = (int)PrivateCommand.Invoke("CheckLen", 4);
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
@@ -586,12 +586,12 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[9] = 0x00;
 
             var PrivateCommand = new PrivateObject(Command);
-            int ResLen = (int)PrivateCommand.Invoke("CheckLenAndThrowException", 4);
+            int ResLen = (int)PrivateCommand.Invoke("CheckLen", 4);
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Command_00_00_CheckPortAndThrowException")]
-        public void Command_00_00Test_CheckPortAndThrowException_001()
+        [TestCategory("Command_00_00_CheckPort")]
+        public void Command_00_00Test_CheckPort_001()
         {
             var Command = new Command_00_00();
             Command.ResData = new byte[10];
@@ -607,14 +607,14 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[9] = 0x00;
 
             var PrivateCommand = new PrivateObject(Command);
-            byte PortNum = (byte)PrivateCommand.Invoke("CheckPortAndThrowException", 5);
+            byte PortNum = (byte)PrivateCommand.Invoke("CheckPort", 5);
 
             Assert.AreEqual(0, PortNum);
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Command_00_00_CheckPortAndThrowException")]
-        public void Command_00_00Test_CheckPortAndThrowException_002()
+        [TestCategory("Command_00_00_CheckPort")]
+        public void Command_00_00Test_CheckPort_002()
         {
             var Command = new Command_00_00();
             Command.ResData = new byte[10];
@@ -630,15 +630,15 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[9] = 0x00;
 
             var PrivateCommand = new PrivateObject(Command);
-            byte PortNum = (byte)PrivateCommand.Invoke("CheckPortAndThrowException", 5);
+            byte PortNum = (byte)PrivateCommand.Invoke("CheckPort", 5);
 
             Assert.AreEqual(3, PortNum);
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Command_00_00_CheckPortAndThrowException")]
+        [TestCategory("Command_00_00_CheckPort")]
         [ExpectedExceptionAttribute(typeof(CommandOperationException))]
-        public void Command_00_00Test_CheckPortAndThrowException_003()
+        public void Command_00_00Test_CheckPort_003()
         {
             var Command = new Command_00_00();
             Command.ResData = new byte[10];
@@ -654,7 +654,7 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[9] = 0x00;
 
             var PrivateCommand = new PrivateObject(Command);
-            byte PortNum = (byte)PrivateCommand.Invoke("CheckPortAndThrowException", 5);
+            byte PortNum = (byte)PrivateCommand.Invoke("CheckPort", 5);
         }
         #endregion
     }

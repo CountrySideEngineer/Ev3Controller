@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Ev3Command
 {
-    public class Command_0C_00 : ACommand
+    public class Command_0C_00 : ACommand_ResLenFix
     {
         #region Other methods and private properties in calling order
         /// <summary>
@@ -39,18 +39,6 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         protected override void CheckParam()
         {
-            base.CheckParam();
-
-            int Len = this.ResData.Length;
-            int ResLen = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_LEN];
-
-            if ((ResLen != this.ResLen) || (Len != ResLen + 4))
-            {
-                throw new CommandLenException(
-                    "CommandOrResponseLenError",
-                    this.Cmd, this.SubCmd, this.Name);
-            }
-
             byte MotorData = 0x00;
             for (int index = 0; index < 4; index++)
             {

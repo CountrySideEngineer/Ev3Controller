@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,30 @@ namespace Ev3Controller.Ev3Command
         }
 
         /// <summary>
+        /// Check whether size of response data buffer and length set in reponse data, 
+        /// calcurated data lenght from the number of device in the data, matche.
+        /// (To be more precise, the size is 4 byte more than the length.)
+        /// If they are not match, CommandLenException will be thrown.
+        /// </summary>
+        /// <param name="OptDataIndex">Index of option data.</param>
+        /// <returns>Length written in response data.</returns>
+        protected override int CheckLen(int OptDataIndex)
+        {
+            Debug.Assert(this.ResData != null);
+
+            int Len = this.ResData.Length;
+            int ResLen = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_LEN];
+            if (Len != (ResLen + 4))
+            {
+                throw new CommandLenException(
+                        "Command or response data Len error",
+                        this.Cmd, this.SubCmd, this.Name);
+            }
+
+            return ResLen;//WANT!!Change using TAPLE.
+        }
+
+        /// <summary>
         /// Check response data of GetSensors, sub code 0x00, type of sensor connected to each port.
         /// </summary>
         protected override void CheckParam()
@@ -55,7 +80,6 @@ namespace Ev3Controller.Ev3Command
                             this.Cmd, this.SubCmd, this.Name);
                 }
             }
-            base.CheckParam();
         }
         #endregion
     }

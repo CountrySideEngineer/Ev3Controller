@@ -62,6 +62,8 @@
     </ApplicationDefinition>
     <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Ev3Command\ACommand.cs" />
+    <Compile Include="Ev3Command\ACommand_ResLenFix.cs" />
+    <Compile Include="Ev3Command\ACommand_ResLenFlex.cs" />
     <Compile Include="Ev3Command\CommandException.cs" />
     <Compile Include="Ev3Command\CommandInvalidParamException.cs" />
     <Compile Include="Ev3Command\CommandLenException.cs" />

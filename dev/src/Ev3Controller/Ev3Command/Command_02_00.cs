@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Ev3Command
 {
-    public class Command_02_00 : ACommand
+    public class Command_02_00 : ACommand_ResLenFix
     {
         #region Other methods and private properties in calling order
         protected override void Init()
@@ -32,22 +32,9 @@ namespace Ev3Controller.Ev3Command
         }
 
         /// <summary>
-        /// Check reponse data of AppVersion original response data.
+        /// No paramter to check.
         /// </summary>
-        protected override void CheckParam()
-        {
-            base.CheckParam();
-
-            int Len = this.ResData.Length;
-            int ResLen = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_LEN];
-
-            if ((ResLen != this.ResLen) || (Len != ResLen + 4))
-            {
-                throw new CommandLenException(
-                    "SomeParameterInvalid",
-                    this.Cmd, this.SubCmd, this.Name);
-            }
-        }
+        protected override void CheckParam() { }
         #endregion
     }
 }
