@@ -42,6 +42,20 @@ namespace Ev3Controller.Ev3Command
             }
             return ResLen;
         }
+
+        /// <summary>
+        /// Check parameters, expecially port number in response data.
+        /// </summary>
+        protected override void CheckParam()
+        {
+            int DevNum = base.CheckDevNum();
+            int DataIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP + 1;
+            for (int DevIndex = 0; DevIndex < DevNum; DevIndex++)
+            {
+                base.CheckPort(DataIndex);
+                DataIndex += this.OneDataLen;
+            }
+        }
         #endregion
 
         #region Public Properties
