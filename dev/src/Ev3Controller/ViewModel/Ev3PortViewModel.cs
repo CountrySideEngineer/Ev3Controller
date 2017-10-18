@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 namespace Ev3Controller.ViewModel
 {
     using Command;
+    using Ev3Command;
     using Model;
+    using System.Windows.Media.Imaging;
+    using Ev3Controller.Util;
 
     public class Ev3PortViewModel : DeviceViewModelBase
     {
@@ -21,9 +24,9 @@ namespace Ev3Controller.ViewModel
             {ConnectionState.Disconnected, new LabelAndEnable(true, @"接続", @"未接続") },
             {ConnectionState.Disconnecting, new LabelAndEnable(false, @"切断", @"切断中") },
             {ConnectionState.Connecting, new LabelAndEnable(false, @"接続", @"接続中") },
-            {ConnectionState.Connected, new LabelAndEnable(true, @"切断", @"接続済み") },
-            {ConnectionState.Sending, new LabelAndEnable(false, @"切断", @"送信中") },
-            {ConnectionState.Receiving, new LabelAndEnable(false, @"切断", @"受信中") },
+            {ConnectionState.Connected, new LabelAndEnable(false, @"切断", @"接続済み") },
+            {ConnectionState.Sending, new LabelAndEnable(true, @"切断", @"送信中") },
+            {ConnectionState.Receiving, new LabelAndEnable(true, @"切断", @"受信中") },
             {ConnectionState.Unknown, new LabelAndEnable(true, @"不明", @"不明") },
         };
         #endregion
@@ -35,7 +38,10 @@ namespace Ev3Controller.ViewModel
         public Ev3PortViewModel()
         {
             this.ConnectState = new ConnectState(ConnectionState.Disconnected);
-            this.AvailableComPortVM = ComPortViewModel.Create();
+            this.UpdateState();
+
+            this.AvailableComPorts = ComPortViewModel.Create();
+            this.SelectedComPort = this.AvailableComPorts.First();
         }
         #endregion
 
@@ -70,6 +76,8 @@ namespace Ev3Controller.ViewModel
                 this.CanChangePort = MapValue.CanChange;
                 this.ActionName = MapValue.ActionLabel;
                 this.StateLabel = MapValue.ConnLabel;
+
+                this.ImageResource = this._ConnectState.StateImage;
             }
         }
 
@@ -101,19 +109,19 @@ namespace Ev3Controller.ViewModel
         /// <summary>
         /// List of available COM port.
         /// </summary>
-        public IEnumerable<ComPortViewModel> AvailableComPortVM { get; protected set; }
+        public IEnumerable<ComPortViewModel> AvailableComPorts { get; protected set; }
 
         /// <summary>
         /// Current selected ComPortViewModel
         /// </summary>
-        protected ComPortViewModel _SelectedComPortVM;
-        public ComPortViewModel SelectedComPortVM
+        protected ComPortViewModel _SelectedComPort;
+        public ComPortViewModel SelectedComPort
         {
-            get { return this._SelectedComPortVM; }
+            get { return this._SelectedComPort; }
             set
             {
-                this._SelectedComPortVM = value;
-                this.RaisePropertyChanged("SelectedComPortVM");
+                this._SelectedComPort = value;
+                this.RaisePropertyChanged("SelectedComPort");
             }
         }
 
@@ -158,6 +166,25 @@ namespace Ev3Controller.ViewModel
         /// Flag shows whether the command to access COM port can execute or not.
         /// </summary>
         public bool CanComPortAccessCommand { get; protected set; }
+
+        /// <summary>
+        /// Image source for connect state.
+        /// </summary>
+        protected BitmapImage _ImageResource;
+        public BitmapImage ImageResource
+        {
+            get
+            {
+                return this._ImageResource;
+            }
+            protected set
+            {
+                this._ImageResource = value;
+                this.RaisePropertyChanged("ImageResource");
+            }
+        }
+
+        public object Ev3Util { get; private set; }
         #endregion
 
         #region Other methods and private properties in calling order.
@@ -184,7 +211,7 @@ namespace Ev3Controller.ViewModel
             if (this.IsConnected) { return; }//Nothing to do if the port has been connected.
 
             this.ReleaseEventHandler();
-            this.AccessRunner = new ComPortAccessSequenceRunner(this.SelectedComPortVM.ComPort);
+            this.AccessRunner = new ComPortAccessSequenceRunner(this.SelectedComPort.ComPort);
             this.SetupEventHandler();
             this.AccessRunner.ChangeAndStartSequence(
                 ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_CONNECT);
@@ -212,42 +239,16 @@ namespace Ev3Controller.ViewModel
             if (e is ConnectStateChangedEventArgs)
             {
                 var Args = e as ConnectStateChangedEventArgs;
-                this.ConnectState = Args.NewValue;
-                
-                //Change connection state, connected or not.
-                switch (this.ConnectState.State)
+                var OldVar = this.ConnectState;
+                var NewVar = Args.NewValue;
+                this.ConnectState = NewVar;
+                this.UpdateState();
+
+                if ((OldVar.State.Equals(ConnectionState.Connecting))
+                    && (NewVar.State.Equals(ConnectionState.Connected)))
                 {
-                    case ConnectionState.Connected:
-                    case ConnectionState.Disconnecting:
-                    case ConnectionState.Sending:
-                    case ConnectionState.Receiving:
-                        this.IsConnected = true;
-                        break;
-
-                    case ConnectionState.Connecting:
-                    case ConnectionState.Disconnected:
-                    case ConnectionState.Unknown:
-                    default:
-                        this.IsConnected = false;
-                        break;
-                }
-
-                //Change the flag shows the COM port access command can excecte or not.
-                switch (this.ConnectState.State)
-                {
-                    case ConnectionState.Connected:
-                    case ConnectionState.Disconnected:
-                    case ConnectionState.Sending:
-                    case ConnectionState.Receiving:
-                        this.CanComPortAccessCommand = true;
-                        break;
-
-                    case ConnectionState.Disconnecting:
-                    case ConnectionState.Connecting:
-                    case ConnectionState.Unknown:
-                    default:
-                        this.CanComPortAccessCommand = false;
-                        break;
+                    this.AccessRunner.ChangeAndStartSequence(
+                        ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
                 }
             }
             //Other properties are update in ConnectState setter.
@@ -264,6 +265,8 @@ namespace Ev3Controller.ViewModel
                 this.AccessRunner.SequenceStartingEvent += this.ConnectedStateChangedCallback;
                 this.AccessRunner.SequenceStartedEvent += this.ConnectedStateChangedCallback;
                 this.AccessRunner.SequenceFinishedEvent += this.ConnectedStateChangedCallback;
+                this.AccessRunner.DataSendReceiveEvent += this.DataSendAndReceivedFinishedCallback;
+                this.AccessRunner.ExceptionReceivedEvent += this.ExceptionRaisedCallback;
             }
         }
 
@@ -278,6 +281,8 @@ namespace Ev3Controller.ViewModel
                 this.AccessRunner.SequenceStartingEvent -= this.ConnectedStateChangedCallback;
                 this.AccessRunner.SequenceStartedEvent -= this.ConnectedStateChangedCallback;
                 this.AccessRunner.SequenceFinishedEvent -= this.ConnectedStateChangedCallback;
+                this.AccessRunner.DataSendReceiveEvent -= this.DataSendAndReceivedFinishedCallback;
+                this.AccessRunner.ExceptionReceivedEvent -= this.ExceptionRaisedCallback;
             }
         }
 
@@ -288,7 +293,80 @@ namespace Ev3Controller.ViewModel
         /// <param name="e"></param>
         public virtual void DataSendAndReceivedFinishedCallback(object sender, EventArgs e)
         {
-            Console.WriteLine("DataSendAndReceivedFinishedCallback called");
+            if (e is NotifySendReceiveDataEventArgs)
+            {
+                var Args = e as NotifySendReceiveDataEventArgs;
+                Console.WriteLine(@"Snd:" + Ev3Utility.Buff2String(Args.SendData));
+                Console.WriteLine(@"Rcv:" + Ev3Utility.Buff2String(Args.RecvData));
+            }
+        }
+
+        /// <summary>
+        /// Handle exception raised in command sequence. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public virtual void ExceptionRaisedCallback(object sender, EventArgs e)
+        {
+            if (e is NotifyCommandException)
+            {
+                var Except = e as NotifyCommandException;
+                var CmdExcept = Except.Except as CommandException;
+                Console.WriteLine(
+                    string.Format(
+                        @"{0} Name:{1} Code:0x{2:x2}-0x{3:x2}",
+                            CmdExcept.Message, CmdExcept.Name, CmdExcept.Cmd, CmdExcept.SubCmd));
+            }
+        }
+
+        /// <summary>
+        /// Update parameters.
+        /// </summary>
+        public void UpdateState()
+        {
+            LabelAndEnable MapValue =
+                Ev3PortViewModel.StateLabelMap[this.ConnectState.State];
+            this.CanChangePort = MapValue.CanChange;
+            this.ActionName = MapValue.ActionLabel;
+            this.StateLabel = MapValue.ConnLabel;
+
+            this.ImageResource = this.ConnectState.StateImage;
+
+            //Change connection state, connected or not.
+            switch (this.ConnectState.State)
+            {
+                case ConnectionState.Connected:
+                case ConnectionState.Disconnecting:
+                case ConnectionState.Sending:
+                case ConnectionState.Receiving:
+                    this.IsConnected = true;
+                    break;
+
+                case ConnectionState.Connecting:
+                case ConnectionState.Disconnected:
+                case ConnectionState.Unknown:
+                default:
+                    this.IsConnected = false;
+                    break;
+            }
+
+            //Change the flag shows the COM port access command can excecte or not.
+            switch (this.ConnectState.State)
+            {
+                case ConnectionState.Connected:
+                case ConnectionState.Disconnected:
+                case ConnectionState.Sending:
+                case ConnectionState.Receiving:
+                    this.CanComPortAccessCommand = true;
+                    break;
+
+                case ConnectionState.Disconnecting:
+                case ConnectionState.Connecting:
+                case ConnectionState.Unknown:
+                default:
+                    this.CanComPortAccessCommand = false;
+                    break;
+            }
         }
 
         #region Inner class

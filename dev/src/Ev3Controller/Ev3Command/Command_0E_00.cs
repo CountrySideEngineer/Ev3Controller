@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +24,32 @@ namespace Ev3Controller.Ev3Command
         /// <summary>
         /// Setup command data for GetMotors original data.
         /// </summary>
-        protected override void SetUp()
+        protected override void SetUp(ICommandParam CommandParam)
         {
             this.CmdData[(int)COMMAND_BUFF_INDEX.COMMAND_BUFF_INDEX_CMD_DATA_LEN] = this.CmdLen;
+        }
+
+        /// <summary>
+        /// Check whether size of response data buffer and length set in reponse data, 
+        /// calcurated data lenght from the number of device in the data, matche.
+        /// (To be more precise, the size is 4 byte more than the length.)
+        /// If they are not match, CommandLenException will be thrown.
+        /// </summary>
+        /// <returns>Length written in response data.</returns>
+        protected override int CheckLen()
+        {
+            Debug.Assert(this.ResData != null);
+
+            int Len = this.ResData.Length;
+            int ResLen = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_LEN];
+            if (Len != (ResLen + 4))
+            {
+                throw new CommandLenException(
+                        "Command or response data Len error",
+                        this.Cmd, this.SubCmd, this.Name);
+            }
+
+            return ResLen;//WANT!!Change using TAPLE.
         }
 
         /// <summary>
@@ -55,7 +79,6 @@ namespace Ev3Controller.Ev3Command
                             this.Cmd, this.SubCmd, this.Name);
                 }
             }
-            base.CheckParam();
         }
         #endregion
     }
