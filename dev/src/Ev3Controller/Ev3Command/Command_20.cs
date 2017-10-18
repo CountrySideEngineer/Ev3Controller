@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Ev3Command
 {
-    public abstract class Command_20 : ACommand_ResLenFix
+    public abstract class Command_20 : ACommand_ResLenFlex
     {
-        #region Public Properties
-        public byte OneDataLen { get; protected set; }
+        #region Constructors and the Finalizer
+        public Command_20(ICommandParam CommandParam) : base(CommandParam) { }
         #endregion
 
         #region Other methods and private properties in calling order
