@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Ev3Command
 {
-    public class Command_20_00 : Command_20
+    public class Command_20_01 : Command_20
     {
         #region Constructors and the Finalizer
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="CommandParam"></param>
-        public Command_20_00(ICommandParam CommandParam = null) : base(CommandParam) { }
+        public Command_20_01(ICommandParam CommandParam = null) : base(CommandParam) { }
         #endregion
 
         #region Other methods and private properties in calling order
@@ -22,13 +22,13 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         protected override void Init()
         {
-            this.SubCmd = 0x00;
+            this.SubCmd = 0x01;
             this.CmdLen = 0x00;
 
-            this.SubRes = 0x00;
+            this.SubRes = 0x01;
             this.ResLen = 0xFF;
 
-            this.OneDataLen = 0x03;
+            this.OneDataLen = 0x02;
 
             base.Init();
         }
