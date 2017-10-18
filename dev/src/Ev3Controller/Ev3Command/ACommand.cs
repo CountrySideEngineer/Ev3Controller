@@ -204,11 +204,12 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         /// <param name="DataIndex">Index of data in response.</param>
         /// <returns>Number of device</returns>
-        protected virtual int CheckDevNumAndThrowException(int DataIndex)
+        protected virtual int CheckDevNum()
         {
             Debug.Assert(this.ResData != null);
 
-            byte DevNum = this.ResData[DataIndex];
+            int DevNumIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP;
+            byte DevNum = this.ResData[DevNumIndex];
             if (4 < DevNum)
             {
                 throw new CommandOperationException(
