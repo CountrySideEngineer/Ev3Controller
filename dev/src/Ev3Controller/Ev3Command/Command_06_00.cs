@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Ev3Command
 {
-    public class Command_06_00 : ACommand
+    public class Command_06_00 : ACommand_ResLenFix
     {
         #region Other methods and private properties in calling order
         /// <summary>
@@ -29,7 +29,7 @@ namespace Ev3Controller.Ev3Command
         /// <summary>
         /// Setup command data for GetBattery original response data.
         /// </summary>
-        protected override void SetUp()
+        protected override void SetUp(ICommandParam CommandParam)
         {
             this.CmdData[(int)COMMAND_BUFF_INDEX.COMMAND_BUFF_INDEX_CMD_DATA_LEN] = this.CmdLen;
         }
@@ -39,17 +39,6 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         protected override void CheckParam()
         {
-            base.CheckParam();
-
-            int Len = this.ResData.Length;
-            int ResLen = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_LEN];
-
-            if ((ResLen != this.ResLen) || (Len != ResLen + 4))
-            {
-                throw new CommandLenException(
-                    "SomeParameterInvalid",
-                    this.Cmd, this.SubCmd, this.Name);
-            }
             byte SafeState = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP];
             switch (SafeState)
             {

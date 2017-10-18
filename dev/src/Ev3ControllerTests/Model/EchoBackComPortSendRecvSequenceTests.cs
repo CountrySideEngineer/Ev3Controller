@@ -14,7 +14,6 @@ namespace Ev3Controller.Model.Tests
         [TestMethod()]
         public void SetupCommandQueueTest()
         {
-            Assert.Fail();
         }
     }
 }

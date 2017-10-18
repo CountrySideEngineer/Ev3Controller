@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="Ev3Command\ACommandTests.cs" />
     <Compile Include="Ev3Command\CommandExceptionTests.cs" />
+    <Compile Include="Ev3Command\CommandParam_12_00_Tests.cs" />
+    <Compile Include="Ev3Command\CommandParam_16_00_Tests.cs" />
     <Compile Include="Ev3Command\Command_02_00Tests.cs" />
     <Compile Include="Ev3Command\Command_04_00Tests.cs" />
     <Compile Include="Ev3Command\Command_06_00_Tests.cs" />
@@ -63,6 +65,10 @@
     <Compile Include="Ev3Command\Command_0E_10_Tests.cs" />
     <Compile Include="Ev3Command\Command_0E_11_Tests.cs" />
     <Compile Include="Ev3Command\Command_0E_20_Tests.cs" />
+    <Compile Include="Ev3Command\Command_10_00_Tests.cs" />
+    <Compile Include="Ev3Command\Command_12_00_Tests.cs" />
+    <Compile Include="Ev3Command\Command_16_00_Tests.cs" />
+    <Compile Include="Ev3Command\Command_20_00_Tests.cs" />
     <Compile Include="Model\ComPortAccessSequenceRunnerTests.cs" />
     <Compile Include="Model\ComPortAccessSequenceTestBase.cs" />
     <Compile Include="Model\ComPortAccessSequenceTests.cs" />
