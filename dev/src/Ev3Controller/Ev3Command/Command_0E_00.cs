@@ -35,9 +35,8 @@ namespace Ev3Controller.Ev3Command
         /// (To be more precise, the size is 4 byte more than the length.)
         /// If they are not match, CommandLenException will be thrown.
         /// </summary>
-        /// <param name="OptDataIndex">Index of option data.</param>
         /// <returns>Length written in response data.</returns>
-        protected override int CheckLen(int OptDataIndex)
+        protected override int CheckLen()
         {
             Debug.Assert(this.ResData != null);
 

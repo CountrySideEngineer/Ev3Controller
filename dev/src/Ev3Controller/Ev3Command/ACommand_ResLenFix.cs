@@ -20,11 +20,11 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         /// <param name="OptDataIndex"></param>
         /// <returns></returns>
-        protected override int CheckLen(int OptDataIndex)
+        protected override int CheckLen()
         {
             Debug.Assert(this.ResData != null);
 
-            int ResLen = base.CheckLen(OptDataIndex);
+            int ResLen = base.CheckLen();
             if (ResLen != this.ResLen)
             {
                 throw new CommandLenException(

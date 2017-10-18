@@ -26,28 +26,6 @@ namespace Ev3Controller.Ev3Command
         }
 
         /// <summary>
-        /// Check reponse data of GetSonicSensor and get ultrasonic sensor listening data,
-        /// distance or ultrasonic listening.
-        /// </summary>
-        protected override void CheckResult()
-        {
-            base.CheckResult();
-            this.CheckLen();
-
-            int DevNum = this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP];
-            if (0 != DevNum)
-            {
-                int PortIndex =
-                    this.ResData[(int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP + 1];
-                for (int index = 0; index < DevNum; index++)
-                {
-                    this.CheckPort(PortIndex);
-                    PortIndex += this.OneDataLen;
-                }
-            }
-        }
-
-        /// <summary>
         /// Check whether size of response data buffer and length set in reponse data, 
         /// calcurated data lenght from the number of device in the data, matche.
         /// (To be more precise, the size is 4 byte more than the length.)
@@ -55,9 +33,9 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         /// <param name="OptDataIndex">Index of option data.</param>
         /// <returns>Length written in response data.</returns>
-        protected override int CheckLen(int OptDataIndex)
+        protected override int CheckLen()
         {
-            int ResLen = base.CheckLen(OptDataIndex);
+            int ResLen = base.CheckLen();
             int DataIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP;
             int DevNum = this.ResData[DataIndex];
 

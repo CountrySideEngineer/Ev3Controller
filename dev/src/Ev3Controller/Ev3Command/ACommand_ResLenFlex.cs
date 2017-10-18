@@ -25,9 +25,8 @@ namespace Ev3Controller.Ev3Command
         ///     FORMULA : Device num x OneDataLen property.
         /// If they are not match, CommandLenException will be thrown.
         /// </summary>
-        /// <param name="OptDataIndex">Index of option data.</param>
         /// <returns>Length written in response data.</returns>
-        protected override int CheckLen(int OptDataIndex)
+        protected override int CheckLen()
         {
             Debug.Assert(this.ResData != null);
 
