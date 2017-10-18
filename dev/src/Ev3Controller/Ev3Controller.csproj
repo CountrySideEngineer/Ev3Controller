@@ -62,12 +62,16 @@
     </ApplicationDefinition>
     <Compile Include="Command\DelegateCommand.cs" />
     <Compile Include="Ev3Command\ACommand.cs" />
+    <Compile Include="Ev3Command\ACommand_ResLenFix.cs" />
+    <Compile Include="Ev3Command\ACommand_ResLenFlex.cs" />
     <Compile Include="Ev3Command\CommandException.cs" />
     <Compile Include="Ev3Command\CommandInvalidParamException.cs" />
     <Compile Include="Ev3Command\CommandLenException.cs" />
     <Compile Include="Ev3Command\CommandNoResponseException.cs" />
     <Compile Include="Ev3Command\CommandOperationException.cs" />
     <Compile Include="Ev3Command\CommandParamException.cs" />
+    <Compile Include="Ev3Command\CommandParam_12_00.cs" />
+    <Compile Include="Ev3Command\CommandParam_16_00.cs" />
     <Compile Include="Ev3Command\CommandUnExpectedResponse.cs" />
     <Compile Include="Ev3Command\Command_00_00.cs" />
     <Compile Include="Ev3Command\Command_02_00.cs" />
@@ -79,6 +83,13 @@
     <Compile Include="Ev3Command\Command_0E_10.cs" />
     <Compile Include="Ev3Command\Command_0E_11.cs" />
     <Compile Include="Ev3Command\Command_0E_20.cs" />
+    <Compile Include="Ev3Command\Command_10_00.cs" />
+    <Compile Include="Ev3Command\Command_12_00.cs" />
+    <Compile Include="Ev3Command\Command_16_00.cs" />
+    <Compile Include="Ev3Command\Command_20.cs" />
+    <Compile Include="Ev3Command\Command_20_00.cs" />
+    <Compile Include="Ev3Command\Command_20_01.cs" />
+    <Compile Include="Ev3Command\ICommandParam.cs" />
     <Compile Include="Model\ComPort.cs" />
     <Compile Include="Model\ComPortAccess.cs" />
     <Compile Include="Model\ComPortAccessSequence.cs" />
@@ -93,6 +104,10 @@
     <Compile Include="Model\NotifyCommandException.cs" />
     <Compile Include="Model\NotifySendReceiveDataEventArgs.cs" />
     <Compile Include="Model\SequenceChangedEventArgs.cs" />
+    <Compile Include="UserControlView\Ev3PortView.xaml.cs">
+      <DependentUpon>Ev3PortView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Util\Ev3Utility.cs" />
     <Compile Include="ViewModel\ComPortViewModel.cs" />
     <Compile Include="ViewModel\DeviceViewModelBase.cs" />
     <Compile Include="ViewModel\Ev3ControllerMainViewModel.cs" />
@@ -110,6 +125,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControlView\Ev3PortView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -139,6 +158,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resource\pict\connected.png" />
+    <Resource Include="Resource\pict\connecting.png" />
+    <Resource Include="Resource\pict\disconnected.png" />
+    <Resource Include="Resource\pict\disconnecting.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

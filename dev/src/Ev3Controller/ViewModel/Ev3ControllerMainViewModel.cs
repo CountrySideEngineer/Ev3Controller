@@ -30,6 +30,11 @@ namespace Ev3Controller.ViewModel
                 }
                 return this._PortViewModel;
             }
+            set
+            {
+                this._PortViewModel = value;
+                this.RaisePropertyChanged("PortViewModel");
+            }
         }
         #endregion
     }
