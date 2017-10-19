@@ -26,6 +26,7 @@ namespace Ev3Controller.Ev3Command.Tests
             Assert.AreEqual(0x01, Command.CmdData[1]);
             Assert.AreEqual(0x00, Command.CmdData[2]);
             Assert.AreEqual(0x02, Command.OneDataLen);
+            Assert.AreEqual(0x31, Command.Res);
             Assert.AreEqual(0x01, Command.SubRes);
             Assert.AreEqual(0xFF, Command.ResLen);
         }
