@@ -398,7 +398,7 @@ namespace Ev3Controller.Ev3Command.Tests
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Command_00_00_Check")]
+        [TestCategory("Command_00_00_CheckDevNum")]
         public void Command_00_00Test_020()
         {
             var Command = new Command_00_00();
@@ -413,13 +413,13 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[7] = 0x06;
 
             var PrivateCommand = new PrivateObject(Command);
-            int DevNum = (int)PrivateCommand.Invoke("CheckDevNumAndThrowException", 4);
+            int DevNum = (int)PrivateCommand.Invoke("CheckDevNum");
 
             Assert.AreEqual(0, DevNum);
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Command_00_00_CheckDevNumAndThrowException")]
+        [TestCategory("Command_00_00_CheckDevNum")]
         public void Command_00_00Test_CheckDevNumAndThrowException_001()
         {
             var Command = new Command_00_00();
@@ -434,13 +434,13 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[7] = 0x06;
 
             var PrivateCommand = new PrivateObject(Command);
-            int DevNum = (int)PrivateCommand.Invoke("CheckDevNumAndThrowException", 4);
+            int DevNum = (int)PrivateCommand.Invoke("CheckDevNum");
 
             Assert.AreEqual(3, DevNum);
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Command_00_00_CheckDevNumAndThrowException")]
+        [TestCategory("Command_00_00_CheckDevNum")]
         public void Command_00_00Test_CheckDevNumAndThrowException_002()
         {
             var Command = new Command_00_00();
@@ -455,13 +455,13 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[7] = 0x06;
 
             var PrivateCommand = new PrivateObject(Command);
-            int DevNum = (int)PrivateCommand.Invoke("CheckDevNumAndThrowException", 4);
+            int DevNum = (int)PrivateCommand.Invoke("CheckDevNum");
 
             Assert.AreEqual(0, DevNum);
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Command_00_00_CheckDevNumAndThrowException")]
+        [TestCategory("Command_00_00_CheckDevNum")]
         public void Command_00_00Test_CheckDevNumAndThrowException_003()
         {
             var Command = new Command_00_00();
@@ -476,13 +476,13 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[7] = 0x06;
 
             var PrivateCommand = new PrivateObject(Command);
-            int DevNum = (int)PrivateCommand.Invoke("CheckDevNumAndThrowException", 4);
+            int DevNum = (int)PrivateCommand.Invoke("CheckDevNum");
 
             Assert.AreEqual(4, DevNum);
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
-        [TestCategory("Command_00_00_CheckDevNumAndThrowException")]
+        [TestCategory("Command_00_00_CheckDevNum")]
         [ExpectedExceptionAttribute(typeof(CommandOperationException))]
         public void Command_00_00Test_CheckDevNumAndThrowException_004()
         {
@@ -498,7 +498,7 @@ namespace Ev3Controller.Ev3Command.Tests
             Command.ResData[7] = 0x06;
 
             var PrivateCommand = new PrivateObject(Command);
-            int DevNum = (int)PrivateCommand.Invoke("CheckDevNumAndThrowException", 4);
+            int DevNum = (int)PrivateCommand.Invoke("CheckDevNum");
         }
         [TestMethod()]
         [TestCategory("Command_00_00")]
