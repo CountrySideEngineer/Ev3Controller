@@ -93,6 +93,7 @@
     <Compile Include="Ev3Command\Command_30_00.cs" />
     <Compile Include="Ev3Command\Command_30_01.cs" />
     <Compile Include="Ev3Command\Command_30_02.cs" />
+    <Compile Include="Ev3Command\Command_40_00.cs" />
     <Compile Include="Ev3Command\ICommandParam.cs" />
     <Compile Include="Model\ComPort.cs" />
     <Compile Include="Model\ComPortAccess.cs" />
