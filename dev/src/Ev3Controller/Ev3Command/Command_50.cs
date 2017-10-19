@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Ev3Command
 {
-    public abstract class Command_20 : ACommand_ResLenFlex
+    public abstract class Command_50 : ACommand_ResLenFlex
     {
         #region Constructors and the Finalizer
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="CommandParam"></param>
-        public Command_20(ICommandParam CommandParam) : base(CommandParam) { }
+        public Command_50(ICommandParam CommandParam) : base(CommandParam) { }
         #endregion
 
         #region Other methods and private properties in calling order
@@ -22,9 +22,9 @@ namespace Ev3Controller.Ev3Command
         /// </summary>
         protected override void Init()
         {
-            this.Name = "GetSonicSensor";
-            this.Cmd = 0x20;
-            this.Res = 0x21;
+            this.Name = "GetGyroSensor";
+            this.Cmd = 0x50;
+            this.Res = 0x51;
 
             base.Init();
         }
