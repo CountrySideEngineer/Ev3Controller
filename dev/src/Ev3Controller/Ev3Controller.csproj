@@ -99,6 +99,7 @@
     <Compile Include="Ev3Command\Command_50_00.cs" />
     <Compile Include="Ev3Command\Command_50_01.cs" />
     <Compile Include="Ev3Command\ICommandParam.cs" />
+    <Compile Include="Model\AppVersion.cs" />
     <Compile Include="Model\ComPort.cs" />
     <Compile Include="Model\ComPortAccess.cs" />
     <Compile Include="Model\ComPortAccessSequence.cs" />
@@ -109,6 +110,9 @@
     <Compile Include="Model\ConnectState.cs" />
     <Compile Include="Model\ConnectStateChangedEventArgs.cs" />
     <Compile Include="Model\EchoBackComPortSendRecvSequence.cs" />
+    <Compile Include="Model\Ev3Device.cs" />
+    <Compile Include="Model\Ev3MotorDevice.cs" />
+    <Compile Include="Model\Ev3SensorDevice.cs" />
     <Compile Include="Model\IsConnectedChangedEventArgs.cs" />
     <Compile Include="Model\LedColor.cs" />
     <Compile Include="Model\NotifyCommandException.cs" />
