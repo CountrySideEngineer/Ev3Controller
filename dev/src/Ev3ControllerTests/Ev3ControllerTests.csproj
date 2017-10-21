@@ -76,6 +76,7 @@
     <Compile Include="Ev3Command\Command_50_00_Tests.cs" />
     <Compile Include="Ev3Command\Command_50_01_Tests.cs" />
     <Compile Include="Ev3Command\Command_A0_00_Tests.cs" />
+    <Compile Include="Ev3Command\SafeState.cs" />
     <Compile Include="Model\ComPortAccessSequenceRunnerTests.cs" />
     <Compile Include="Model\ComPortAccessSequenceTestBase.cs" />
     <Compile Include="Model\ComPortAccessSequenceTests.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Model\ComPortSendRecvSequenceTests.cs" />
     <Compile Include="Model\ComPortTests.cs" />
     <Compile Include="Model\EchoBackComPortSendRecvSequenceTests.cs" />
+    <Compile Include="Model\EV3Brick_Tests.cs" />
     <Compile Include="Model\NotifyCommandExceptionTests.cs" />
     <Compile Include="Model\NotifySendReceiveDataEventArgsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
