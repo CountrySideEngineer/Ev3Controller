@@ -1,0 +1,126 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ev3Controller.Model
+{
+    public class EV3Brick
+    {
+        #region Public Properties
+        /// <summary>
+        /// Battery of EV3 Brick.
+        /// </summary>
+        protected Power _Battery;
+        public Power Battery
+        {
+            get
+            {
+                if (null == this._Battery )
+                {
+                    this._Battery = new Power();
+                }
+                return this._Battery;
+            }
+            set { this.Battery = value; }
+        }
+
+        /// <summary>
+        /// Led color data.
+        /// </summary>
+        protected LedColor _Led;
+        public LedColor Led
+        {
+            get
+            {
+                if (null == this._Led)
+                {
+                    this._Led = new LedColor();
+                }
+                return this._Led;
+            }
+        }
+
+        /// <summary>
+        /// Application version running on Ev3.
+        /// </summary>
+        protected AppVersion _Version;
+        public AppVersion Version
+        {
+            get
+            {
+                if (null == this._Version)
+                {
+                    this._Version = new AppVersion();
+                }
+                return this._Version;
+            }
+        }
+
+        /// <summary>
+        /// Sensor device data.
+        /// </summary>
+        protected Ev3SensorDevice[] _SensorDevice;
+
+        /// <summary>
+        /// Motor device data.
+        /// </summary>
+        protected Ev3MotorDevice[] _MotorDevice;
+        #endregion
+
+        #region Other methods and private properties in calling order
+        /// <summary>
+        /// Returns the MotorDevice object specified by PortIndex, index of array. 
+        /// </summary>
+        /// <param name="PortIndex">Abstracted port number.</param>
+        /// <returns></returns>
+        public Ev3MotorDevice MotorDevice(int PortIndex)
+        {
+            if (null == this._MotorDevice)
+            {
+                this._MotorDevice = new Ev3MotorDevice[4];
+            }
+            try
+            {
+                if (null == this._MotorDevice[PortIndex])
+                {
+                    this._MotorDevice[PortIndex] = new Ev3MotorDevice();
+                }
+                return this._MotorDevice[PortIndex];
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Returns the SensorDevice object specified by PortIdnex, index of array.
+        /// </summary>
+        /// <param name="PortIndex">Abstracted port number.</param>
+        /// <returns></returns>
+        public Ev3SensorDevice SensorDevice(int PortIndex)
+        {
+            if (null == this._SensorDevice)
+            {
+                this._SensorDevice = new Ev3SensorDevice[4];
+            }
+            try
+            {
+                if (null == this._SensorDevice[PortIndex])
+                {
+                    this._SensorDevice[PortIndex] = new Ev3SensorDevice();
+                }
+                return this._SensorDevice[PortIndex];
+            }
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        #endregion
+    }
+}

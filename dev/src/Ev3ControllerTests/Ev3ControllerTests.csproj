@@ -85,6 +85,7 @@
     <Compile Include="Model\ComPortSendRecvSequenceTests.cs" />
     <Compile Include="Model\ComPortTests.cs" />
     <Compile Include="Model\EchoBackComPortSendRecvSequenceTests.cs" />
+    <Compile Include="Model\EV3Brick_Tests.cs" />
     <Compile Include="Model\NotifyCommandExceptionTests.cs" />
     <Compile Include="Model\NotifySendReceiveDataEventArgsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
