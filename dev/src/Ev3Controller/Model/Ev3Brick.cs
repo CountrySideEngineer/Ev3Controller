@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Model
 {
-    public class EV3Brick
+    public class Ev3Brick
     {
         #region Public Properties
         /// <summary>

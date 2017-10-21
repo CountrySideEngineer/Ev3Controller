@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 namespace Ev3Controller.Model.Tests
 {
     [TestClass()]
-    public class EV3Brick_Tests
+    public class Ev3Brick_Tests
     {
         #region Unit test of "MotorDevice" method.
         [TestMethod()]
         [TestCategory("EV3Brick_SensorDevice")]
         public void EV3Brick_SensorDevice_Test_001()
         {
-            var Brick = new EV3Brick();
+            var Brick = new Ev3Brick();
             var SensorDevice = Brick.SensorDevice(0);
 
             Assert.AreEqual(0, SensorDevice.Value1);
@@ -36,7 +36,7 @@ namespace Ev3Controller.Model.Tests
         [TestCategory("EV3Brick_SensorDevice")]
         public void EV3Brick_SensorDevice_Test_002()
         {
-            var Brick = new EV3Brick();
+            var Brick = new Ev3Brick();
             var SensorDevice = Brick.SensorDevice(3);
 
             Assert.AreEqual(0, SensorDevice.Value1);
@@ -47,7 +47,7 @@ namespace Ev3Controller.Model.Tests
         [TestCategory("EV3Brick_SensorDevice")]
         public void EV3Brick_SensorDevice_Test_003()
         {
-            var Brick = new EV3Brick();
+            var Brick = new Ev3Brick();
             var SensorDevice = Brick.SensorDevice(-1);
 
             Assert.IsNull(SensorDevice);
@@ -56,7 +56,7 @@ namespace Ev3Controller.Model.Tests
         [TestCategory("EV3Brick_SensorDevice")]
         public void EV3Brick_SensorDevice_Test_004()
         {
-            var Brick = new EV3Brick();
+            var Brick = new Ev3Brick();
             var SensorDevice = Brick.SensorDevice(4);
 
             Assert.IsNull(SensorDevice);
@@ -68,7 +68,7 @@ namespace Ev3Controller.Model.Tests
         [TestCategory("EV3Brick_MotorDevice")]
         public void EV3Brick_MotorDevice_Test_001()
         {
-            var Brick = new EV3Brick();
+            var Brick = new Ev3Brick();
             var Device = Brick.MotorDevice(0);
 
             Assert.AreEqual(0, Device.Power);
@@ -85,7 +85,7 @@ namespace Ev3Controller.Model.Tests
         [TestCategory("EV3Brick_MotorDevice")]
         public void EV3Brick_MotorDevice_Test_002()
         {
-            var Brick = new EV3Brick();
+            var Brick = new Ev3Brick();
             var Device = Brick.MotorDevice(3);
 
             Assert.AreEqual(0, Device.Power);
@@ -95,7 +95,7 @@ namespace Ev3Controller.Model.Tests
         [TestCategory("EV3Brick_MotorDevice")]
         public void EV3Brick_MotorDevice_Test_003()
         {
-            var Brick = new EV3Brick();
+            var Brick = new Ev3Brick();
             var Device = Brick.MotorDevice(-1);
 
             Assert.IsNull(Device);
@@ -104,7 +104,7 @@ namespace Ev3Controller.Model.Tests
         [TestCategory("EV3Brick_MotorDevice")]
         public void EV3Brick_MotorDevice_Test_004()
         {
-            var Brick = new EV3Brick();
+            var Brick = new Ev3Brick();
             var Device = Brick.MotorDevice(4);
 
             Assert.IsNull(Device);
