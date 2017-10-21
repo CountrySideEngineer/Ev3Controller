@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.Model
 {
-    class LedColor
+    public class LedColor
     {
         #region Public constants
         public enum COLOR
