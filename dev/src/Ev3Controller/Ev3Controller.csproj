@@ -110,7 +110,7 @@
     <Compile Include="Model\ConnectState.cs" />
     <Compile Include="Model\ConnectStateChangedEventArgs.cs" />
     <Compile Include="Model\EchoBackComPortSendRecvSequence.cs" />
-    <Compile Include="Model\EV3Brick.cs" />
+    <Compile Include="Model\Ev3Brick.cs" />
     <Compile Include="Model\Ev3Device.cs" />
     <Compile Include="Model\Ev3MotorDevice.cs" />
     <Compile Include="Model\Ev3SensorDevice.cs" />

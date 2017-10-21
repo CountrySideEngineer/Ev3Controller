@@ -8,6 +8,10 @@ namespace Ev3Controller.Model
 {
     public class Ev3Brick
     {
+        #region Constructors and the Finalizer
+        protected Ev3Brick() { }
+        #endregion
+
         #region Public Properties
         /// <summary>
         /// Battery of EV3 Brick.
@@ -83,6 +87,11 @@ namespace Ev3Controller.Model
         /// Motor device data.
         /// </summary>
         protected Ev3MotorDevice[] _MotorDevice;
+
+        /// <summary>
+        /// Instance for singleton.
+        /// </summary>
+        protected static Ev3Brick _Instance = new Ev3Brick();
         #endregion
 
         #region Other methods and private properties in calling order
@@ -136,6 +145,19 @@ namespace Ev3Controller.Model
                 Console.WriteLine(ex.Message);
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Returns Ev3Brick instance, singleton object.
+        /// </summary>
+        /// <returns></returns>
+        public static Ev3Brick GetInstance()
+        {
+            if (null == Ev3Brick._Instance)
+            {
+                _Instance = new Ev3Brick();
+            }
+            return _Instance;
         }
         #endregion
     }
