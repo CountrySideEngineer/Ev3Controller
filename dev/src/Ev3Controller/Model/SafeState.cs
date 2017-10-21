@@ -15,6 +15,7 @@ namespace Ev3Controller.Model
             { SAFE_STATE.SAFE_STATE_ATTN, "Attention" },
             { SAFE_STATE.SAFE_STATE_WARN, "Warning" },
             { SAFE_STATE.SAFE_STATE_STOP, "STOP" },
+            { SAFE_STATE.SAFE_STATE_UNKNOWN, "ERROR" },
         };
         #endregion
 
@@ -25,6 +26,7 @@ namespace Ev3Controller.Model
             SAFE_STATE_ATTN,
             SAFE_STATE_WARN,
             SAFE_STATE_STOP,
+            SAFE_STATE_UNKNOWN,
             SAFE_STATE_MAX,
         };
         #endregion

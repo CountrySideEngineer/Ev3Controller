@@ -80,6 +80,7 @@
     <Compile Include="Model\BrickUpdater_00_00_Tests.cs" />
     <Compile Include="Model\BrickUpdater_02_00_Tests.cs" />
     <Compile Include="Model\BrickUpdater_04_00_Tests.cs" />
+    <Compile Include="Model\BrickUpdater_06_00_Tests.cs" />
     <Compile Include="Model\ComPortAccessSequenceRunnerTests.cs" />
     <Compile Include="Model\ComPortAccessSequenceTestBase.cs" />
     <Compile Include="Model\ComPortAccessSequenceTests.cs" />
