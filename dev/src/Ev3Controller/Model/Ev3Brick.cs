@@ -27,7 +27,7 @@ namespace Ev3Controller.Model
                 }
                 return this._Battery;
             }
-            set { this.Battery = value; }
+            set { this._Battery = value; }
         }
 
         /// <summary>
@@ -43,7 +43,8 @@ namespace Ev3Controller.Model
                     this._Led = new LedColor();
                 }
                 return this._Led;
-            }
+            } 
+            set { this._Led = value; }
         }
 
         /// <summary>
@@ -60,6 +61,7 @@ namespace Ev3Controller.Model
                 }
                 return this._State;
             }
+            set { this._State = value; }
         }
 
         /// <summary>
@@ -76,6 +78,7 @@ namespace Ev3Controller.Model
                 }
                 return this._Version;
             }
+            set { this._Version = null; }
         }
 
         /// <summary>
@@ -158,6 +161,37 @@ namespace Ev3Controller.Model
                 _Instance = new Ev3Brick();
             }
             return _Instance;
+        }
+
+        /// <summary>
+        /// Reset Ev3Brick instance.
+        /// </summary>
+        public static void ResetInstance()
+        {
+            if (null != _Instance)
+            {
+                _Instance._Battery = null;
+                _Instance._Led = null;
+                _Instance._State = null;
+                _Instance._Version = null;
+                if (null != _Instance._SensorDevice)
+                {
+                    for (int index = 0; index < 4; index++)
+                    {
+                        _Instance._SensorDevice[index] = null;
+                    }
+                    _Instance._SensorDevice = null;
+                }
+                if (null != _Instance._MotorDevice)
+                {
+                    for (int index = 0; index < 4; index++)
+                    {
+                        _Instance._MotorDevice[index] = null;
+                    }
+                    _Instance._MotorDevice = null;
+                }
+                _Instance = null;
+            }
         }
         #endregion
     }
