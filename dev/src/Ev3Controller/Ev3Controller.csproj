@@ -102,6 +102,7 @@
     <Compile Include="Model\AppVersion.cs" />
     <Compile Include="Model\BrickUpdater.cs" />
     <Compile Include="Model\BrickUpdater_00_00.cs" />
+    <Compile Include="Model\BrickUpdater_02_00.cs" />
     <Compile Include="Model\ComPort.cs" />
     <Compile Include="Model\ComPortAccess.cs" />
     <Compile Include="Model\ComPortAccessSequence.cs" />
