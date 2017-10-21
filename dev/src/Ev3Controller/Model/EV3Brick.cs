@@ -43,6 +43,22 @@ namespace Ev3Controller.Model
         }
 
         /// <summary>
+        /// State of safe.
+        /// </summary>
+        protected SafeState _State;
+        public SafeState State
+        {
+            get
+            {
+                if (null == this._State)
+                {
+                    this._State = new SafeState();
+                }
+                return this._State;
+            }
+        }
+
+        /// <summary>
         /// Application version running on Ev3.
         /// </summary>
         protected AppVersion _Version;

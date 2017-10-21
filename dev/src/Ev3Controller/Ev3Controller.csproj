@@ -119,6 +119,7 @@
     <Compile Include="Model\NotifyCommandException.cs" />
     <Compile Include="Model\NotifySendReceiveDataEventArgs.cs" />
     <Compile Include="Model\Power.cs" />
+    <Compile Include="Model\SafeState.cs" />
     <Compile Include="Model\SequenceChangedEventArgs.cs" />
     <Compile Include="UserControlView\Ev3PortView.xaml.cs">
       <DependentUpon>Ev3PortView.xaml</DependentUpon>
