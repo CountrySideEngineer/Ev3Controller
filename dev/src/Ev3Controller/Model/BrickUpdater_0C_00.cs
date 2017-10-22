@@ -43,7 +43,7 @@ namespace Ev3Controller.Model
                 {
                     Brick.MotorDevice(Index).ConnectedPort = (Ev3Device.OUTPORT)Index;
 
-                    DEVICE_TYPE DeviceType = DEVICE_TYPE.MOTOR_DEVICE_UNKNOWN;
+                    DEVICE_TYPE DeviceType = DEVICE_TYPE.MOTOR_DEVICE_NO_DEVICE;
                     byte Type = Command.ResData[DataTopIndex + Index];
                     bool HasValue = DeviceTypeDictionary.ContainsKey(Type);
                     if (HasValue)

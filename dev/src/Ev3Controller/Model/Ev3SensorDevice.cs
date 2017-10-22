@@ -21,6 +21,7 @@ namespace Ev3Controller.Model
             SENSOR_DEVICE_COLOR,
             SENSOR_DEVICE_HT_NXT_ACCEL,
             SENSOR_DEVICE_NXT_TEMP,
+            SENSOR_DEVICE_UNKNOWN,
             SENSOR_DEVICE_MAX,
         }
         #endregion
@@ -36,6 +37,7 @@ namespace Ev3Controller.Model
                 { DEVICE_TYPE.SENSOR_DEVICE_COLOR, "COLOR" },
                 { DEVICE_TYPE.SENSOR_DEVICE_HT_NXT_ACCEL, "HTX" },
                 { DEVICE_TYPE.SENSOR_DEVICE_NXT_TEMP, "TEMPERATURE" },
+                { DEVICE_TYPE.SENSOR_DEVICE_UNKNOWN, "UNKNOWN" },
                 { DEVICE_TYPE.SENSOR_DEVICE_MAX, "UNKNOWN" },
         };
         #endregion
@@ -43,7 +45,7 @@ namespace Ev3Controller.Model
         #region Constructors and the Finalizer
         public Ev3SensorDevice()
         {
-            this.ConnectedPort = OUTPORT.OUTPORT_MAX;
+            this.ConnectedPort = INPORT.INPORT_MAX;
             this.DeviceType = DEVICE_TYPE.SENSOR_DEVICE_NO_DEVICE;
 
             this.Value1 = 0;
@@ -71,7 +73,7 @@ namespace Ev3Controller.Model
         /// <summary>
         /// Port the sensor device is connected.
         /// </summary>
-        public OUTPORT ConnectedPort { get; set; }
+        public INPORT ConnectedPort { get; set; }
 
         /// <summary>
         /// Connected device type.
@@ -86,7 +88,7 @@ namespace Ev3Controller.Model
         /// <returns></returns>
         public override string GetPortName()
         {
-            return OutPortNameDictionary[this.ConnectedPort];
+            return InPortNameDictionary[this.ConnectedPort];
         }
 
         /// <summary>

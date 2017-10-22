@@ -34,9 +34,9 @@ namespace Ev3Controller.Model.Tests
         public void Ev3SensorDevice_GetPortName_Test_001()
         {
             var Device = new Ev3SensorDevice();
-            Device.ConnectedPort = Ev3Device.OUTPORT.OUTPORT_A;
+            Device.ConnectedPort = Ev3Device.INPORT.INPORT_1;
 
-            Assert.AreEqual("PORT_A", Device.Port);
+            Assert.AreEqual("PORT_1", Device.Port);
         }
         [TestMethod()]
         [TestCategory("Ev3SensorDevice")]
@@ -44,9 +44,9 @@ namespace Ev3Controller.Model.Tests
         public void Ev3SensorDevice_GetPortName_Test_002()
         {
             var Device = new Ev3SensorDevice();
-            Device.ConnectedPort = Ev3Device.OUTPORT.OUTPORT_B;
+            Device.ConnectedPort = Ev3Device.INPORT.INPORT_2;
 
-            Assert.AreEqual("PORT_B", Device.Port);
+            Assert.AreEqual("PORT_2", Device.Port);
         }
         [TestMethod()]
         [TestCategory("Ev3SensorDevice")]
@@ -54,9 +54,9 @@ namespace Ev3Controller.Model.Tests
         public void Ev3SensorDevice_GetPortName_Test_003()
         {
             var Device = new Ev3SensorDevice();
-            Device.ConnectedPort = Ev3Device.OUTPORT.OUTPORT_C;
+            Device.ConnectedPort = Ev3Device.INPORT.INPORT_3;
 
-            Assert.AreEqual("PORT_C", Device.Port);
+            Assert.AreEqual("PORT_3", Device.Port);
         }
         [TestMethod()]
         [TestCategory("Ev3SensorDevice")]
@@ -64,9 +64,9 @@ namespace Ev3Controller.Model.Tests
         public void Ev3SensorDevice_GetPortName_Test_004()
         {
             var Device = new Ev3SensorDevice();
-            Device.ConnectedPort = Ev3Device.OUTPORT.OUTPORT_D;
+            Device.ConnectedPort = Ev3Device.INPORT.INPORT_4;
 
-            Assert.AreEqual("PORT_D", Device.Port);
+            Assert.AreEqual("PORT_4", Device.Port);
         }
         [TestMethod()]
         [TestCategory("Ev3SensorDevice")]
@@ -74,7 +74,7 @@ namespace Ev3Controller.Model.Tests
         public void Ev3SensorDevice_GetPortName_Test_005()
         {
             var Device = new Ev3SensorDevice();
-            Device.ConnectedPort = Ev3Device.OUTPORT.OUTPORT_MAX;
+            Device.ConnectedPort = Ev3Device.INPORT.INPORT_MAX;
 
             Assert.AreEqual("", Device.Port);
         }
