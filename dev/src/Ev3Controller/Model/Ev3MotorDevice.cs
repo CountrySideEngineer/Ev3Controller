@@ -28,8 +28,8 @@ namespace Ev3Controller.Model
             DeviceTypeDictionary = new Dictionary<DEVICE_TYPE, string>()
         {
                 { DEVICE_TYPE.MOTOR_DEVICE_NO_DEVICE, "NO DEVICE" },
-                { DEVICE_TYPE.MOTOR_DEVICE_LARGE_MOTOR, "LARGE MOTOR" },
                 { DEVICE_TYPE.MOTOR_DEVICE_MEDIUM_MOTOR, "MEDIUM MOTOR" },
+                { DEVICE_TYPE.MOTOR_DEVICE_LARGE_MOTOR, "LARGE MOTOR" },
                 { DEVICE_TYPE.MOTOR_DEVICE_UNADJUSTED, "UnAdjusted" },
                 { DEVICE_TYPE.MOTOR_DEVICE_UNKNOWN, "Unknown" },
                 { DEVICE_TYPE.MOTOR_DEVICE_MAX, "Unknown" },

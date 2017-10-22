@@ -58,6 +58,7 @@ namespace Ev3Controller.Model
         #region Constructors and the Finalizer
         public Ev3Device()
         {
+            this.IsConnected = false;
         }
         #endregion
 
