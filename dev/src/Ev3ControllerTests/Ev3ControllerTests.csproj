@@ -77,6 +77,14 @@
     <Compile Include="Ev3Command\Command_50_01_Tests.cs" />
     <Compile Include="Ev3Command\Command_A0_00_Tests.cs" />
     <Compile Include="Ev3Command\SafeState.cs" />
+    <Compile Include="Model\BrickUpdater_00_00_Tests.cs" />
+    <Compile Include="Model\BrickUpdater_02_00_Tests.cs" />
+    <Compile Include="Model\BrickUpdater_04_00_Tests.cs" />
+    <Compile Include="Model\BrickUpdater_06_00_Tests.cs" />
+    <Compile Include="Model\BrickUpdater_0C_00_Tests.cs" />
+    <Compile Include="Model\BrickUpdater_0E_00_Tests.cs" />
+    <Compile Include="Model\BrickUpdater_10_00_Tests.cs" />
+    <Compile Include="Model\BrickUpdater_20_00_Tests.cs" />
     <Compile Include="Model\ComPortAccessSequenceRunnerTests.cs" />
     <Compile Include="Model\ComPortAccessSequenceTestBase.cs" />
     <Compile Include="Model\ComPortAccessSequenceTests.cs" />
@@ -87,8 +95,11 @@
     <Compile Include="Model\ComPortTests.cs" />
     <Compile Include="Model\EchoBackComPortSendRecvSequenceTests.cs" />
     <Compile Include="Model\EV3Brick_Tests.cs" />
+    <Compile Include="Model\Ev3MotorDevice_Tests.cs" />
+    <Compile Include="Model\Ev3SensorDevice_Tests.cs" />
     <Compile Include="Model\NotifyCommandExceptionTests.cs" />
     <Compile Include="Model\NotifySendReceiveDataEventArgsTests.cs" />
+    <Compile Include="Model\Ev3Brick_TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ComPortViewModelTests.cs" />
     <Compile Include="ViewModel\Ev3PortViewModelTests.cs" />
