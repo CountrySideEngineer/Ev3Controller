@@ -31,6 +31,8 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(0).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)0, Brick.SensorDevice(0).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(0).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(0).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(1).IsConnected);
             Assert.IsFalse(Brick.SensorDevice(2).IsConnected);
             Assert.IsFalse(Brick.SensorDevice(3).IsConnected);
@@ -53,6 +55,8 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(0).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)0, Brick.SensorDevice(0).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(0).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(0).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(1).IsConnected);
             Assert.IsFalse(Brick.SensorDevice(2).IsConnected);
             Assert.IsFalse(Brick.SensorDevice(3).IsConnected);
@@ -76,6 +80,8 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(1).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)1, Brick.SensorDevice(1).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(1).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(1).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(2).IsConnected);
             Assert.IsFalse(Brick.SensorDevice(3).IsConnected);
         }
@@ -98,6 +104,8 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(1).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)1, Brick.SensorDevice(1).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(1).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(1).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(2).IsConnected);
             Assert.IsFalse(Brick.SensorDevice(3).IsConnected);
         }
@@ -121,6 +129,8 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(2).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)2, Brick.SensorDevice(2).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(2).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(2).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(3).IsConnected);
         }
         [TestMethod()]
@@ -143,6 +153,8 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(2).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)2, Brick.SensorDevice(2).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(2).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(2).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(3).IsConnected);
         }
         [TestMethod()]
@@ -166,6 +178,8 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(3).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)3, Brick.SensorDevice(3).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(3).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(3).DeviceType);
         }
         [TestMethod()]
         [TestCategory("BrickUpdater_20_01")]
@@ -188,6 +202,8 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(3).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)3, Brick.SensorDevice(3).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(3).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(3).DeviceType);
         }
         [TestMethod()]
         [TestCategory("BrickUpdater_20_01")]
@@ -209,9 +225,13 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(0).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)0, Brick.SensorDevice(0).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(0).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(0).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(1).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)1, Brick.SensorDevice(1).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(1).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(1).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(2).IsConnected);
             Assert.IsFalse(Brick.SensorDevice(3).IsConnected);
         }
@@ -235,9 +255,13 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(0).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)0, Brick.SensorDevice(0).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(0).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(0).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(1).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)1, Brick.SensorDevice(1).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(1).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(1).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(2).IsConnected);
             Assert.IsFalse(Brick.SensorDevice(3).IsConnected);
         }
@@ -261,10 +285,14 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(0).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)0, Brick.SensorDevice(0).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(0).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(0).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(1).IsConnected);
             Assert.IsTrue(Brick.SensorDevice(2).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)2, Brick.SensorDevice(2).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(2).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(2).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(3).IsConnected);
         }
         [TestMethod()]
@@ -287,10 +315,14 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(0).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)0, Brick.SensorDevice(0).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(0).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(0).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(1).IsConnected);
             Assert.IsTrue(Brick.SensorDevice(2).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)2, Brick.SensorDevice(2).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(2).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(2).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(3).IsConnected);
         }
         [TestMethod()]
@@ -313,11 +345,15 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(0).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)0, Brick.SensorDevice(0).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(0).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(0).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(1).IsConnected);
             Assert.IsFalse(Brick.SensorDevice(2).IsConnected);
             Assert.IsTrue(Brick.SensorDevice(3).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)3, Brick.SensorDevice(3).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(3).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(3).DeviceType);
         }
         [TestMethod()]
         [TestCategory("BrickUpdater_20_01")]
@@ -339,11 +375,15 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(0).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)0, Brick.SensorDevice(0).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(0).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(0).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(1).IsConnected);
             Assert.IsFalse(Brick.SensorDevice(2).IsConnected);
             Assert.IsTrue(Brick.SensorDevice(3).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)3, Brick.SensorDevice(3).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(3).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(3).DeviceType);
         }
         [TestMethod()]
         [TestCategory("BrickUpdater_20_01")]
@@ -366,10 +406,14 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(1).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)1, Brick.SensorDevice(1).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(1).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(1).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(2).IsConnected);
             Assert.IsTrue(Brick.SensorDevice(3).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)3, Brick.SensorDevice(3).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(3).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(3).DeviceType);
         }
         [TestMethod()]
         [TestCategory("BrickUpdater_20_01")]
@@ -392,10 +436,14 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(1).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)1, Brick.SensorDevice(1).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(1).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(1).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(2).IsConnected);
             Assert.IsTrue(Brick.SensorDevice(3).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)3, Brick.SensorDevice(3).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(3).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(3).DeviceType);
         }
         [TestMethod()]
         [TestCategory("BrickUpdater_20_01")]
@@ -419,9 +467,13 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(2).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)2, Brick.SensorDevice(2).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(2).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(2).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(3).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)3, Brick.SensorDevice(3).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(3).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(3).DeviceType);
         }
         [TestMethod()]
         [TestCategory("BrickUpdater_20_01")]
@@ -445,9 +497,13 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(2).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)2, Brick.SensorDevice(2).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(2).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(2).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(3).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)3, Brick.SensorDevice(3).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(3).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(2).DeviceType);
         }
         [TestMethod()]
         [TestCategory("BrickUpdater_20_01")]
@@ -471,12 +527,18 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(0).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)0, Brick.SensorDevice(0).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(0).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(0).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(1).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)1, Brick.SensorDevice(1).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(1).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(1).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(2).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)2, Brick.SensorDevice(2).ConnectedPort);
             Assert.AreEqual(0x02, Brick.SensorDevice(2).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(2).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(3).IsConnected);
         }
         [TestMethod()]
@@ -501,13 +563,19 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(0).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)0, Brick.SensorDevice(0).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(0).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(0).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(1).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)1, Brick.SensorDevice(1).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(1).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(1).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(2).IsConnected);
             Assert.IsTrue(Brick.SensorDevice(3).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)3, Brick.SensorDevice(3).ConnectedPort);
             Assert.AreEqual(0x03, Brick.SensorDevice(3).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(3).DeviceType);
         }
         [TestMethod()]
         [TestCategory("BrickUpdater_20_01")]
@@ -531,13 +599,19 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(0).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)0, Brick.SensorDevice(0).ConnectedPort);
             Assert.AreEqual(0x00, Brick.SensorDevice(0).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(0).DeviceType);
             Assert.IsFalse(Brick.SensorDevice(1).IsConnected);
             Assert.IsTrue(Brick.SensorDevice(2).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)2, Brick.SensorDevice(2).ConnectedPort);
             Assert.AreEqual(0x02, Brick.SensorDevice(2).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(2).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(3).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)3, Brick.SensorDevice(3).ConnectedPort);
             Assert.AreEqual(0x03, Brick.SensorDevice(3).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(3).DeviceType);
         }
         [TestMethod()]
         [TestCategory("BrickUpdater_20_01")]
@@ -562,12 +636,18 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(1).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)1, Brick.SensorDevice(1).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(1).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(1).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(2).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)2, Brick.SensorDevice(2).ConnectedPort);
             Assert.AreEqual(0x02, Brick.SensorDevice(2).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(2).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(3).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)3, Brick.SensorDevice(3).ConnectedPort);
             Assert.AreEqual(0x03, Brick.SensorDevice(3).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(3).DeviceType);
         }
         [TestMethod()]
         [TestCategory("BrickUpdater_20_01")]
@@ -593,15 +673,23 @@ namespace Ev3Controller.Model.Tests
             Assert.IsTrue(Brick.SensorDevice(0).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)0, Brick.SensorDevice(0).ConnectedPort);
             Assert.AreEqual(0x04, Brick.SensorDevice(0).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(0).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(1).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)1, Brick.SensorDevice(1).ConnectedPort);
             Assert.AreEqual(0x01, Brick.SensorDevice(1).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(1).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(2).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)2, Brick.SensorDevice(2).ConnectedPort);
             Assert.AreEqual(0x02, Brick.SensorDevice(2).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(2).DeviceType);
             Assert.IsTrue(Brick.SensorDevice(3).IsConnected);
             Assert.AreEqual((Ev3Device.INPORT)3, Brick.SensorDevice(3).ConnectedPort);
             Assert.AreEqual(0x03, Brick.SensorDevice(3).Value2);
+            Assert.AreEqual(Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC,
+                Brick.SensorDevice(3).DeviceType);
         }
         #endregion
     }

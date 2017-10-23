@@ -34,6 +34,8 @@ namespace Ev3Controller.Model
                     Brick.SensorDevice(Port).ConnectedPort = (Ev3SensorDevice.INPORT)Port;
                     Brick.SensorDevice(Port).IsConnected = true;
                     Brick.SensorDevice(Port).Value2 = Color;
+                    Brick.SensorDevice(Port).DeviceType =
+                        Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_COLOR;
                 }
             }
         }

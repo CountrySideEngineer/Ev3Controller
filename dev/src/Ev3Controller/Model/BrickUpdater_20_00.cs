@@ -36,6 +36,8 @@ namespace Ev3Controller.Model
                     Brick.SensorDevice(Port).ConnectedPort = (Ev3Device.INPORT)Port;
                     Brick.SensorDevice(Port).IsConnected = true;
                     Brick.SensorDevice(Port).Value1 = (int)Dist;
+                    Brick.SensorDevice(Port).DeviceType =
+                        Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC;
                 }
             }
         }
