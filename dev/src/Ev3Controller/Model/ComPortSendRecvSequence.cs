@@ -66,8 +66,9 @@ namespace Ev3Controller.Model
                         ComPortAcc.SendAndRecv(Command.CmdData, out ResData);
                         Command.ResData = ResData;
                         Command.Check();
-                        this.OnNotifySendReceiveData(
-                            new NotifySendReceiveDataEventArgs(Command.CmdData, Command.ResData));
+                        //this.OnNotifySendReceiveData(
+                        //    new NotifySendReceiveDataEventArgs(Command.CmdData, Command.ResData));
+                        this.OnNotifySendReceiveData(new NotifySendReceiveDataEventArgs(Command));
                     }
                     catch   (CommandException CmdExpt)
                     {
