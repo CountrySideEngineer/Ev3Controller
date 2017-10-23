@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ev3Controller.Ev3Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,15 @@ namespace Ev3Controller.Model
         /// <param name="RecvData">Byte array contains received data.</param>
         public NotifySendReceiveDataEventArgs(byte[] SendData, byte[] RecvData)
         {
+            this.Command = null;
             this.SendData = SendData;
             this.RecvData = RecvData;
+        }
+        public NotifySendReceiveDataEventArgs(ACommand Command)
+        {
+            this.Command = Command;
+            this.SendData = this.Command.CmdData;
+            this.RecvData = this.Command.ResData;
         }
         #endregion
 
@@ -25,12 +33,17 @@ namespace Ev3Controller.Model
         /// <summary>
         /// Sending data bffer.
         /// </summary>
-        public byte[] SendData;
+        public byte[] SendData { get; protected set; }
 
         /// <summary>
         /// Receiving data buffer.
         /// </summary>
-        public byte[] RecvData;
+        public byte[] RecvData { get; protected set; }
+
+        /// <summary>
+        /// Send and received command data.
+        /// </summary>
+        public ACommand Command { get; protected set; }
         #endregion
     }
 }
