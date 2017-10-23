@@ -110,6 +110,12 @@
     <Compile Include="Model\BrickUpdater_10_00.cs" />
     <Compile Include="Model\BrickUpdater_20_00.cs" />
     <Compile Include="Model\BrickUpdater_20_01.cs" />
+    <Compile Include="Model\BrickUpdater_30_00.cs" />
+    <Compile Include="Model\BrickUpdater_30_01.cs" />
+    <Compile Include="Model\BrickUpdater_30_02.cs" />
+    <Compile Include="Model\BrickUpdater_40_00.cs" />
+    <Compile Include="Model\BrickUpdater_50_00.cs" />
+    <Compile Include="Model\BrickUpdater_50_01.cs" />
     <Compile Include="Model\ComPort.cs" />
     <Compile Include="Model\ComPortAccess.cs" />
     <Compile Include="Model\ComPortAccessSequence.cs" />
