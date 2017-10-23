@@ -85,6 +85,7 @@
     <Compile Include="Model\BrickUpdater_0E_00_Tests.cs" />
     <Compile Include="Model\BrickUpdater_10_00_Tests.cs" />
     <Compile Include="Model\BrickUpdater_20_00_Tests.cs" />
+    <Compile Include="Model\BrickUpdater_20_01_Tests.cs" />
     <Compile Include="Model\ComPortAccessSequenceRunnerTests.cs" />
     <Compile Include="Model\ComPortAccessSequenceTestBase.cs" />
     <Compile Include="Model\ComPortAccessSequenceTests.cs" />
