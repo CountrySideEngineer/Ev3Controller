@@ -182,17 +182,13 @@ namespace Ev3Controller.Model
                 {
                     if (Result is bool)
                     {
-                        bool BoolRes = (bool)Result;
-                        if (BoolRes)
-                        {
-                            this.OnTaskFinishedEvent(
-                                new SequenceChangedEventArgs(this.FinishedConnectionState));
-                        }
-                        else
-                        {
-                            this.OnTaskFinishedEvent(
-                                new SequenceChangedEventArgs(this.FinishedConnectionState));
-                        }
+                        this.OnTaskFinishedEvent(
+                            new SequenceChangedEventArgs(this.FinishedConnectionState, (bool)Result));
+                    }
+                    else
+                    {
+                        this.OnTaskFinishedEvent(
+                            new SequenceChangedEventArgs(this.FinishedConnectionState));
                     }
                 }
                 else

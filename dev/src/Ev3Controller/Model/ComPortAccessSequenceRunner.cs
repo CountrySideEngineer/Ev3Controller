@@ -267,9 +267,21 @@ namespace Ev3Controller.Model
         /// <param name="e">Detail information about this event.</param>
         public void SequenceFinisedEventCallback(object sender, EventArgs e)
         {
-            this.OnSequenceFinishedEvent(
-                new ConnectStateChangedEventArgs(
-                    new ConnectState(this.CurSequence.FinishedConnectionState)));
+            if (e is SequenceChangedEventArgs)
+            {
+                var Args = e as SequenceChangedEventArgs;
+                this.OnSequenceFinishedEvent(
+                    new ConnectStateChangedEventArgs(
+                        new ConnectState(this.CurSequence.FinishedConnectionState),
+                        Args.SequenceChangedResult));
+            }
+            else
+            {
+                this.OnSequenceFinishedEvent(
+                    new ConnectStateChangedEventArgs(
+                        new ConnectState(this.CurSequence.FinishedConnectionState)));
+            }
+
         }
 
         /// <summary>
