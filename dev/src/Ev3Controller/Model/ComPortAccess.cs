@@ -112,35 +112,35 @@ namespace Ev3Controller.Model
                 Console.WriteLine("Catch UnauthorizedAccessException");
                 Console.WriteLine("[ERROR]{0}", ex.StackTrace);
 
-                return false;
+                throw;
             }
             catch (ArgumentOutOfRangeException ex)
             {
                 Console.WriteLine("Catch ArgumentOutOfRangeException");
                 Console.WriteLine("[ERROR]{0}", ex.StackTrace);
 
-                return false;
+                throw;
             }
             catch (ArgumentException ex)
             {
                 Console.WriteLine("Catch ArgumentException");
                 Console.WriteLine("[ERROR]{0}", ex.StackTrace);
 
-                return false;
+                throw;
             }
             catch (IOException ex)
             {
                 Console.WriteLine("Catch IOException");
                 Console.WriteLine("[ERROR]{0}", ex.StackTrace);
 
-                return false;
+                throw;
             }
             catch (InvalidOperationException ex)
             {
                 Console.WriteLine("Catch InvalidOperationException");
                 Console.WriteLine("[ERROR]{0}", ex.StackTrace);
 
-                return false;
+                throw;
             }
         }
 
@@ -161,6 +161,8 @@ namespace Ev3Controller.Model
             {
                 Console.WriteLine("Catch InvalidOperationException");
                 Console.WriteLine("[ERROR]{0}", ex.StackTrace);
+
+                throw;
             }
         }
 
