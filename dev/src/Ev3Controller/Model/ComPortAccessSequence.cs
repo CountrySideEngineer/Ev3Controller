@@ -270,7 +270,7 @@ namespace Ev3Controller.Model
         /// <param name="e"></param>
         public void OnNotifyRecvExceptionEvent(EventArgs e)
         {
-            this.NotifyRecvExceptionEvent(this, e);
+            this.NotifyRecvExceptionEvent?.Invoke(this, e);
         }
         protected Dictionary<StateIndex, ConnectionStateInformation> ConnectionStateInformationDictionary;
         #endregion
