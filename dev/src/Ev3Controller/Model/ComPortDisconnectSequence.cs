@@ -13,6 +13,9 @@ namespace Ev3Controller.Model
         {
             this.ConnectionStateInformationDictionary = new Dictionary<StateIndex, ConnectionStateInformation>
             {
+                { StateIndex.STATE_INDEX_BASE,
+                    new ConnectionStateInformation(
+                        true, "Connected", ConnectionState.Connected) },
                 { StateIndex.STATE_INDEX_STARTING,
                     new ConnectionStateInformation(
                         true, "Disconnecting", ConnectionState.Disconnecting) },
@@ -32,9 +35,18 @@ namespace Ev3Controller.Model
         /// <returns></returns>
         public override object Sequence(ComPortAccess ComPortAcc)
         {
-            ComPortAcc.Disconnect();
+            try
+            {
+                ComPortAcc.Disconnect();
 
-            return null;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                this.OnNotifyRecvExceptionEvent(new NotifyConnectExceptionEventArgs(ex));
+
+                return null;
+            }
         }
         #endregion
     }

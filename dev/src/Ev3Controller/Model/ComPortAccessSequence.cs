@@ -14,6 +14,7 @@ namespace Ev3Controller.Model
         #region Public constants
         protected enum StateIndex
         {
+            STATE_INDEX_BASE,
             STATE_INDEX_STARTING,
             STATE_INDEX_STARTED,
             STATE_INDEX_FINISHED,
@@ -56,6 +57,17 @@ namespace Ev3Controller.Model
 
         #region Public Properties
         /// <summary>
+        /// Flag show whether the object has message to show before the sequence starts.
+        /// </summary>
+        public bool HasBaseMessage
+        {
+            get
+            {
+                return this.HasMessageArrayItem(StateIndex.STATE_INDEX_BASE);
+            }
+        }
+
+        /// <summary>
         /// Flag show whether the object has message to show when the sequence starting.
         /// </summary>
         public bool HasStartingMessage
@@ -89,6 +101,17 @@ namespace Ev3Controller.Model
         }
 
         /// <summary>
+        /// A message shown before the sequence starts.
+        /// </summary>
+        public string BaseMessage
+        {
+            get
+            {
+                return this.MessageArrayItem(StateIndex.STATE_INDEX_BASE);
+            }
+        }
+
+        /// <summary>
         /// A message shown when the sequence starting.
         /// </summary>
         public string StartingMessage
@@ -118,6 +141,17 @@ namespace Ev3Controller.Model
             get
             {
                 return this.MessageArrayItem(StateIndex.STATE_INDEX_FINISHED);
+            }
+        }
+
+        /// <summary>
+        /// ConnectionState notified while starting sequence.
+        /// </summary>
+        public ConnectionState BaseConnectionState
+        {
+            get
+            {
+                return this.ConnectinoStateArrayItem(StateIndex.STATE_INDEX_BASE);
             }
         }
 
@@ -182,8 +216,21 @@ namespace Ev3Controller.Model
                 {
                     if (Result is bool)
                     {
-                        this.OnTaskFinishedEvent(
-                            new SequenceChangedEventArgs(this.FinishedConnectionState, (bool)Result));
+                        bool SeqResult = (bool)Result;
+                        if (SeqResult)
+                        {
+                            this.OnTaskFinishedEvent(
+                                new SequenceChangedEventArgs(
+                                    this.FinishedConnectionState,
+                                    SeqResult));
+                        }
+                        else
+                        {
+                            this.OnTaskFinishedEvent(
+                                new SequenceChangedEventArgs(
+                                    this.StartingConnectionState,
+                                    SeqResult));
+                        }
                     }
                     else
                     {
