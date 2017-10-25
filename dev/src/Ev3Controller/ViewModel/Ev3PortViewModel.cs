@@ -11,6 +11,7 @@ namespace Ev3Controller.ViewModel
     using Model;
     using System.Windows.Media.Imaging;
     using Ev3Controller.Util;
+    using System.Windows;
 
     public class Ev3PortViewModel : DeviceViewModelBase
     {
@@ -239,16 +240,23 @@ namespace Ev3Controller.ViewModel
             if (e is ConnectStateChangedEventArgs)
             {
                 var Args = e as ConnectStateChangedEventArgs;
-                var OldVar = this.ConnectState;
-                var NewVar = Args.NewValue;
-                this.ConnectState = NewVar;
-                this.UpdateState();
-
-                if ((OldVar.State.Equals(ConnectionState.Connecting))
-                    && (NewVar.State.Equals(ConnectionState.Connected)))
+                if (Args.ChangedResult)
                 {
-                    this.AccessRunner.ChangeAndStartSequence(
-                        ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
+                    var OldVar = this.ConnectState;
+                    var NewVar = Args.NewValue;
+                    this.ConnectState = NewVar;
+                    this.UpdateState();
+
+                    if ((OldVar.State.Equals(ConnectionState.Connecting))
+                        && (NewVar.State.Equals(ConnectionState.Connected)))
+                    {
+                        this.AccessRunner.ChangeAndStartSequence(
+                            ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("接続できませんでした。", "接続更新エラー");
                 }
             }
             //Other properties are update in ConnectState setter.
@@ -295,9 +303,25 @@ namespace Ev3Controller.ViewModel
         {
             if (e is NotifySendReceiveDataEventArgs)
             {
-                var Args = e as NotifySendReceiveDataEventArgs;
-                Console.WriteLine(@"Snd:" + Ev3Utility.Buff2String(Args.SendData));
-                Console.WriteLine(@"Rcv:" + Ev3Utility.Buff2String(Args.RecvData));
+
+                try
+                {
+                    var Args = e as NotifySendReceiveDataEventArgs;
+                    Console.WriteLine(@"Snd:" + Ev3Utility.Buff2String(Args.SendData));
+                    Console.WriteLine(@"Rcv:" + Ev3Utility.Buff2String(Args.RecvData));
+
+                    var Command = Args.Command;
+                    var Updater = BrickUpdater.Factory(Command);
+                    Updater.Update(Command, Ev3Brick.GetInstance());
+                }
+                catch (NullReferenceException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
