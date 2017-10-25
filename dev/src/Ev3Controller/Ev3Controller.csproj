@@ -116,6 +116,7 @@
     <Compile Include="Model\BrickUpdater_40_00.cs" />
     <Compile Include="Model\BrickUpdater_50_00.cs" />
     <Compile Include="Model\BrickUpdater_50_01.cs" />
+    <Compile Include="Model\BrickUpdater_A0_00.cs" />
     <Compile Include="Model\ComPort.cs" />
     <Compile Include="Model\ComPortAccess.cs" />
     <Compile Include="Model\ComPortAccessSequence.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Model\IsConnectedChangedEventArgs.cs" />
     <Compile Include="Model\LedColor.cs" />
     <Compile Include="Model\NotifyCommandException.cs" />
+    <Compile Include="Model\NotifyConnectExceptionEventArgs.cs" />
     <Compile Include="Model\NotifySendReceiveDataEventArgs.cs" />
     <Compile Include="Model\Power.cs" />
     <Compile Include="Model\SafeState.cs" />

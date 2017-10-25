@@ -25,6 +25,9 @@ namespace Ev3Controller.Model
         {
             this.ConnectionStateInformationDictionary = new Dictionary<StateIndex, ConnectionStateInformation>
             {
+                { StateIndex.STATE_INDEX_BASE,
+                    new ConnectionStateInformation(
+                        true, "Wait command request", ConnectionState.Connected) },
                 { StateIndex.STATE_INDEX_STARTING,
                     new ConnectionStateInformation(
                         true, "Starting send and receive sequence.", ConnectionState.Connected) },
