@@ -240,23 +240,16 @@ namespace Ev3Controller.ViewModel
             if (e is ConnectStateChangedEventArgs)
             {
                 var Args = e as ConnectStateChangedEventArgs;
-                if (Args.ChangedResult)
-                {
-                    var OldVar = this.ConnectState;
-                    var NewVar = Args.NewValue;
-                    this.ConnectState = NewVar;
-                    this.UpdateState();
+                var OldVar = this.ConnectState;
+                var NewVar = Args.NewValue;
+                this.ConnectState = NewVar;
+                this.UpdateState();
 
-                    if ((OldVar.State.Equals(ConnectionState.Connecting))
-                        && (NewVar.State.Equals(ConnectionState.Connected)))
-                    {
-                        this.AccessRunner.ChangeAndStartSequence(
-                            ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
-                    }
-                }
-                else
+                if ((OldVar.State.Equals(ConnectionState.Connecting))
+                    && (NewVar.State.Equals(ConnectionState.Connected)))
                 {
-                    MessageBox.Show("接続できませんでした。", "接続更新エラー");
+                    this.AccessRunner.ChangeAndStartSequence(
+                        ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
                 }
             }
             //Other properties are update in ConnectState setter.
@@ -303,7 +296,6 @@ namespace Ev3Controller.ViewModel
         {
             if (e is NotifySendReceiveDataEventArgs)
             {
-
                 try
                 {
                     var Args = e as NotifySendReceiveDataEventArgs;
@@ -340,6 +332,17 @@ namespace Ev3Controller.ViewModel
                     string.Format(
                         @"{0} Name:{1} Code:0x{2:x2}-0x{3:x2}",
                             CmdExcept.Message, CmdExcept.Name, CmdExcept.Cmd, CmdExcept.SubCmd));
+            }
+            else if (e is NotifyConnectExceptionEventArgs)
+            {
+                var Args = e as NotifyConnectExceptionEventArgs;
+                var Except = Args.Except as Exception;
+
+                MessageBox.Show(
+                    "接続/切断中にエラーが発生しました。" +
+                    "\r\n" +
+                    "ポートの状態を確認して下さい。",
+                    "接続更新エラー");
             }
         }
 

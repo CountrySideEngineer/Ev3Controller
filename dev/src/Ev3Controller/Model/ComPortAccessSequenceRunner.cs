@@ -272,7 +272,7 @@ namespace Ev3Controller.Model
                 var Args = e as SequenceChangedEventArgs;
                 this.OnSequenceFinishedEvent(
                     new ConnectStateChangedEventArgs(
-                        new ConnectState(this.CurSequence.FinishedConnectionState),
+                        new ConnectState(Args.ConnectState),
                         Args.SequenceChangedResult));
             }
             else

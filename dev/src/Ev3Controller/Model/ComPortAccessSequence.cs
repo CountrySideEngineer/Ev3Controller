@@ -228,7 +228,7 @@ namespace Ev3Controller.Model
                         {
                             this.OnTaskFinishedEvent(
                                 new SequenceChangedEventArgs(
-                                    this.StartingConnectionState,
+                                    this.BaseConnectionState,
                                     SeqResult));
                         }
                     }
