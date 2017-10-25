@@ -14,10 +14,14 @@ namespace Ev3Controller.Model
         /// </summary>
         /// <param name="OldValue">Old value of connection state with device.</param>
         /// <param name="NewValue">New value of connection state with device.</param>
-        public ConnectStateChangedEventArgs(ConnectState OldValue, ConnectState NewValue)
+        public ConnectStateChangedEventArgs(ConnectState OldValue,
+            ConnectState NewValue,
+            bool Result = true)
         {
             this.OldValue = OldValue;
             this.NewValue = NewValue;
+
+            this.ChangedResult = Result;
         }
 
         /// <summary>
@@ -28,6 +32,8 @@ namespace Ev3Controller.Model
         {
             this.OldValue = new ConnectState(ConnectionState.Unknown);
             this.NewValue = NewValue;
+
+            this.ChangedResult = Result;
         }
         #endregion
 
