@@ -339,9 +339,7 @@ namespace Ev3Controller.ViewModel
                 var Except = Args.Except as Exception;
 
                 MessageBox.Show(
-                    "接続/切断中にエラーが発生しました。" +
-                    "\r\n" +
-                    "ポートの状態を確認して下さい。",
+                    Except.Message,
                     "接続更新エラー");
             }
         }

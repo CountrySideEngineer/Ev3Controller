@@ -109,36 +109,36 @@ namespace Ev3Controller.Model
             }
             catch (UnauthorizedAccessException ex)
             {
-                Console.WriteLine("Catch UnauthorizedAccessException");
-                Console.WriteLine("[ERROR]{0}", ex.StackTrace);
+                Console.WriteLine("Catch UnauthorizedAccessException in " + this.ToString());
+                Console.WriteLine("[ERROR]{0}", ex.Message);
 
                 throw;
             }
             catch (ArgumentOutOfRangeException ex)
             {
-                Console.WriteLine("Catch ArgumentOutOfRangeException");
-                Console.WriteLine("[ERROR]{0}", ex.StackTrace);
+                Console.WriteLine("Catch ArgumentOutOfRangeException in " + this.ToString());
+                Console.WriteLine("[ERROR]{0}", ex.Message);
 
                 throw;
             }
             catch (ArgumentException ex)
             {
-                Console.WriteLine("Catch ArgumentException");
-                Console.WriteLine("[ERROR]{0}", ex.StackTrace);
+                Console.WriteLine("Catch ArgumentException in " + this.ToString());
+                Console.WriteLine("[ERROR]{0}", ex.Message);
 
                 throw;
             }
             catch (IOException ex)
             {
-                Console.WriteLine("Catch IOException");
-                Console.WriteLine("[ERROR]{0}", ex.StackTrace);
+                Console.WriteLine("Catch IOException in " + this.ToString());
+                Console.WriteLine("[ERROR]{0}", ex.Message);
 
                 throw;
             }
             catch (InvalidOperationException ex)
             {
-                Console.WriteLine("Catch InvalidOperationException");
-                Console.WriteLine("[ERROR]{0}", ex.StackTrace);
+                Console.WriteLine("Catch InvalidOperationException in " + this.ToString());
+                Console.WriteLine("[ERROR]{0}", ex.Message);
 
                 throw;
             }
