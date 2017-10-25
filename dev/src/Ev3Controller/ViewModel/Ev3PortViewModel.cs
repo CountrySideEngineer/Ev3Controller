@@ -11,6 +11,7 @@ namespace Ev3Controller.ViewModel
     using Model;
     using System.Windows.Media.Imaging;
     using Ev3Controller.Util;
+    using System.Windows;
 
     public class Ev3PortViewModel : DeviceViewModelBase
     {
@@ -295,9 +296,24 @@ namespace Ev3Controller.ViewModel
         {
             if (e is NotifySendReceiveDataEventArgs)
             {
-                var Args = e as NotifySendReceiveDataEventArgs;
-                Console.WriteLine(@"Snd:" + Ev3Utility.Buff2String(Args.SendData));
-                Console.WriteLine(@"Rcv:" + Ev3Utility.Buff2String(Args.RecvData));
+                try
+                {
+                    var Args = e as NotifySendReceiveDataEventArgs;
+                    Console.WriteLine(@"Snd:" + Ev3Utility.Buff2String(Args.SendData));
+                    Console.WriteLine(@"Rcv:" + Ev3Utility.Buff2String(Args.RecvData));
+
+                    var Command = Args.Command;
+                    var Updater = BrickUpdater.Factory(Command);
+                    Updater.Update(Command, Ev3Brick.GetInstance());
+                }
+                catch (NullReferenceException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 
@@ -316,6 +332,15 @@ namespace Ev3Controller.ViewModel
                     string.Format(
                         @"{0} Name:{1} Code:0x{2:x2}-0x{3:x2}",
                             CmdExcept.Message, CmdExcept.Name, CmdExcept.Cmd, CmdExcept.SubCmd));
+            }
+            else if (e is NotifyConnectExceptionEventArgs)
+            {
+                var Args = e as NotifyConnectExceptionEventArgs;
+                var Except = Args.Except as Exception;
+
+                MessageBox.Show(
+                    Except.Message,
+                    "接続更新エラー");
             }
         }
 
