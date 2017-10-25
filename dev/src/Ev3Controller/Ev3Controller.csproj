@@ -134,7 +134,7 @@
     <Compile Include="Model\IsConnectedChangedEventArgs.cs" />
     <Compile Include="Model\LedColor.cs" />
     <Compile Include="Model\NotifyCommandException.cs" />
-    <Compile Include="Model\NotifyConnectException.cs" />
+    <Compile Include="Model\NotifyConnectExceptionEventArgs.cs" />
     <Compile Include="Model\NotifySendReceiveDataEventArgs.cs" />
     <Compile Include="Model\Power.cs" />
     <Compile Include="Model\SafeState.cs" />
