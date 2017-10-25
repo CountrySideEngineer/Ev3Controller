@@ -17,6 +17,9 @@ namespace Ev3Controller.Model
         {
             this.ConnectionStateInformationDictionary = new Dictionary<StateIndex, ConnectionStateInformation>
             {
+                { StateIndex.STATE_INDEX_BASE,
+                    new ConnectionStateInformation(
+                        true, "Disconnected", ConnectionState.Disconnected) },
                 { StateIndex.STATE_INDEX_STARTING,
                     new ConnectionStateInformation(
                         true, "Connecting", ConnectionState.Connecting) },
@@ -39,11 +42,22 @@ namespace Ev3Controller.Model
             bool Result = false;
             this.IsRunning = true;
 
-            Result = ComPortAcc.Connect();
+            try
+            {
+                Result = ComPortAcc.Connect();
 
-            this.IsRunning = false;
+                return Result;
+            }
+            catch (Exception ex)
+            {
+                this.OnNotifyRecvExceptionEvent(new NotifyConnectExceptionEventArgs(ex));
 
-            return Result;
+                return false;
+            }
+            finally
+            {
+                this.IsRunning = false;
+            }
         }
         #endregion
     }

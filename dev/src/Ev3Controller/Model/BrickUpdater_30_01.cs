@@ -28,7 +28,7 @@ namespace Ev3Controller.Model
                 int DevNum = Command.ResData[DataTopIndex++];
                 for (Index = 0; Index < DevNum; Index++)
                 {
-                    int DataIndex = DataTopIndex + (DevNum * 2);
+                    int DataIndex = DataTopIndex + (Index * 2);
                     byte Port = Command.ResData[DataIndex++];
                     byte Color = Command.ResData[DataIndex];
                     Brick.SensorDevice(Port).ConnectedPort = (Ev3SensorDevice.INPORT)Port;
