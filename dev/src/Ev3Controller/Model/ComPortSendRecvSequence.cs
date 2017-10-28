@@ -71,7 +71,6 @@ namespace Ev3Controller.Model
                         Command.ResData = ResData;
                         Command.Check();
                         this.OnNotifySendReceiveData(new NotifySendReceiveDataEventArgs(Command));
-                        Thread.Sleep(20);
                     }
                     catch   (CommandException CmdExpt)
                     {
