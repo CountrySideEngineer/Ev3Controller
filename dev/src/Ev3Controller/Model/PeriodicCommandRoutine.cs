@@ -10,6 +10,10 @@ namespace Ev3Controller.Model
 {
     public class PeriodicCommandRoutine : CommandRoutine
     {
+        /// <summary>
+        /// Constructor.
+        /// Setup command to send in the routine.
+        /// </summary>
         public PeriodicCommandRoutine()
         {
             this.CommandQueue = new Queue<ACommand>();
@@ -22,6 +26,13 @@ namespace Ev3Controller.Model
             this.CommandQueue.Enqueue(new Command_50_01());
         }
 
+        /// <summary>
+        /// Method to run periodic command routine.
+        /// </summary>
+        /// <param name="ComPortAcc">ComPortAccess class contains COM port abstract object.</param>
+        /// <param name="Sequence">Sequence class to run routine.</param>
+        /// <param name="TimerCount">Passed time.</param>
+        /// <returns></returns>
         public override bool Routine(
             ComPortAccess ComPortAcc,
             ComPortSendRecvSequence Sequence,

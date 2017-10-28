@@ -9,6 +9,14 @@ namespace Ev3Controller.Model
 {
     public class InitCommandRoutine : CommandRoutine
     {
+        /// <summary>
+        /// Method to run periodic command routine.
+        /// In this routine, send EchoBack command till succeeds 5 times and AppVersion.
+        /// </summary>
+        /// <param name="ComPortAcc">ComPortAccess class contains COM port abstract object.</param>
+        /// <param name="Sequence">Sequence class to run routine.</param>
+        /// <param name="TimerCount">Passed time.</param>
+        /// <returns></returns>
         public override bool Routine(
             ComPortAccess ComPortAcc,
             ComPortSendRecvSequence Sequence,
