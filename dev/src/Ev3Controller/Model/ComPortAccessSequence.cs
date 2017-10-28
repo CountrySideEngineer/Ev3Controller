@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ev3Controller.Model
@@ -255,7 +256,10 @@ namespace Ev3Controller.Model
             if (this.IsRunning)
             {
                 this.DoesContinue = false;
-                while (this.IsRunning);
+                while (this.IsRunning)
+                {
+                    Thread.Sleep(2);
+                }
             }
         }
 
@@ -320,6 +324,7 @@ namespace Ev3Controller.Model
             this.NotifyRecvExceptionEvent?.Invoke(this, e);
         }
         protected Dictionary<StateIndex, ConnectionStateInformation> ConnectionStateInformationDictionary;
+        private object thread;
         #endregion
 
         #region Inner class
