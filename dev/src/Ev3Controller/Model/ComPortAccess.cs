@@ -232,11 +232,11 @@ namespace Ev3Controller.Model
                     else
                     {
                         /*
-                         *  Command receiving task run each 10 milli seconds.
+                         *  Command receiving task run each 40 milli seconds.
                          *  So, wait twice the time, it will be enough to handle all command data and
                          *  create and send response data.
                          */
-                        if (WaitCount > 20)
+                        if (WaitCount > 40)
                         {
                             break;
                         }
