@@ -299,7 +299,7 @@ namespace Ev3Controller.Model
                 {
                     Next = SeqManager.Failure;
                 }
-                //this.ChangeAndStartSequence(Next);
+                this.ChangeAndStartSequence(Next);
             }
             catch (InvalidCastException ex)
             {
