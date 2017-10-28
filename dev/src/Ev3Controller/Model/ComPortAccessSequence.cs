@@ -324,7 +324,6 @@ namespace Ev3Controller.Model
             this.NotifyRecvExceptionEvent?.Invoke(this, e);
         }
         protected Dictionary<StateIndex, ConnectionStateInformation> ConnectionStateInformationDictionary;
-        private object thread;
         #endregion
 
         #region Inner class
