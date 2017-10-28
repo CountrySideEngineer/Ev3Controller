@@ -244,13 +244,6 @@ namespace Ev3Controller.ViewModel
                 var NewVar = Args.NewValue;
                 this.ConnectState = NewVar;
                 this.UpdateState();
-
-                if ((OldVar.State.Equals(ConnectionState.Connecting))
-                    && (NewVar.State.Equals(ConnectionState.Connected)))
-                {
-                    this.AccessRunner.ChangeAndStartSequence(
-                        ComPortAccessSequenceRunner.SequenceName.SEQUENCE_NAME_SEND_AND_RECV);
-                }
             }
             //Other properties are update in ConnectState setter.
         }

@@ -19,6 +19,18 @@ namespace Ev3Controller.Model
             SEQUENCE_NAME_MAX,
         };
 
+        //ここに、シーケンスの順番をまとめたリストを作成する。
+        public static Dictionary<SequenceName, SequenceManager> SequenceDictionary =
+            new Dictionary<SequenceName, SequenceManager>()
+        {
+                { SequenceName.SEQUENCE_NAME_CONNECT,
+                    new SequenceManager(SequenceName.SEQUENCE_NAME_SEND_AND_RECV) },
+                { SequenceName.SEQUENCE_NAME_DISCONNECT,
+                    new SequenceManager() },
+                { SequenceName.SEQUENCE_NAME_SEND_AND_RECV,
+                    new SequenceManager() }
+        };
+
         #region Events
         /// <summary>
         /// Delegate to notify the sequence prepared starting.
@@ -174,7 +186,10 @@ namespace Ev3Controller.Model
         /// <returns>Task newly run.</returns>
         public Task StartSequence(ComPortAccessSequence NextSequence)
         {
-            Debug.Assert(null != NextSequence);
+            if (null == NextSequence)
+            {
+                return null;
+            }
 
             Task<object> task = Task<object>.Run(() =>
             {
@@ -185,7 +200,6 @@ namespace Ev3Controller.Model
                 if (null != this.CurSequence)
                 {
                     this.CurSequence.StopSequence();
-                    //while (!this.CurTask.Status.Equals(TaskStatus.RanToCompletion)) { }
                     this.ReleaseEventHandler(this.CurSequence);
                     this.CurSequence = null;
                 }
@@ -267,21 +281,34 @@ namespace Ev3Controller.Model
         /// <param name="e">Detail information about this event.</param>
         public void SequenceFinisedEventCallback(object sender, EventArgs e)
         {
-            if (e is SequenceChangedEventArgs)
+            try
             {
                 var Args = e as SequenceChangedEventArgs;
+                bool ChangeResult = Args.SequenceChangedResult;
                 this.OnSequenceFinishedEvent(
                     new ConnectStateChangedEventArgs(
-                        new ConnectState(Args.ConnectState),
-                        Args.SequenceChangedResult));
+                        new ConnectState(Args.ConnectState), ChangeResult));
+
+                var SeqManager = ComPortAccessSequenceRunner.SequenceDictionary[this.SeqName];
+                var Next = SequenceName.SEQUENCE_NAME_UNKNOWN;
+                if (ChangeResult)
+                {
+                    Next = SeqManager.Success;
+                }
+                else
+                {
+                    Next = SeqManager.Failure;
+                }
+                this.ChangeAndStartSequence(Next);
             }
-            else
+            catch (InvalidCastException ex)
             {
+                Console.WriteLine(ex.Message);
+
                 this.OnSequenceFinishedEvent(
                     new ConnectStateChangedEventArgs(
                         new ConnectState(this.CurSequence.FinishedConnectionState)));
             }
-
         }
 
         /// <summary>
@@ -310,6 +337,21 @@ namespace Ev3Controller.Model
         public void OnDataSendReceiveEvent(EventArgs e)
         {
             this.DataSendReceiveEvent?.Invoke(this, e);
+        }
+        #endregion
+
+        #region Inner class of ComPortAccessSequenceRunner
+        public class SequenceManager
+        {
+            public SequenceManager(
+                SequenceName Success = SequenceName.SEQUENCE_NAME_UNKNOWN,
+                SequenceName Failure = SequenceName.SEQUENCE_NAME_UNKNOWN)
+            {
+                this.Success = Success;
+                this.Failure = Failure;
+            }
+            public SequenceName Success { get; protected set; }
+            public SequenceName Failure { get; protected set; }
         }
         #endregion
     }

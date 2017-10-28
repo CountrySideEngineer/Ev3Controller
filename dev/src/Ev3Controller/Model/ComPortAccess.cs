@@ -173,6 +173,9 @@ namespace Ev3Controller.Model
         /// <param name="RecvBuff">Buffer to buffer to store received data.</param>
         public virtual void SendAndRecv(byte[] SendBuff, out byte[] RecvBuff)
         {
+            this.Port.DiscardInBuffer();
+            this.Port.DiscardOutBuffer();
+
             this.SendData(SendBuff);
             this.RecvData(out RecvBuff);
         }
@@ -232,11 +235,11 @@ namespace Ev3Controller.Model
                     else
                     {
                         /*
-                         *  Command receiving task run each 10 milli seconds.
+                         *  Command receiving task run each 40 milli seconds.
                          *  So, wait twice the time, it will be enough to handle all command data and
                          *  create and send response data.
                          */
-                        if (WaitCount > 20)
+                        if (WaitCount > 150)
                         {
                             break;
                         }
