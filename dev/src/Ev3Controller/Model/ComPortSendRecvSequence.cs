@@ -60,27 +60,37 @@ namespace Ev3Controller.Model
             this.IsRunning = true;
             this.DoesContinue = true;
 
+            CommandRoutine Routine = new InitCommandRoutine();
+            Routine.Routine(ComPortAcc, this);
+
+            Routine = new PeriodicCommandRoutine();
             while (this.DoesContinue)
             {
-                foreach (ACommand Command in this.CommandQueue)
-                {
-                    try
-                    {
-                        byte[] ResData;
-                        ComPortAcc.SendAndRecv(Command.CmdData, out ResData);
-                        Command.ResData = ResData;
-                        Command.Check();
-                        this.OnNotifySendReceiveData(new NotifySendReceiveDataEventArgs(Command));
-                    }
-                    catch   (CommandException CmdExpt)
-                    {
-                        this.OnNotifyRecvExceptionEvent(new NotifyCommandException(CmdExpt)) ;
-                    }
-                }
+                Routine.Routine(ComPortAcc, this);
             }
             this.IsRunning = false;
 
             return null;
+        }
+
+        public bool SendAndRecvRoutine(ComPortAccess ComPortAcc, ACommand Command)
+        {
+            try
+            {
+                byte[] ResData;
+                ComPortAcc.SendAndRecv(Command.CmdData, out ResData);
+                Command.ResData = ResData;
+                Command.Check();
+                this.OnNotifySendReceiveData(new NotifySendReceiveDataEventArgs(Command));
+
+                return true;
+            }
+            catch (CommandException CmdExpt)
+            {
+                this.OnNotifyRecvExceptionEvent(new NotifyCommandException(CmdExpt));
+
+                return false;
+            }
         }
         #endregion
     }
