@@ -98,6 +98,7 @@
     <Compile Include="Ev3Command\Command_50.cs" />
     <Compile Include="Ev3Command\Command_50_00.cs" />
     <Compile Include="Ev3Command\Command_50_01.cs" />
+    <Compile Include="Ev3Command\Command_F0_00.cs" />
     <Compile Include="Ev3Command\ICommandParam.cs" />
     <Compile Include="Model\AppVersion.cs" />
     <Compile Include="Model\BrickUpdater.cs" />
