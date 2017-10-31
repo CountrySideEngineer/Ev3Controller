@@ -29,6 +29,7 @@ namespace Ev3Controller.Model
                 new { Cmd = 0x50, Sub = 0x00, Updater = ((new BrickUpdater_50_00()) as BrickUpdater) },
                 new { Cmd = 0x50, Sub = 0x01, Updater = ((new BrickUpdater_50_01()) as BrickUpdater) },
                 new { Cmd = 0xA0, Sub = 0x00, Updater = ((new BrickUpdater_A0_00()) as BrickUpdater) },
+                new { Cmd = 0xF0, Sub = 0x00, Updater = ((new BrickUpdater_F0_00()) as BrickUpdater) },
             };
             var CmdUpdater = UpdaterList.Where(x => x.Cmd == Cmd.Cmd && x.Sub == Cmd.SubCmd);
             BrickUpdater Upater = null;
@@ -45,7 +46,7 @@ namespace Ev3Controller.Model
             else
             {
                 throw new ArgumentException(
-                    string.Format("Cmd = {0} Sub = {1}", Cmd.Cmd, Cmd.SubCmd));
+                    string.Format("Cmd = 0x{0:x2} Sub = 0x{1:x2}", Cmd.Cmd, Cmd.SubCmd));
             }
 
         }
