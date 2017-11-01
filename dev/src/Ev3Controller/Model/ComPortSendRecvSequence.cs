@@ -73,6 +73,12 @@ namespace Ev3Controller.Model
             return null;
         }
 
+        /// <summary>
+        /// A routine to send command and receive response, and notify the result.
+        /// </summary>
+        /// <param name="ComPortAcc"></param>
+        /// <param name="Command"></param>
+        /// <returns></returns>
         public bool SendAndRecvRoutine(ComPortAccess ComPortAcc, ACommand Command)
         {
             try
