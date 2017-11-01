@@ -51,6 +51,10 @@ namespace Ev3Controller.Model
             this.Value1 = 0;
             this.Value2 = 0;
             this.Value3 = 0;
+
+            this.Unit1 = "";
+            this.Unit2 = "";
+            this.Unit3 = "";
         }
         #endregion
 
@@ -69,6 +73,21 @@ namespace Ev3Controller.Model
         /// Sensor value3.
         /// </summary>
         public int Value3 { get; set; }
+
+        /// <summary>
+        /// Unit of Value1
+        /// </summary>
+        public string Unit1 { get; set; }
+
+        /// <summary>
+        /// Unit of Value2
+        /// </summary>
+        public string Unit2 { get; set; }
+
+        /// <summary>
+        /// Unit of Value3
+        /// </summary>
+        public string Unit3 { get; set; }
 
         /// <summary>
         /// Port the sensor device is connected.

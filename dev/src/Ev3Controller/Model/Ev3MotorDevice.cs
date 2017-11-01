@@ -43,6 +43,9 @@ namespace Ev3Controller.Model
             this.DeviceType = DEVICE_TYPE.MOTOR_DEVICE_NO_DEVICE;
             this.Power = 0;
             this.Counts = 0;
+
+            this.PowerUnit = "";
+            this.CountsUnit = "";
         }
         #endregion
 
@@ -53,9 +56,19 @@ namespace Ev3Controller.Model
         public int Power { get; set; }
 
         /// <summary>
+        /// Unit of motor power.
+        /// </summary>
+        public string PowerUnit { get; set; }
+
+        /// <summary>
         /// Angle position of motor.
         /// </summary>
         public long Counts { get; set; }
+
+        /// <summary>
+        /// Unit of counts.
+        /// </summary>
+        public string CountsUnit { get; set; }
 
         /// <summary>
         /// Port the motor device is connected.
