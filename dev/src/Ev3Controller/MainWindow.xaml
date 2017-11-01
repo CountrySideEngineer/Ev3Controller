@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Ev3Controller.UserControlView"
         xmlns:vm="clr-namespace:Ev3Controller.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="128" Width="310">
+        Title="MainWindow" Height="128" Width="248">
     <Window.DataContext>
         <vm:Ev3ControllerMainViewModel/>
     </Window.DataContext>
