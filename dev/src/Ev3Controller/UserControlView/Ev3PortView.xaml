@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Ev3Controller.UserControlView"
              xmlns:VM="clr-namespace:Ev3Controller.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="64" d:DesignWidth="248">
+             d:DesignHeight="32" d:DesignWidth="224">
     <Border BorderBrush="Black" BorderThickness="0"
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid Width="Auto"
@@ -22,10 +22,13 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <ComboBox x:Name="PortComboBox"
-                      Grid.Column="0" Grid.ColumnSpan="3"
-                      Grid.Row="1" Grid.RowSpan="2" 
+                      Grid.Column="0" Grid.ColumnSpan="6"
+                      Grid.Row="0" Grid.RowSpan="4" 
                       IsEnabled="{Binding Path=CanChangePort}"
                       ItemsSource="{Binding Path=AvailableComPorts}"
                       SelectedItem="{Binding Path=SelectedComPort}"
@@ -42,7 +45,7 @@
             </ComboBox>
             <Image x:Name="ConnectStateImage"
                    Grid.Row="0" Grid.RowSpan="4"
-                   Grid.Column="4" Grid.ColumnSpan="1"
+                   Grid.Column="6" Grid.ColumnSpan="1"
                    Cursor="Hand"
                    Source="{Binding Path=ImageResource}">
                 <Image.InputBindings>
