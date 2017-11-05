@@ -155,6 +155,7 @@
     <Compile Include="ViewModel\DeviceViewModelBase.cs" />
     <Compile Include="ViewModel\Ev3ControllerMainViewModel.cs" />
     <Compile Include="ViewModel\Ev3PortViewModel.cs" />
+    <Compile Include="ViewModel\Ev3SafeStateViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
