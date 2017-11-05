@@ -147,6 +147,9 @@
     <Compile Include="UserControlView\Ev3PortView.xaml.cs">
       <DependentUpon>Ev3PortView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlView\Ev3SafeStateView.xaml.cs">
+      <DependentUpon>Ev3SafeStateView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Util\Ev3Utility.cs" />
     <Compile Include="ViewModel\ComPortViewModel.cs" />
     <Compile Include="ViewModel\DeviceViewModelBase.cs" />
@@ -166,6 +169,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControlView\Ev3PortView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlView\Ev3SafeStateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
