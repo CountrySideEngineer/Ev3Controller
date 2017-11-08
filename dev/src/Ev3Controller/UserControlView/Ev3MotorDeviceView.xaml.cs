@@ -30,7 +30,7 @@ namespace Ev3Controller.UserControlView
                 "TargetOutput",
                 typeof(double),
                 typeof(Ev3MotorDeviceView),
-                new PropertyMetadata(0, TargetOutputValueChanged));
+                new PropertyMetadata(0d, TargetOutputValueChanged));
         public double TargetOutput
         {
             get { return (double)GetValue(TargetOutputProperty); }
@@ -51,7 +51,7 @@ namespace Ev3Controller.UserControlView
                 "CurrentOutput",
                 typeof(double),
                 typeof(Ev3MotorDeviceView),
-                new PropertyMetadata(0, CurrentOutputValueChanged));
+                new PropertyMetadata(0d, CurrentOutputValueChanged));
         public double CurrentOutput
         {
             get { return (double)GetValue(CurrentOutputProperty); }

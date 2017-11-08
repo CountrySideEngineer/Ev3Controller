@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:Ev3Controller.UserControlView"
              mc:Ignorable="d" 
              Background="White"
-             d:DesignHeight="120" d:DesignWidth="120">
+             d:DesignHeight="120" d:DesignWidth="100">
     <Grid x:Name="OutputCircleArea"
-          Width="120"
-          Height="{Binding ElementName=OutputCircleArea, Path=Width}">
+          Width="100"
+          Height="120">
         <!--Add "Converter to chagne size."-->
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -20,7 +20,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
