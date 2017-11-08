@@ -153,6 +153,9 @@
     <Compile Include="UserControlView\Ev3SafeStateView.xaml.cs">
       <DependentUpon>Ev3SafeStateView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlView\Ev3SensorDeviceView.xaml.cs">
+      <DependentUpon>Ev3SensorDeviceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Util\Ev3Utility.cs" />
     <Compile Include="ViewModel\ComPortViewModel.cs" />
     <Compile Include="ViewModel\DeviceViewModelBase.cs" />
@@ -181,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlView\Ev3SafeStateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlView\Ev3SensorDeviceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
