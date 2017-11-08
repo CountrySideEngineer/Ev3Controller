@@ -6,12 +6,18 @@
         xmlns:local="clr-namespace:Ev3Controller.UserControlView"
         xmlns:vm="clr-namespace:Ev3Controller.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="128" Width="310">
+        Background="Gray"
+        Title="MainWindow" Height="288" Width="448">
     <Window.DataContext>
         <vm:Ev3ControllerMainViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -23,15 +29,87 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <local:Ev3PortView x:Name="Ev3PortView"
-                           Grid.Row="1" Grid.RowSpan="2"
-                           Grid.Column="0" Grid.ColumnSpan="5"
+                           Grid.Row="4" Grid.RowSpan="1"
+                           Grid.Column="2" Grid.ColumnSpan="6"
                            HorizontalAlignment="Stretch"
                            VerticalAlignment="Stretch"
                            HorizontalContentAlignment="Stretch"
                            VerticalContentAlignment="Stretch"
                            DataContext="{Binding Path=PortViewModel}"
                            />
+        <local:Ev3SafeStateView x:Name="Ev3SafeStateView"
+                                Grid.Row="4" Grid.RowSpan="1"
+                                Grid.Column="8" Grid.ColumnSpan="4"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                DataContext="{Binding Path=SafeSateViewModel}"
+                                />
+        <local:Ev3MotorDeviceView x:Name="Ev3MotorDeviceView1"
+                                  Grid.Row="1" Grid.RowSpan="3"
+                                  Grid.Column="1" Grid.ColumnSpan="3"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  DataContext="{Binding Path=MotorDeviceViewModel1}"
+                                  />
+        <local:Ev3MotorDeviceView x:Name="Ev3MotorDeviceView2"
+                                  Grid.Row="1" Grid.RowSpan="3"
+                                  Grid.Column="4" Grid.ColumnSpan="3"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  DataContext="{Binding Path=MotorDeviceViewModel2}"
+                                  />
+        <local:Ev3MotorDeviceView x:Name="Ev3MotorDeviceView3"
+                                  Grid.Row="1" Grid.RowSpan="3"
+                                  Grid.Column="7" Grid.ColumnSpan="3"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  DataContext="{Binding Path=MotorDeviceViewModel3}"
+                                  />
+        <local:Ev3MotorDeviceView x:Name="Ev3MotorDeviceView4"
+                                  Grid.Row="1" Grid.RowSpan="3"
+                                  Grid.Column="10" Grid.ColumnSpan="3"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  DataContext="{Binding Path=MotorDeviceViewModel4}"
+                                  />
+        <local:Ev3SensorDeviceView x:Name="Ev3SensorDeviceA"
+                                  Grid.Row="5" Grid.RowSpan="3"
+                                  Grid.Column="1" Grid.ColumnSpan="3"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  DataContext="{Binding Path=SensorDeviceViewModelA}"
+                                  />
+        <local:Ev3SensorDeviceView x:Name="Ev3SensorDeviceB"
+                                  Grid.Row="5" Grid.RowSpan="3"
+                                  Grid.Column="4" Grid.ColumnSpan="3"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  DataContext="{Binding Path=SensorDeviceViewModelB}"
+                                  />
+        <local:Ev3SensorDeviceView x:Name="Ev3SensorDeviceC"
+                                  Grid.Row="5" Grid.RowSpan="3"
+                                  Grid.Column="7" Grid.ColumnSpan="3"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  DataContext="{Binding Path=SensorDeviceViewModelC}"
+                                  />
+        <local:Ev3SensorDeviceView x:Name="Ev3SensorDeviceD"
+                                  Grid.Row="5" Grid.RowSpan="3"
+                                  Grid.Column="10" Grid.ColumnSpan="3"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  DataContext="{Binding Path=SensorDeviceViewModelD}"
+                                  />
     </Grid>
 </Window>
