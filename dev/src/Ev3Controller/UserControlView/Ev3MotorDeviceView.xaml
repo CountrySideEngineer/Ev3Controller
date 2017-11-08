@@ -9,7 +9,7 @@
              d:DesignHeight="120" d:DesignWidth="120">
     <Grid x:Name="OutputCircleArea"
           Width="120"
-          Height="{Binding ElementName=OutputCircleArea, Path=DesignHeight}">
+          Height="{Binding ElementName=OutputCircleArea, Path=Width}">
         <!--Add "Converter to chagne size."-->
         <Grid.RowDefinitions>
             <RowDefinition/>
