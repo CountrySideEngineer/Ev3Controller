@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.ViewModel
 {
-    public class Ev3MotorViewModel : PortConnectDeviceViewModelBase
+    public class Ev3MotorDeviceViewModel : PortConnectDeviceViewModelBase
     {
         #region Constructors and the Finalizer
-        public Ev3MotorViewModel() { }
+        public Ev3MotorDeviceViewModel() { }
         #endregion
 
         #region Public Properties
