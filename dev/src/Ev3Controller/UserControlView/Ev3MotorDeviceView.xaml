@@ -7,24 +7,22 @@
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="120" d:DesignWidth="100">
-    <Grid x:Name="OutputCircleArea"
-          Width="100"
-          Height="120">
+    <Grid x:Name="OutputCircleArea">
         <!--Add "Converter to chagne size."-->
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <TextBox x:Name="DevicePortText"
                  Grid.Column="2" Grid.ColumnSpan="4"
