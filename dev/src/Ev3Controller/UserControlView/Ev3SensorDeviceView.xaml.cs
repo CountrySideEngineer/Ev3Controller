@@ -23,6 +23,8 @@ namespace Ev3Controller.UserControlView
         public Ev3SensorDeviceView()
         {
             InitializeComponent();
+
+            this.Visibility = Visibility.Hidden;
         }
     }
 }

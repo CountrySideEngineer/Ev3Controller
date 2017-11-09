@@ -51,7 +51,7 @@ namespace Ev3Controller.ViewModel
 
         /// <summary>Unit of current motor output power.</summary>
         protected string _CurrentOutputUnit;
-        protected string CurrentOutputUnit
+        public string CurrentOutputUnit
         {
             get { return this._CurrentOutputUnit; }
             set
