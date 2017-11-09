@@ -12,6 +12,7 @@ namespace Ev3Controller.ViewModel
         public Ev3ControllerMainViewModel()
         {
 
+            this.PortViewModel.ConnectStateChanged += this.ConnectStateChangedCallback;
         }
         #endregion
 
@@ -203,6 +204,13 @@ namespace Ev3Controller.ViewModel
                 this._SensorViewModel4 = value;
                 this.RaisePropertyChanged("SensorViewModel4");
             }
+        }
+        #endregion
+
+        #region Other methods and private properties in calling order
+        public void ConnectStateChangedCallback(object sender, EventArgs e)
+        {
+            Console.WriteLine("Connection State chagned.");
         }
         #endregion
     }
