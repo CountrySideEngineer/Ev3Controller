@@ -14,12 +14,6 @@ namespace Ev3Controller.ViewModel
         #region Constructors and the Finalizer
         public Ev3ControllerMainViewModel()
         {
-            for (int index = 0; index < 4; index++)
-            {
-                this.MotorViewModelArray[index] = new Ev3MotorDeviceViewModel();
-                this.SensorViewModelArray[index] = new Ev3SensorDeviceViewModel();
-            }
-
             this.PortViewModel.ConnectStateChanged += this.ConnectStateChangedCallback;
             this.UpdateTimer = null;
         }
@@ -54,11 +48,11 @@ namespace Ev3Controller.ViewModel
         {
             get
             {
-                if (null == this._MotorViewModelArray[0])
+                if (null == this.MotorViewModelArray[0])
                 {
-                    this._MotorViewModelArray[0] = new Ev3MotorDeviceViewModel();
+                    this.MotorViewModelArray[0] = new Ev3MotorDeviceViewModel();
                 }
-                return this._MotorViewModelArray[0];
+                return this.MotorViewModelArray[0];
             }
             set
             {
@@ -74,11 +68,11 @@ namespace Ev3Controller.ViewModel
         {
             get
             {
-                if (null == this._MotorViewModelArray[1])
+                if (null == this.MotorViewModelArray[1])
                 {
-                    this._MotorViewModelArray[1] = new Ev3MotorDeviceViewModel();
+                    this.MotorViewModelArray[1] = new Ev3MotorDeviceViewModel();
                 }
-                return this._MotorViewModelArray[1];
+                return this.MotorViewModelArray[1];
             }
             set
             {
@@ -94,11 +88,11 @@ namespace Ev3Controller.ViewModel
         {
             get
             {
-                if (null == this._MotorViewModelArray[2])
+                if (null == this.MotorViewModelArray[2])
                 {
-                    this._MotorViewModelArray[2] = new Ev3MotorDeviceViewModel();
+                    this.MotorViewModelArray[2] = new Ev3MotorDeviceViewModel();
                 }
-                return this._MotorViewModelArray[2];
+                return this.MotorViewModelArray[2];
             }
             set
             {
@@ -114,11 +108,11 @@ namespace Ev3Controller.ViewModel
         {
             get
             {
-                if (null == this._MotorViewModelArray[3])
+                if (null == this.MotorViewModelArray[3])
                 {
-                    this._MotorViewModelArray[3] = new Ev3MotorDeviceViewModel();
+                    this.MotorViewModelArray[3] = new Ev3MotorDeviceViewModel();
                 }
-                return this._MotorViewModelArray[3];
+                return this.MotorViewModelArray[3];
             }
             set
             {
@@ -150,11 +144,11 @@ namespace Ev3Controller.ViewModel
         {
             get
             {
-                if (null == this._SensorViewModelArray[0])
+                if (null == this.SensorViewModelArray[0])
                 {
-                    this._SensorViewModelArray[0] = new Ev3SensorDeviceViewModel();
+                    this.SensorViewModelArray[0] = new Ev3SensorDeviceViewModel();
                 }
-                return this._SensorViewModelArray[0];
+                return this.SensorViewModelArray[0];
             }
             set
             {
@@ -170,15 +164,15 @@ namespace Ev3Controller.ViewModel
         {
             get
             {
-                if (null == this._SensorViewModelArray[1])
+                if (null == this.SensorViewModelArray[1])
                 {
-                    this._SensorViewModelArray[1] = new Ev3SensorDeviceViewModel();
+                    this.SensorViewModelArray[1] = new Ev3SensorDeviceViewModel();
                 }
-                return this._SensorViewModelArray[1];
+                return this.SensorViewModelArray[1];
             }
             set
             {
-                this._SensorViewModelArray[1] = value;
+                this.SensorViewModelArray[1] = value;
                 this.RaisePropertyChanged("SensorViewModel2");
             }
         }
@@ -190,15 +184,15 @@ namespace Ev3Controller.ViewModel
         {
             get
             {
-                if (null == this._SensorViewModelArray[2])
+                if (null == this.SensorViewModelArray[2])
                 {
-                    this._SensorViewModelArray[2] = new Ev3SensorDeviceViewModel();
+                    this.SensorViewModelArray[2] = new Ev3SensorDeviceViewModel();
                 }
-                return this._SensorViewModelArray[2];
+                return this.SensorViewModelArray[2];
             }
             set
             {
-                this._SensorViewModelArray[2] = value;
+                this.SensorViewModelArray[2] = value;
                 this.RaisePropertyChanged("SensorViewModel3");
             }
         }
@@ -210,11 +204,11 @@ namespace Ev3Controller.ViewModel
         {
             get
             {
-                if (null == this._SensorViewModelArray[3])
+                if (null == this.SensorViewModelArray[3])
                 {
-                    this._SensorViewModelArray[3] = new Ev3SensorDeviceViewModel();
+                    this.SensorViewModelArray[3] = new Ev3SensorDeviceViewModel();
                 }
-                return this._SensorViewModelArray[3];
+                return this.SensorViewModelArray[3];
             }
             set
             {
