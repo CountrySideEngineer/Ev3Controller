@@ -284,12 +284,15 @@ namespace Ev3Controller.ViewModel
                     };
                     this.UpdateTimer.Start();
                 }
-                else
+                else if (Arg.NewValue.State.Equals(ConnectionState.Disconnected))
                 {
                     try
                     {
                         this.UpdateTimer.Stop();
                         this.UpdateTimer = null;
+
+                        var Updater = new BrickDataUpdater();
+                        Updater.UpdateViewModel(this);
                     }
                     catch (NullReferenceException ex)
                     {
