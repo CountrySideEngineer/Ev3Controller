@@ -21,7 +21,7 @@ namespace Ev3Controller.Ev3Command
 
             this.Res = 0x11;
             this.SubRes = 0x00;
-            this.ResLen = 0x08;
+            this.ResLen = 0x01;
 
             base.Init();
         }
@@ -34,28 +34,10 @@ namespace Ev3Controller.Ev3Command
             this.CmdData[(int)COMMAND_BUFF_INDEX.COMMAND_BUFF_INDEX_CMD_DATA_LEN] = this.CmdLen;
         }
 
-        protected override void CheckParam()
-        {
-            int DataIndex = (int)RESPONSE_BUFF_INDEX.RESPONSE_BUFF_INDEX_RES_DATA_TOP;
-            int DevNum = 4;
-            for (int DevNumIndex = 0; DevNumIndex < DevNum; DevNumIndex++)
-            {
-                byte IsConnect = this.ResData[DataIndex++];
-                if ((IsConnect != 0x00) && (IsConnect != 0x01))
-                {
-                    throw new CommandOperationException(
-                        "InvalidConnectState",
-                        this.Cmd, this.SubCmd, this.Name);
-                }
-                byte MotorOutput = this.ResData[DataIndex++];
-                if (0x64 < MotorOutput)
-                {
-                    throw new CommandOperationException(
-                        "InvalidMotorPower",
-                        this.Cmd, this.SubCmd, this.Name);
-                }
-            }
-        }
+        /// <summary>
+        /// Check response data:Nothing to do.
+        /// </summary>
+        protected override void CheckParam() { }
         #endregion
     }
 }
