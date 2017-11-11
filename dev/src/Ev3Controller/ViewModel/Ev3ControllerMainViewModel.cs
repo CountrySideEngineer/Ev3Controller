@@ -133,6 +133,13 @@ namespace Ev3Controller.ViewModel
                 {
                     this._MotorViewModelArray = new Ev3MotorDeviceViewModel[4];
                 }
+                for (int index = 0; index < 4; index++)
+                {
+                    if (null == this._MotorViewModelArray[index])
+                    {
+                        this._MotorViewModelArray[index] = new Ev3MotorDeviceViewModel();
+                    }
+                }
                 return this._MotorViewModelArray;
             }
         }
@@ -226,11 +233,30 @@ namespace Ev3Controller.ViewModel
                 {
                     this._SensorViewModelArray = new Ev3SensorDeviceViewModel[4];
                 }
+                for (int index = 0; index < 4; index++)
+                {
+                    if (null == this._SensorViewModelArray[index])
+                    {
+                        this._SensorViewModelArray[index] = new Ev3SensorDeviceViewModel();
+                    }
+                }
                 return this._SensorViewModelArray;
             }
         }
 
-        public Timer UpdateTimer { get; protected set; }
+        protected Timer _UpdateTimer;
+        public Timer UpdateTimer
+        {
+            get
+            {
+                if (null == this._UpdateTimer)
+                {
+                    this._UpdateTimer = new Timer(10);
+                }
+                return this._UpdateTimer;
+            }
+            set { this._UpdateTimer = value; }
+        }
         #endregion
 
         #region Other methods and private properties in calling order
@@ -243,13 +269,13 @@ namespace Ev3Controller.ViewModel
                 var Arg = e as ConnectStateChangedEventArgs;
                 if (Arg.NewValue.State.Equals(ConnectionState.Connected))
                 {
-                    this.UpdateTimer = new Timer(10);//Interval = 10 msec
                     this.UpdateTimer.Elapsed += (send_source, arg_data) =>
                     {
                         try
                         {
                             this.UpdateTimer.Stop();
-                            //Write code here to set Brick data into property.
+                            var Updater = new BrickDataUpdater();
+                            Updater.UpdateViewModel(this);
                         }
                         finally
                         {
