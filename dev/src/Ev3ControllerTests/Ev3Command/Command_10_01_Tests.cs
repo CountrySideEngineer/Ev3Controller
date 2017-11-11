@@ -17,13 +17,13 @@ namespace Ev3ControllerTests.Ev3Command
 
             Assert.AreEqual("GetMotorPower", Command.Name);
             Assert.AreEqual(0x10, Command.Cmd);
-            Assert.AreEqual(0x00, Command.SubCmd);
+            Assert.AreEqual(0x01, Command.SubCmd);
             Assert.AreEqual(0x00, Command.CmdLen);
             Assert.AreEqual(0x11, Command.Res);
-            Assert.AreEqual(0x00, Command.SubRes);
+            Assert.AreEqual(0x01, Command.SubRes);
             Assert.AreEqual(0x08, Command.ResLen);
             Assert.AreEqual(0x10, Command.CmdData[0]);
-            Assert.AreEqual(0x00, Command.CmdData[1]);
+            Assert.AreEqual(0x01, Command.CmdData[1]);
             Assert.AreEqual(0x00, Command.CmdData[2]);
         }
         #endregion
@@ -37,7 +37,7 @@ namespace Ev3ControllerTests.Ev3Command
             var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
-            Command.ResData[1] = 0x00;
+            Command.ResData[1] = 0x01;
             Command.ResData[2] = 0x00;
             Command.ResData[3] = 0x08;
             Command.ResData[4] = 0x00;
@@ -67,7 +67,7 @@ namespace Ev3ControllerTests.Ev3Command
             var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
-            Command.ResData[1] = 0x00;
+            Command.ResData[1] = 0x01;
             Command.ResData[2] = 0x00;
             Command.ResData[3] = 0x08;
             Command.ResData[4] = 0x01;
@@ -98,7 +98,7 @@ namespace Ev3ControllerTests.Ev3Command
             var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
-            Command.ResData[1] = 0x00;
+            Command.ResData[1] = 0x01;
             Command.ResData[2] = 0x00;
             Command.ResData[3] = 0x08;
             Command.ResData[4] = 0x00;
@@ -121,7 +121,7 @@ namespace Ev3ControllerTests.Ev3Command
             var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
-            Command.ResData[1] = 0x00;
+            Command.ResData[1] = 0x01;
             Command.ResData[2] = 0x00;
             Command.ResData[3] = 0x08;
             Command.ResData[4] = 0x00;
@@ -144,7 +144,7 @@ namespace Ev3ControllerTests.Ev3Command
             var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
-            Command.ResData[1] = 0x00;
+            Command.ResData[1] = 0x01;
             Command.ResData[2] = 0x00;
             Command.ResData[3] = 0x08;
             Command.ResData[4] = 0x00;
@@ -167,7 +167,7 @@ namespace Ev3ControllerTests.Ev3Command
             var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
-            Command.ResData[1] = 0x00;
+            Command.ResData[1] = 0x01;
             Command.ResData[2] = 0x00;
             Command.ResData[3] = 0x08;
             Command.ResData[4] = 0x00;
@@ -190,7 +190,7 @@ namespace Ev3ControllerTests.Ev3Command
             var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
-            Command.ResData[1] = 0x00;
+            Command.ResData[1] = 0x01;
             Command.ResData[2] = 0x00;
             Command.ResData[3] = 0x08;
             Command.ResData[4] = 0x00;
@@ -213,7 +213,7 @@ namespace Ev3ControllerTests.Ev3Command
             var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
-            Command.ResData[1] = 0x00;
+            Command.ResData[1] = 0x01;
             Command.ResData[2] = 0x00;
             Command.ResData[3] = 0x08;
             Command.ResData[4] = 0x00;
@@ -236,7 +236,7 @@ namespace Ev3ControllerTests.Ev3Command
             var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
-            Command.ResData[1] = 0x00;
+            Command.ResData[1] = 0x01;
             Command.ResData[2] = 0x00;
             Command.ResData[3] = 0x08;
             Command.ResData[4] = 0x00;
@@ -259,7 +259,7 @@ namespace Ev3ControllerTests.Ev3Command
             var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
-            Command.ResData[1] = 0x00;
+            Command.ResData[1] = 0x01;
             Command.ResData[2] = 0x00;
             Command.ResData[3] = 0x08;
             Command.ResData[4] = 0x02;

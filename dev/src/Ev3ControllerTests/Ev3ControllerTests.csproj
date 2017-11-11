@@ -77,7 +77,6 @@
     <Compile Include="Ev3Command\Command_50_01_Tests.cs" />
     <Compile Include="Ev3Command\Command_A0_00_Tests.cs" />
     <Compile Include="Ev3Command\Command_F0_00_Tests.cs" />
-    <Compile Include="Ev3Command\SafeState.cs" />
     <Compile Include="Ev3Command\Command_10_01_Tests.cs" />
     <Compile Include="Model\BrickDataUpdater_Tests.cs" />
     <Compile Include="Model\BrickUpdater_00_00_Tests.cs" />
@@ -87,6 +86,7 @@
     <Compile Include="Model\BrickUpdater_0C_00_Tests.cs" />
     <Compile Include="Model\BrickUpdater_0E_00_Tests.cs" />
     <Compile Include="Model\BrickUpdater_10_00_Tests.cs" />
+    <Compile Include="Model\BrickUpdater_10_01_Tests.cs" />
     <Compile Include="Model\BrickUpdater_20_00_Tests.cs" />
     <Compile Include="Model\BrickUpdater_20_01_Tests.cs" />
     <Compile Include="Model\BrickUpdater_50_00_Tests.cs" />
