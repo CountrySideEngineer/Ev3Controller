@@ -5,15 +5,15 @@ using Ev3Controller.Ev3Command;
 namespace Ev3ControllerTests.Ev3Command
 {
     [TestClass]
-    public class Command_10_00_Tests
+    public class Command_10_01_Tests
     {
-        #region Unit test of Command_10_00 constructor
+        #region Unit test of Command_10_01 constructor
         [TestMethod]
-        [TestCategory("Command_10_00")]
-        [TestCategory("Command_10_00_Constructor")]
-        public void Command_10_00_Constructor_001()
+        [TestCategory("Command_10_01")]
+        [TestCategory("Command_10_01_Constructor")]
+        public void Command_10_01_Constructor_001()
         {
-            var Command = new Command_10_00();
+            var Command = new Command_10_01();
 
             Assert.AreEqual("GetMotorPower", Command.Name);
             Assert.AreEqual(0x10, Command.Cmd);
@@ -28,19 +28,26 @@ namespace Ev3ControllerTests.Ev3Command
         }
         #endregion
 
-        #region Unit test of Command_10_00 CheckParam method.
+        #region Unit test of Command_10_01 CheckParam method.
         [TestMethod]
-        [TestCategory("Command_10_00")]
-        [TestCategory("Command_10_00_Check")]
-        public void Command_10_00_Check_001()
+        [TestCategory("Command_10_01")]
+        [TestCategory("Command_10_01_Check")]
+        public void Command_10_01_Check_001()
         {
-            var Command = new Command_10_00();
-            Command.ResData = new byte[5];
+            var Command = new Command_10_01();
+            Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
             Command.ResData[1] = 0x00;
             Command.ResData[2] = 0x00;
-            Command.ResData[3] = 0x01;
+            Command.ResData[3] = 0x08;
             Command.ResData[4] = 0x00;
+            Command.ResData[5] = 0x00;
+            Command.ResData[6] = 0x00;
+            Command.ResData[7] = 0x00;
+            Command.ResData[8] = 0x00;
+            Command.ResData[9] = 0x00;
+            Command.ResData[10] = 0x00;
+            Command.ResData[11] = 0x00;
 
             try
             {
@@ -53,11 +60,11 @@ namespace Ev3ControllerTests.Ev3Command
             }
         }
         [TestMethod]
-        [TestCategory("Command_10_00")]
-        [TestCategory("Command_10_00_Check")]
-        public void Command_10_00_Check_002()
+        [TestCategory("Command_10_01")]
+        [TestCategory("Command_10_01_Check")]
+        public void Command_10_01_Check_002()
         {
-            var Command = new Command_10_00();
+            var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
             Command.ResData[1] = 0x00;
@@ -83,12 +90,12 @@ namespace Ev3ControllerTests.Ev3Command
             }
         }
         [TestMethod]
-        [TestCategory("Command_10_00")]
-        [TestCategory("Command_10_00_Check")]
+        [TestCategory("Command_10_01")]
+        [TestCategory("Command_10_01_Check")]
         [ExpectedExceptionAttribute(typeof(CommandOperationException))]
-        public void Command_10_00_Check_003()
+        public void Command_10_01_Check_003()
         {
-            var Command = new Command_10_00();
+            var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
             Command.ResData[1] = 0x00;
@@ -106,12 +113,12 @@ namespace Ev3ControllerTests.Ev3Command
             Command.Check();
         }
         [TestMethod]
-        [TestCategory("Command_10_00")]
-        [TestCategory("Command_10_00_Check")]
+        [TestCategory("Command_10_01")]
+        [TestCategory("Command_10_01_Check")]
         [ExpectedExceptionAttribute(typeof(CommandOperationException))]
-        public void Command_10_00_Check_004()
+        public void Command_10_01_Check_004()
         {
-            var Command = new Command_10_00();
+            var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
             Command.ResData[1] = 0x00;
@@ -129,12 +136,12 @@ namespace Ev3ControllerTests.Ev3Command
             Command.Check();
         }
         [TestMethod]
-        [TestCategory("Command_10_00")]
-        [TestCategory("Command_10_00_Check")]
+        [TestCategory("Command_10_01")]
+        [TestCategory("Command_10_01_Check")]
         [ExpectedExceptionAttribute(typeof(CommandOperationException))]
-        public void Command_10_00_Check_005()
+        public void Command_10_01_Check_005()
         {
-            var Command = new Command_10_00();
+            var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
             Command.ResData[1] = 0x00;
@@ -152,12 +159,12 @@ namespace Ev3ControllerTests.Ev3Command
             Command.Check();
         }
         [TestMethod]
-        [TestCategory("Command_10_00")]
-        [TestCategory("Command_10_00_Check")]
+        [TestCategory("Command_10_01")]
+        [TestCategory("Command_10_01_Check")]
         [ExpectedExceptionAttribute(typeof(CommandOperationException))]
-        public void Command_10_00_Check_006()
+        public void Command_10_01_Check_006()
         {
-            var Command = new Command_10_00();
+            var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
             Command.ResData[1] = 0x00;
@@ -175,12 +182,12 @@ namespace Ev3ControllerTests.Ev3Command
             Command.Check();
         }
         [TestMethod]
-        [TestCategory("Command_10_00")]
-        [TestCategory("Command_10_00_Check")]
+        [TestCategory("Command_10_01")]
+        [TestCategory("Command_10_01_Check")]
         [ExpectedExceptionAttribute(typeof(CommandOperationException))]
-        public void Command_10_00_Check_007()
+        public void Command_10_01_Check_007()
         {
-            var Command = new Command_10_00();
+            var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
             Command.ResData[1] = 0x00;
@@ -198,12 +205,12 @@ namespace Ev3ControllerTests.Ev3Command
             Command.Check();
         }
         [TestMethod]
-        [TestCategory("Command_10_00")]
-        [TestCategory("Command_10_00_Check")]
+        [TestCategory("Command_10_01")]
+        [TestCategory("Command_10_01_Check")]
         [ExpectedExceptionAttribute(typeof(CommandOperationException))]
-        public void Command_10_00_Check_008()
+        public void Command_10_01_Check_008()
         {
-            var Command = new Command_10_00();
+            var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
             Command.ResData[1] = 0x00;
@@ -221,12 +228,12 @@ namespace Ev3ControllerTests.Ev3Command
             Command.Check();
         }
         [TestMethod]
-        [TestCategory("Command_10_00")]
-        [TestCategory("Command_10_00_Check")]
+        [TestCategory("Command_10_01")]
+        [TestCategory("Command_10_01_Check")]
         [ExpectedExceptionAttribute(typeof(CommandOperationException))]
-        public void Command_10_00_Check_009()
+        public void Command_10_01_Check_009()
         {
-            var Command = new Command_10_00();
+            var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
             Command.ResData[1] = 0x00;
@@ -244,12 +251,12 @@ namespace Ev3ControllerTests.Ev3Command
             Command.Check();
         }
         [TestMethod]
-        [TestCategory("Command_10_00")]
-        [TestCategory("Command_10_00_Check")]
+        [TestCategory("Command_10_01")]
+        [TestCategory("Command_10_01_Check")]
         [ExpectedExceptionAttribute(typeof(CommandOperationException))]
-        public void Command_10_00_Check_010()
+        public void Command_10_01_Check_010()
         {
-            var Command = new Command_10_00();
+            var Command = new Command_10_01();
             Command.ResData = new byte[12];
             Command.ResData[0] = 0x11;
             Command.ResData[1] = 0x00;

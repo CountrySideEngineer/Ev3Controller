@@ -21,7 +21,7 @@ namespace Ev3Controller.Ev3Command
 
             this.Res = 0x11;
             this.SubRes = 0x00;
-            this.ResLen = 0x08;
+            this.ResLen = 0x01;
 
             base.Init();
         }

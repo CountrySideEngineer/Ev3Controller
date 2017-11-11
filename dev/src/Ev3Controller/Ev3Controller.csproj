@@ -77,6 +77,7 @@
     <Compile Include="Ev3Command\Command_02_00.cs" />
     <Compile Include="Ev3Command\Command_04_00.cs" />
     <Compile Include="Ev3Command\Command_06_00.cs" />
+    <Compile Include="Ev3Command\Command_10_01.cs" />
     <Compile Include="Ev3Command\Command_A0_00.cs" />
     <Compile Include="Ev3Command\Command_0C_00.cs" />
     <Compile Include="Ev3Command\Command_0E.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Model\BrickUpdater_0C_00.cs" />
     <Compile Include="Model\BrickUpdater_0E_00.cs" />
     <Compile Include="Model\BrickUpdater_10_00.cs" />
+    <Compile Include="Model\BrickUpdater_10_01.cs" />
     <Compile Include="Model\BrickUpdater_20_00.cs" />
     <Compile Include="Model\BrickUpdater_20_01.cs" />
     <Compile Include="Model\BrickUpdater_30_00.cs" />

@@ -291,6 +291,8 @@ namespace Ev3Controller.ViewModel
                         this.UpdateTimer.Stop();
                         this.UpdateTimer.Elapsed -= this.UpdateTimerEvent;
                         this.UpdateTimer.Elapsed += this.ResetTimerEvent;
+                        this.UpdateTimer.Interval = 1;
+                        this.UpdateTimer.Start();
                     }
                     catch (NullReferenceException ex)
                     {
