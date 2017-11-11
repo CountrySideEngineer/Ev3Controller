@@ -33,15 +33,14 @@ namespace Ev3Controller.Model
                 try
                 {
                     var Device = Brick.MotorDeviceArray[index];
-                    DeviceViewModel.IsConnected = true;
                     DeviceViewModel.PortName = Device.Port;
                     DeviceViewModel.DeviceName = Device.Device;
                     DeviceViewModel.CurrentOutput = Device.Power;
+                    DeviceViewModel.IsConnected = true;
                     DeviceViewModel.CurrentOutputUnit = @"%";
                 }
                 catch (NullReferenceException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     DeviceViewModel.IsConnected = false;
                     DeviceViewModel.TargetOutput = 0;
                     DeviceViewModel.TargetOutputUnit = "";
@@ -64,9 +63,9 @@ namespace Ev3Controller.Model
                 try
                 {
                     var Device = Brick.SensorDeviceArray[index];
-                    DeviceViewModel.IsConnected = true;
                     DeviceViewModel.PortName = Device.Port;
                     DeviceViewModel.DeviceName = Device.Device;
+                    DeviceViewModel.IsConnected = true;
                     DeviceViewModel.SensorValue1 = Device.Value1;
                     DeviceViewModel.SensorValue1Unit = "";
                     DeviceViewModel.SensorValue2 = Device.Value2;
@@ -76,7 +75,6 @@ namespace Ev3Controller.Model
                 }
                 catch (NullReferenceException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     DeviceViewModel.IsConnected = false;
                     DeviceViewModel.SensorValue1 = 0;
                     DeviceViewModel.SensorValue1Unit = "";

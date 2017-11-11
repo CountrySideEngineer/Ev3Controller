@@ -88,7 +88,7 @@
                                   DataContext="{Binding Path=MotorViewModelD}"
                                   IsEnabled="{Binding Path=IsConnected}"
                                   />
-        <local:Ev3SensorDeviceView x:Name="Ev3SensorDeviceA"
+        <local:Ev3SensorDeviceView x:Name="Ev3SensorDevice1"
                                   Grid.Row="5" Grid.RowSpan="3"
                                   Grid.Column="1" Grid.ColumnSpan="3"
                                   HorizontalAlignment="Stretch"
@@ -96,7 +96,7 @@
                                   DataContext="{Binding Path=SensorViewModel1}"
                                   IsEnabled="{Binding Path=IsConnected}"
                                   />
-        <local:Ev3SensorDeviceView x:Name="Ev3SensorDeviceB"
+        <local:Ev3SensorDeviceView x:Name="Ev3SensorDevice2"
                                   Grid.Row="5" Grid.RowSpan="3"
                                   Grid.Column="4" Grid.ColumnSpan="3"
                                   HorizontalAlignment="Stretch"
@@ -104,7 +104,7 @@
                                   DataContext="{Binding Path=SensorViewModel2}"
                                   IsEnabled="{Binding Path=IsConnected}"
                                   />
-        <local:Ev3SensorDeviceView x:Name="Ev3SensorDeviceC"
+        <local:Ev3SensorDeviceView x:Name="Ev3SensorDevice3"
                                   Grid.Row="5" Grid.RowSpan="3"
                                   Grid.Column="7" Grid.ColumnSpan="3"
                                   HorizontalAlignment="Stretch"
@@ -112,7 +112,7 @@
                                   DataContext="{Binding Path=SensorViewModel3}"
                                   IsEnabled="{Binding Path=IsConnected}"
                                   />
-        <local:Ev3SensorDeviceView x:Name="Ev3SensorDeviceD"
+        <local:Ev3SensorDeviceView x:Name="Ev3SensorDevice4"
                                   Grid.Row="5" Grid.RowSpan="3"
                                   Grid.Column="10" Grid.ColumnSpan="3"
                                   HorizontalAlignment="Stretch"

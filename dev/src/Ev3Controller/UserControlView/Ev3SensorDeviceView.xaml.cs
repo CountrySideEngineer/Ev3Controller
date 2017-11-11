@@ -23,8 +23,20 @@ namespace Ev3Controller.UserControlView
         public Ev3SensorDeviceView()
         {
             InitializeComponent();
+        }
 
-            this.Visibility = Visibility.Hidden;
+        protected void UserControl_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            bool NewValue = (bool)e.NewValue;
+            if (NewValue)
+            {
+                this.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.Visibility = Visibility.Hidden;
+            }
+
         }
     }
 }
