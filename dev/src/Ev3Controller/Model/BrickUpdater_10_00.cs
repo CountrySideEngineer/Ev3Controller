@@ -20,30 +20,7 @@ namespace Ev3Controller.Model
         {
             Debug.Assert(Command != null);
             Debug.Assert(Brick != null);
-
-            if (Command is Command_10_00)
-            {
-                int Index = 0;
-                int DataTopIndex = 4;
-                for (Index = 0; Index < 4; Index++)
-                {
-                    int DataIndex = DataTopIndex + Index * 2;
-                    byte Connection = Command.ResData[DataIndex++];
-                    byte Power = Command.ResData[DataIndex];
-
-                    Brick.MotorDevice(Index).ConnectedPort = (Ev3Device.OUTPORT)Index;
-                    if (0x00 == Connection)
-                    {
-                        Brick.MotorDevice(Index).IsConnected = false;
-                        Brick.MotorDevice(Index).Power = 0;
-                    }
-                    else
-                    {
-                        Brick.MotorDevice(Index).IsConnected = true;
-                        Brick.MotorDevice(Index).Power = Power;
-                    }
-                }
-            }
+            //Nothing to check in this response data.
         }
     }
 }
