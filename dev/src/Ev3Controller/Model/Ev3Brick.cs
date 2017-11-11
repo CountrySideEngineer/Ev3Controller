@@ -87,9 +87,39 @@ namespace Ev3Controller.Model
         protected Ev3SensorDevice[] _SensorDevice;
 
         /// <summary>
+        /// Interface of array of Ev3SensorDevice object.
+        /// </summary>
+        public Ev3SensorDevice[] SensorDeviceArray
+        {
+            get
+            {
+                if (null == this._SensorDevice)
+                {
+                    this._SensorDevice = new Ev3SensorDevice[4];
+                }
+                return this._SensorDevice;
+            }
+        }
+
+        /// <summary>
         /// Motor device data.
         /// </summary>
         protected Ev3MotorDevice[] _MotorDevice;
+
+        /// <summary>
+        /// Interface of array of EV3MotorDevice object.
+        /// </summary>
+        public Ev3MotorDevice[] MotorDeviceArray
+        {
+            get
+            {
+                if (null == this._MotorDevice)
+                {
+                    this._MotorDevice = new Ev3MotorDevice[4];
+                }
+                return this._MotorDevice;
+            }
+        }
 
         /// <summary>
         /// Instance for singleton.
