@@ -8,10 +8,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="32" d:DesignWidth="224">
     <Border BorderBrush="Black" BorderThickness="0"
+            Background="Transparent"
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid Width="Auto"
-                Height="Auto" Background="White">
+        <Grid Width="Auto" Height="Auto">
             <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
@@ -28,7 +30,7 @@
             </Grid.ColumnDefinitions>
             <ComboBox x:Name="PortComboBox"
                       Grid.Column="0" Grid.ColumnSpan="6"
-                      Grid.Row="0" Grid.RowSpan="4" 
+                      Grid.Row="1" Grid.RowSpan="4" 
                       IsEnabled="{Binding Path=CanChangePort}"
                       ItemsSource="{Binding Path=AvailableComPorts}"
                       SelectedItem="{Binding Path=SelectedComPort}"
@@ -44,7 +46,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <Image x:Name="ConnectStateImage"
-                   Grid.Row="0" Grid.RowSpan="4"
+                   Grid.Row="0" Grid.RowSpan="6"
                    Grid.Column="6" Grid.ColumnSpan="1"
                    Cursor="Hand"
                    Source="{Binding Path=ImageResource}">
