@@ -23,6 +23,8 @@ namespace Ev3Controller.UserControlView
         public Ev3MotorDeviceView()
         {
             InitializeComponent();
+
+            this.Visibility = Visibility.Hidden;
         }
         #region Properties and fields
         public static readonly DependencyProperty TargetOutputProperty =
@@ -165,6 +167,20 @@ namespace Ev3Controller.UserControlView
                 return new Point(x, y);
             }
             #endregion
+        }
+
+        private void UserControl_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            bool NewValue = (bool)e.NewValue;
+            if (NewValue)
+            {
+                this.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.Visibility = Visibility.Hidden;
+            }
+
         }
     }
 }

@@ -41,5 +41,18 @@ namespace Ev3Controller.ViewModel
             }
         }
         #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// Reset device data of port name and device name.
+        /// </summary>
+        public override void ResetDevice()
+        {
+            base.ResetDevice();
+
+            this.PortName = "";
+            this.DeviceName = "";
+        }
+        #endregion
     }
 }

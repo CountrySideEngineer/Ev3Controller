@@ -51,7 +51,7 @@ namespace Ev3Controller.ViewModel
 
         /// <summary>Unit of current motor output power.</summary>
         protected string _CurrentOutputUnit;
-        protected string CurrentOutputUnit
+        public string CurrentOutputUnit
         {
             get { return this._CurrentOutputUnit; }
             set
@@ -59,6 +59,21 @@ namespace Ev3Controller.ViewModel
                 this._CurrentOutputUnit = value;
                 this.RaisePropertyChanged("CurrentOutputUnit");
             }
+        }
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// Reset device data of output value and their unit.
+        /// </summary>
+        public override void ResetDevice()
+        {
+            base.ResetDevice();
+
+            this.TargetOutput = 0;
+            this.CurrentOutput = 0;
+            this.TargetOutputUnit = "";
+            this.CurrentOutputUnit = "";
         }
         #endregion
     }

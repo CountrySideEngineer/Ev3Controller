@@ -78,6 +78,7 @@
     <Compile Include="Ev3Command\Command_A0_00_Tests.cs" />
     <Compile Include="Ev3Command\Command_F0_00_Tests.cs" />
     <Compile Include="Ev3Command\SafeState.cs" />
+    <Compile Include="Model\BrickDataUpdater_Tests.cs" />
     <Compile Include="Model\BrickUpdater_00_00_Tests.cs" />
     <Compile Include="Model\BrickUpdater_02_00_Tests.cs" />
     <Compile Include="Model\BrickUpdater_04_00_Tests.cs" />
