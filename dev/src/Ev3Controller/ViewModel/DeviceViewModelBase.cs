@@ -58,6 +58,14 @@ namespace Ev3Controller.ViewModel
         {
             this.IsConnected = e.NewValue;
         }
+
+        /// <summary>
+        /// Reset device data by setting "IsConnected" property.
+        /// </summary>
+        public virtual void ResetDevice()
+        {
+            this.IsConnected = false;
+        }
         #endregion
     }
 }

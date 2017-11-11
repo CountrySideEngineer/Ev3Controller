@@ -244,6 +244,8 @@ namespace Ev3Controller.ViewModel
                 var NewVar = Args.NewValue;
                 this.ConnectState = NewVar;
                 this.UpdateState();
+
+                this.OnConnectStateChanged(Args);
             }
             //Other properties are update in ConnectState setter.
         }

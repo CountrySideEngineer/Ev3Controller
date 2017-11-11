@@ -24,5 +24,19 @@ namespace Ev3Controller.UserControlView
         {
             InitializeComponent();
         }
+
+        protected void UserControl_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            bool NewValue = (bool)e.NewValue;
+            if (NewValue)
+            {
+                this.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.Visibility = Visibility.Hidden;
+            }
+
+        }
     }
 }
