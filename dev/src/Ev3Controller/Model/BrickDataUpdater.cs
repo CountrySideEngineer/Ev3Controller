@@ -21,6 +21,25 @@ namespace Ev3Controller.Model
         }
 
         /// <summary>
+        /// Reset device data by calling 
+        /// </summary>
+        /// <param name="ViewModel"></param>
+        public void ResetViewModel(Ev3ControllerMainViewModel ViewModel)
+        {
+            for (int index = 0; index < 4; index++)
+            {
+                if (null != ViewModel.MotorViewModelArray[index])
+                {
+                    ViewModel.MotorViewModelArray[index].ResetDevice();
+                }
+                if (null != ViewModel.SensorViewModelArray[index])
+                {
+                    ViewModel.SensorViewModelArray[index].ResetDevice();
+                }
+            }
+        }
+
+        /// <summary>
         /// Set motor data into controller view model.
         /// </summary>
         /// <param name="ViewModel"></param>
@@ -39,6 +58,7 @@ namespace Ev3Controller.Model
                     DeviceViewModel.IsConnected = true;
                     DeviceViewModel.CurrentOutputUnit = @"%";
                 }
+#pragma warning disable 168
                 catch (NullReferenceException ex)
                 {
                     DeviceViewModel.IsConnected = false;
@@ -47,6 +67,7 @@ namespace Ev3Controller.Model
                     DeviceViewModel.CurrentOutput = 0;
                     DeviceViewModel.CurrentOutputUnit = "";
                 }
+#pragma warning restore
             }
         }
 
@@ -73,6 +94,7 @@ namespace Ev3Controller.Model
                     DeviceViewModel.SensorValue3 = Device.Value3;
                     DeviceViewModel.SensorValue3Unit = "";
                 }
+#pragma warning disable 168
                 catch (NullReferenceException ex)
                 {
                     DeviceViewModel.IsConnected = false;
@@ -83,6 +105,7 @@ namespace Ev3Controller.Model
                     DeviceViewModel.SensorValue3 = 0;
                     DeviceViewModel.SensorValue3Unit = "";
                 }
+#pragma warning restore
             }
         }
         #endregion

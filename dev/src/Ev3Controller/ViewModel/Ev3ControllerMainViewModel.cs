@@ -289,10 +289,8 @@ namespace Ev3Controller.ViewModel
                     try
                     {
                         this.UpdateTimer.Stop();
-                        this.UpdateTimer = null;
-
-                        var Updater = new BrickDataUpdater();
-                        Updater.UpdateViewModel(this);
+                        this.UpdateTimer.Elapsed -= this.UpdateTimerEvent;
+                        this.UpdateTimer.Elapsed += this.ResetTimerEvent;
                     }
                     catch (NullReferenceException ex)
                     {
@@ -300,6 +298,44 @@ namespace Ev3Controller.ViewModel
                         Console.WriteLine("Timer has not been started.");
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Timer dispatcher to update by Ev3Brick data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void UpdateTimerEvent(object sender, EventArgs e)
+        {
+            try
+            {
+                this.UpdateTimer.Stop();
+                var Updater = new BrickDataUpdater();
+                Updater.UpdateViewModel(this);
+            }
+            finally
+            {
+                this.UpdateTimer.Start();
+            }
+        }
+
+        /// <summary>
+        /// Timer dispatcher to reset device data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void ResetTimerEvent(object sender, EventArgs e)
+        {
+            try
+            {
+                var Updater = new BrickDataUpdater();
+                Updater.ResetViewModel(this);
+            }
+            finally
+            {
+                this.UpdateTimer.Stop();
+                this.UpdateTimer.Elapsed -= ResetTimerEvent;//Remove ResetTimerEvent from Timer object itself.
             }
         }
         #endregion
