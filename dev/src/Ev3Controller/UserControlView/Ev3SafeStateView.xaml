@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ev3Controller.UserControlView"
              mc:Ignorable="d" 
-             d:DesignHeight="40" d:DesignWidth="160">
+             d:DesignHeight="40" d:DesignWidth="160" IsEnabledChanged="UserControl_IsEnabledChanged">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -34,6 +34,7 @@
                  BorderThickness="0"
                  BorderBrush="Black"
                  Background="Transparent"
+                 Foreground="White"
                  IsEnabled="{Binding Path=IsConnected}"
                  Text="{Binding Path=SafetyState}"
                  />

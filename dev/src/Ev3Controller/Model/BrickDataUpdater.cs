@@ -38,6 +38,7 @@ namespace Ev3Controller.Model
                     ViewModel.SensorViewModelArray[index].ResetDevice();
                 }
             }
+            ViewModel.SafeStateViewModel.ResetDevice();
         }
 
         /// <summary>
@@ -117,6 +118,7 @@ namespace Ev3Controller.Model
         public void UpdateSafeStateViewModel(Ev3ControllerMainViewModel ViewModel)
         {
             var Brick = Ev3Brick.GetInstance();
+            ViewModel.SafeStateViewModel.IsConnected = true;
             ViewModel.SafeStateViewModel.SafetyState = Brick.State.StateName;
         }
         #endregion

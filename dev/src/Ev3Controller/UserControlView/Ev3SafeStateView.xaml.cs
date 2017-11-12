@@ -23,6 +23,8 @@ namespace Ev3Controller.UserControlView
         public Ev3SafeStateView()
         {
             InitializeComponent();
+
+            this.Visibility = Visibility.Hidden;
         }
         #region Public read-only static fields
         /// <summary>
@@ -53,6 +55,19 @@ namespace Ev3Controller.UserControlView
         {
             get { return (bool)GetValue(IsConnectedProperty); }
             set { SetValue(IsConnectedProperty, value); }
+        }
+
+        protected void UserControl_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            bool NewValue = (bool)e.NewValue;
+            if (NewValue)
+            {
+                this.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.Visibility = Visibility.Hidden;
+            }
         }
         #endregion
     }
