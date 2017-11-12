@@ -55,7 +55,7 @@ namespace Ev3Controller.Model
                     DeviceViewModel.PortName = Device.Port;
                     DeviceViewModel.DeviceName = Device.Device;
                     DeviceViewModel.CurrentOutput = Device.Power;
-                    DeviceViewModel.IsConnected = true;
+                    DeviceViewModel.IsConnected = Device.IsConnected;
                     DeviceViewModel.CurrentOutputUnit = @"%";
                 }
 #pragma warning disable 168
