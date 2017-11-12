@@ -25,6 +25,9 @@ namespace Ev3Controller.ViewModel
         #endregion
 
         #region Other methods and private properties in calling order
+        /// <summary>
+        /// Reset device data of safe state 
+        /// </summary>
         public override void ResetDevice()
         {
             base.ResetDevice();
