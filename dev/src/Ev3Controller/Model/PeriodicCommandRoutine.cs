@@ -17,6 +17,7 @@ namespace Ev3Controller.Model
         public PeriodicCommandRoutine()
         {
             this.CommandQueue = new Queue<ACommand>();
+            this.CommandQueue.Enqueue(new Command_0C_00());
             this.CommandQueue.Enqueue(new Command_10_01());
             this.CommandQueue.Enqueue(new Command_F0_00());
         }
