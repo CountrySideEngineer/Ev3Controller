@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Ev3Controller.ViewModel
 {
@@ -33,6 +34,23 @@ namespace Ev3Controller.ViewModel
             base.ResetDevice();
 
             this.SafetyState = "";
+        }
+
+        /// <summary>
+        /// Image source for connect state.
+        /// </summary>
+        protected BitmapImage _ImageSource;
+        public BitmapImage ImageSource
+        {
+            get
+            {
+                return this._ImageSource;
+            }
+            set
+            {
+                this._ImageSource = value;
+                this.RaisePropertyChanged("ImageSource");
+            }
         }
         #endregion
     }

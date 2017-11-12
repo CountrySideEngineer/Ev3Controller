@@ -120,6 +120,7 @@ namespace Ev3Controller.Model
             var Brick = Ev3Brick.GetInstance();
             ViewModel.SafeStateViewModel.IsConnected = true;
             ViewModel.SafeStateViewModel.SafetyState = Brick.State.StateName;
+            ViewModel.SafeStateViewModel.ImageSource = Brick.State.StateImage;
         }
         #endregion
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Ev3Controller.Model
 {
@@ -16,6 +17,25 @@ namespace Ev3Controller.Model
             { SAFE_STATE.SAFE_STATE_WARN, "Warning" },
             { SAFE_STATE.SAFE_STATE_STOP, "STOP" },
             { SAFE_STATE.SAFE_STATE_UNKNOWN, "ERROR" },
+        };
+
+        protected static Dictionary<SAFE_STATE, BitmapImage> SafeStateResourceDictionary = new Dictionary<SAFE_STATE, BitmapImage>()
+        {
+            { SAFE_STATE.SAFE_STATE_SAFE,
+                new BitmapImage(
+                    new Uri(@"../Resource/pict/safe_state_safe.png", UriKind.Relative)) },
+            { SAFE_STATE.SAFE_STATE_ATTN,
+                new BitmapImage(
+                    new Uri(@"../Resource/pict/safe_state_attn.png", UriKind.Relative)) },
+            { SAFE_STATE.SAFE_STATE_WARN,
+                new BitmapImage(
+                    new Uri(@"../Resource/pict/safe_state_warn.png", UriKind.Relative)) },
+            { SAFE_STATE.SAFE_STATE_STOP,
+                new BitmapImage(
+                    new Uri(@"../Resource/pict/safe_state_stop.png", UriKind.Relative)) },
+            { SAFE_STATE.SAFE_STATE_UNKNOWN,
+                new BitmapImage(
+                    new Uri(@"../Resource/pict/safe_state_unknown.png", UriKind.Relative)) },
         };
         #endregion
 
@@ -53,6 +73,14 @@ namespace Ev3Controller.Model
             {
                 return SafeStateDictionary[this.State];
             }
+        }
+
+        /// <summary>
+        /// Bitmap image which shows state.
+        /// </summary>
+        public BitmapImage StateImage
+        {
+            get { return SafeState.SafeStateResourceDictionary[this.State]; }
         }
         #endregion
     }
