@@ -18,6 +18,7 @@ namespace Ev3Controller.Model
         {
             this.UpdateMotorViewModel(ViewModel);
             this.UpdateSensorViewModel(ViewModel);
+            this.UpdateSafeStateViewModel(ViewModel);
         }
 
         /// <summary>
@@ -107,6 +108,16 @@ namespace Ev3Controller.Model
                 }
 #pragma warning restore
             }
+        }
+
+        /// <summary>
+        /// Set safe state.
+        /// </summary>
+        /// <param name="ViewModel"></param>
+        public void UpdateSafeStateViewModel(Ev3ControllerMainViewModel ViewModel)
+        {
+            var Brick = Ev3Brick.GetInstance();
+            ViewModel.SafeStateViewModel.SafetyState = Brick.State.StateName;
         }
         #endregion
     }
