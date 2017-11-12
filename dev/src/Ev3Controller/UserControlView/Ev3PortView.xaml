@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Ev3Controller.UserControlView"
              xmlns:VM="clr-namespace:Ev3Controller.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="32" d:DesignWidth="224">
+             d:DesignHeight="32" d:DesignWidth="192">
     <Border BorderBrush="Black" BorderThickness="0"
             Background="Transparent"
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -25,11 +25,9 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <ComboBox x:Name="PortComboBox"
-                      Grid.Column="0" Grid.ColumnSpan="6"
+                      Grid.Column="0" Grid.ColumnSpan="4"
                       Grid.Row="1" Grid.RowSpan="4" 
                       IsEnabled="{Binding Path=CanChangePort}"
                       ItemsSource="{Binding Path=AvailableComPorts}"
