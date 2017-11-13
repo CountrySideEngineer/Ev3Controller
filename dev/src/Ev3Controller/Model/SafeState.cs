@@ -19,23 +19,13 @@ namespace Ev3Controller.Model
             { SAFE_STATE.SAFE_STATE_UNKNOWN, "ERROR" },
         };
 
-        protected static Dictionary<SAFE_STATE, BitmapImage> SafeStateResourceDictionary = new Dictionary<SAFE_STATE, BitmapImage>()
+        protected static Dictionary<SAFE_STATE, string> SafeStateResourceDictionary = new Dictionary<SAFE_STATE, string>()
         {
-            { SAFE_STATE.SAFE_STATE_SAFE,
-                new BitmapImage(
-                    new Uri(@"../Resource/pict/safe_state_safe.png", UriKind.Relative)) },
-            { SAFE_STATE.SAFE_STATE_ATTN,
-                new BitmapImage(
-                    new Uri(@"../Resource/pict/safe_state_attn.png", UriKind.Relative)) },
-            { SAFE_STATE.SAFE_STATE_WARN,
-                new BitmapImage(
-                    new Uri(@"../Resource/pict/safe_state_warn.png", UriKind.Relative)) },
-            { SAFE_STATE.SAFE_STATE_STOP,
-                new BitmapImage(
-                    new Uri(@"../Resource/pict/safe_state_stop.png", UriKind.Relative)) },
-            { SAFE_STATE.SAFE_STATE_UNKNOWN,
-                new BitmapImage(
-                    new Uri(@"../Resource/pict/safe_state_unknown.png", UriKind.Relative)) },
+            { SAFE_STATE.SAFE_STATE_SAFE, @"../Resource/pict/safe_state_safe.png" },
+            { SAFE_STATE.SAFE_STATE_ATTN, @"../Resource/pict/safe_state_attn.png" },
+            { SAFE_STATE.SAFE_STATE_WARN, @"../Resource/pict/safe_state_warn.png" },
+            { SAFE_STATE.SAFE_STATE_STOP, @"../Resource/pict/safe_state_stop.png" },
+            { SAFE_STATE.SAFE_STATE_UNKNOWN, @"../Resource/pict/safe_state_unknown.png" },
         };
         #endregion
 
@@ -78,7 +68,7 @@ namespace Ev3Controller.Model
         /// <summary>
         /// Bitmap image which shows state.
         /// </summary>
-        public BitmapImage StateImage
+        public string StateImage
         {
             get { return SafeState.SafeStateResourceDictionary[this.State]; }
         }
