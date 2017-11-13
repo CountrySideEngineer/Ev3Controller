@@ -18,6 +18,7 @@ namespace Ev3Controller.Model
         {
             this.UpdateMotorViewModel(ViewModel);
             this.UpdateSensorViewModel(ViewModel);
+            this.UpdateSafeStateViewModel(ViewModel);
         }
 
         /// <summary>
@@ -37,6 +38,7 @@ namespace Ev3Controller.Model
                     ViewModel.SensorViewModelArray[index].ResetDevice();
                 }
             }
+            ViewModel.SafeStateViewModel.ResetDevice();
         }
 
         /// <summary>
@@ -55,7 +57,7 @@ namespace Ev3Controller.Model
                     DeviceViewModel.PortName = Device.Port;
                     DeviceViewModel.DeviceName = Device.Device;
                     DeviceViewModel.CurrentOutput = Device.Power;
-                    DeviceViewModel.IsConnected = true;
+                    DeviceViewModel.IsConnected = Device.IsConnected;
                     DeviceViewModel.CurrentOutputUnit = @"%";
                 }
 #pragma warning disable 168
@@ -107,6 +109,18 @@ namespace Ev3Controller.Model
                 }
 #pragma warning restore
             }
+        }
+
+        /// <summary>
+        /// Set safe state.
+        /// </summary>
+        /// <param name="ViewModel"></param>
+        public void UpdateSafeStateViewModel(Ev3ControllerMainViewModel ViewModel)
+        {
+            var Brick = Ev3Brick.GetInstance();
+            ViewModel.SafeStateViewModel.IsConnected = true;
+            ViewModel.SafeStateViewModel.SafetyState = Brick.State.StateName;
+            ViewModel.SafeStateViewModel.ImageSource = Brick.State.StateImage;
         }
         #endregion
     }

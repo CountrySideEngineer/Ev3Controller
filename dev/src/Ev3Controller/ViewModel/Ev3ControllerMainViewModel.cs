@@ -42,6 +42,27 @@ namespace Ev3Controller.ViewModel
         }
 
         /// <summary>
+        /// View model object about safe state.
+        /// </summary>
+        protected Ev3SafeStateViewModel _SafeStateViewModel;
+        public Ev3SafeStateViewModel SafeStateViewModel
+        {
+            get
+            {
+                if (null == this._SafeStateViewModel)
+                {
+                    this._SafeStateViewModel = new Ev3SafeStateViewModel();
+                }
+                return this._SafeStateViewModel;
+            }
+            set
+            {
+                this._SafeStateViewModel = value;
+                this.RaisePropertyChanged("SafeStateViewModel");
+            }
+        }
+
+        /// <summary>
         /// View model object about motor device connected port A of Brick.
         /// </summary>
         public Ev3MotorDeviceViewModel MotorViewModelA
