@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Ev3Controller.UserControlView"
              mc:Ignorable="d" 
              Background="White"
-             d:DesignHeight="100" d:DesignWidth="80" IsEnabledChanged="UserControl_IsEnabledChanged">
+             d:DesignHeight="100" d:DesignWidth="100" IsEnabledChanged="UserControl_IsEnabledChanged">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

@@ -229,7 +229,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resource\pict\safe_state_attn.png" />
+    <Resource Include="Resource\pict\safe_state_safe.png" />
+    <Resource Include="Resource\pict\safe_state_stop.png" />
+    <Resource Include="Resource\pict\safe_state_unknown.png" />
+    <Resource Include="Resource\pict\safe_state_warn.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\pict\connected.png" />
     <Resource Include="Resource\pict\connecting.png" />

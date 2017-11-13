@@ -45,30 +45,16 @@ namespace Ev3Controller.Model
     public class ConnectState
     {
         #region Private fields and constants (in a region)
-        protected static Dictionary<ConnectionState, BitmapImage> ResourceDictionary = 
-            new Dictionary<ConnectionState, BitmapImage>
+        protected static Dictionary<ConnectionState, string> ResourceDictionary = 
+            new Dictionary<ConnectionState, string>
         {
-            { ConnectionState.Disconnected,
-                new BitmapImage(
-                    new Uri(@"../Resource/pict/disconnected.png", UriKind.Relative)) },
-            { ConnectionState.Disconnecting,
-                new BitmapImage(
-                    new Uri(@"../Resource/pict/disconnecting.png", UriKind.Relative)) },
-            { ConnectionState.Connecting,
-                new BitmapImage(
-                    new Uri(@"../Resource/pict/connecting.png", UriKind.Relative)) },
-            { ConnectionState.Connected,
-                new BitmapImage(
-                    new Uri(@"../Resource/pict/connected.png", UriKind.Relative)) },
-            { ConnectionState.Sending,
-                new BitmapImage(
-                    new Uri(@"../Resource/pict/connected.png", UriKind.Relative)) },
-            { ConnectionState.Receiving,
-                new BitmapImage(
-                    new Uri(@"../Resource/pict/connected.png", UriKind.Relative)) },
-            { ConnectionState.Unknown,
-                new BitmapImage(
-                    new Uri(@"../Resource/pict/disconnected.png", UriKind.Relative)) },
+            { ConnectionState.Disconnected, @"../Resource/pict/disconnected.png" },
+            { ConnectionState.Disconnecting,@"../Resource/pict/disconnecting.png" },
+            { ConnectionState.Connecting, @"../Resource/pict/connecting.png" },
+            { ConnectionState.Connected, @"../Resource/pict/connected.png" },
+            { ConnectionState.Sending, @"../Resource/pict/connected.png" },
+            { ConnectionState.Receiving, @"../Resource/pict/connected.png" },
+            { ConnectionState.Unknown, @"../Resource/pict/disconnected.png" },
         };
         #endregion
 
@@ -93,7 +79,7 @@ namespace Ev3Controller.Model
         /// <summary>
         /// Bitmap image which shows state.
         /// </summary>
-        public BitmapImage StateImage { get; protected set; }
+        public string StateImage { get; protected set; }
         #endregion
 
         #region Other methods and private properties in calling order.

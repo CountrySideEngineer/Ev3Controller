@@ -171,8 +171,8 @@ namespace Ev3Controller.ViewModel
         /// <summary>
         /// Image source for connect state.
         /// </summary>
-        protected BitmapImage _ImageResource;
-        public BitmapImage ImageResource
+        protected string _ImageResource;
+        public string ImageResource
         {
             get
             {
