@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Ev3Controller.Model
 {
@@ -16,6 +17,15 @@ namespace Ev3Controller.Model
             { SAFE_STATE.SAFE_STATE_WARN, "Warning" },
             { SAFE_STATE.SAFE_STATE_STOP, "STOP" },
             { SAFE_STATE.SAFE_STATE_UNKNOWN, "ERROR" },
+        };
+
+        protected static Dictionary<SAFE_STATE, string> SafeStateResourceDictionary = new Dictionary<SAFE_STATE, string>()
+        {
+            { SAFE_STATE.SAFE_STATE_SAFE, @"../Resource/pict/safe_state_safe.png" },
+            { SAFE_STATE.SAFE_STATE_ATTN, @"../Resource/pict/safe_state_attn.png" },
+            { SAFE_STATE.SAFE_STATE_WARN, @"../Resource/pict/safe_state_warn.png" },
+            { SAFE_STATE.SAFE_STATE_STOP, @"../Resource/pict/safe_state_stop.png" },
+            { SAFE_STATE.SAFE_STATE_UNKNOWN, @"../Resource/pict/safe_state_unknown.png" },
         };
         #endregion
 
@@ -53,6 +63,14 @@ namespace Ev3Controller.Model
             {
                 return SafeStateDictionary[this.State];
             }
+        }
+
+        /// <summary>
+        /// Bitmap image which shows state.
+        /// </summary>
+        public string StateImage
+        {
+            get { return SafeState.SafeStateResourceDictionary[this.State]; }
         }
         #endregion
     }
