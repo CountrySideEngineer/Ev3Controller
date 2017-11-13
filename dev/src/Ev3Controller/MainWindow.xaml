@@ -95,6 +95,8 @@
                                   VerticalAlignment="Stretch"
                                   DataContext="{Binding Path=MotorViewModelB}"
                                   IsEnabled="{Binding Path=IsConnected}"
+                                  TargetOutput="{Binding Path=TargetOutput}"
+                                  CurrentOutput="{Binding Path=CurrentOutput}"
                                   />
         <local:Ev3MotorDeviceView x:Name="Ev3MotorDeviceView3"
                                   Grid.Row="1" Grid.RowSpan="1"
@@ -103,6 +105,8 @@
                                   VerticalAlignment="Stretch"
                                   DataContext="{Binding Path=MotorViewModelC}"
                                   IsEnabled="{Binding Path=IsConnected}"
+                                  TargetOutput="{Binding Path=TargetOutput}"
+                                  CurrentOutput="{Binding Path=CurrentOutput}"
                                   />
         <local:Ev3MotorDeviceView x:Name="Ev3MotorDeviceView4"
                                   Grid.Row="1" Grid.RowSpan="1"
@@ -111,6 +115,8 @@
                                   VerticalAlignment="Stretch"
                                   DataContext="{Binding Path=MotorViewModelD}"
                                   IsEnabled="{Binding Path=IsConnected}"
+                                  TargetOutput="{Binding Path=TargetOutput}"
+                                  CurrentOutput="{Binding Path=CurrentOutput}"
                                   />
         <local:Ev3SensorDeviceView x:Name="Ev3SensorDevice1"
                                   Grid.Row="2" Grid.RowSpan="1"
