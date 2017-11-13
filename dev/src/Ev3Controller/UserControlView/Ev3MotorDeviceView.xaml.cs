@@ -161,8 +161,8 @@ namespace Ev3Controller.UserControlView
             protected static Point CalcEndPoint(double Angle, double Radius)
             {
                 double Radian = Math.PI * (Angle + RIGHT_ANGLE) / 180;
-                double x = Radius * Math.Cos(Radian);
-                double y = Radius * Math.Sign(Radian);
+                double x = Radius + Radius * Math.Cos(Radian);
+                double y = Radius + Radius * Math.Sin(Radian);
 
                 return new Point(x, y);
             }
