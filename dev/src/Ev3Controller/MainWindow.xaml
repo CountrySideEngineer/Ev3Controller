@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ev3Controller.UserControlView"
         xmlns:vm="clr-namespace:Ev3Controller.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:Interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+        xmlns:Core="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions" 
+        xmlns:cmd="clr-namespace:Ev3Controller.Command"
         mc:Ignorable="d"
         Background="Black"
-        Title="MainWindow" Height="320" Width="400">
+        Title="MainWindow" Height="316" Width="400">
     <Window.DataContext>
         <vm:Ev3ControllerMainViewModel/>
     </Window.DataContext>
@@ -31,6 +36,20 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+        <i:Interaction.Triggers>
+            <ei:KeyTrigger Key="Up" FiredOn="KeyDown">
+                <cmd:KeyCoordinateAction Command="{Binding Path=KeyboardCommand}"/>
+            </ei:KeyTrigger>
+            <ei:KeyTrigger Key="Down" FiredOn="KeyDown">
+                <cmd:KeyCoordinateAction Command="{Binding Path=KeyboardCommand}"/>
+            </ei:KeyTrigger>
+            <ei:KeyTrigger Key="Right" FiredOn="KeyDown">
+                <cmd:KeyCoordinateAction Command="{Binding Path=KeyboardCommand}"/>
+            </ei:KeyTrigger>
+            <ei:KeyTrigger Key="Left" FiredOn="KeyDown">
+                <cmd:KeyCoordinateAction Command="{Binding Path=KeyboardCommand}"/>
+            </ei:KeyTrigger>
+        </i:Interaction.Triggers>
         <Grid Grid.Column="0" Grid.ColumnSpan="4"
               Grid.Row="0" Grid.RowSpan="1"
               Background="Red">
