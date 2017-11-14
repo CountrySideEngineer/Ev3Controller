@@ -38,7 +38,7 @@ namespace Ev3Controller.ViewModel
 
         /// <summary>
         /// Target steering.
-        /// Positive value means that a vehicle turns left and negative means it turns right.
+        /// Positive value means that a vehicle turns righ and negative means it turns left.
         /// </summary>
         protected int _TargetSteer;
         public int TargetSteer

@@ -402,6 +402,28 @@ namespace Ev3Controller.ViewModel
         {
             Console.WriteLine("KeyboardCommandExecute called");
             Console.WriteLine("KeyCode = {0}", e.Key);
+            switch (e.Key)
+            {
+                case Key.Up:
+                    this.MotorSteerViewModel.TargetMotorOutput++;
+                    break;
+
+                case Key.Down:
+                    this.MotorSteerViewModel.TargetMotorOutput--;
+                    break;
+
+                case Key.Right:
+                    this.MotorSteerViewModel.TargetSteer++;
+                    break;
+
+                case Key.Left:
+                    this.MotorSteerViewModel.TargetSteer--;
+                    break;
+
+                default:
+                    //Nothig to do.
+                    break;
+            }
         }
 
         /// <summary>
