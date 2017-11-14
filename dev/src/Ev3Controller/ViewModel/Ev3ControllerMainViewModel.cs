@@ -296,6 +296,19 @@ namespace Ev3Controller.ViewModel
             }
         }
 
+        protected Ev3MotorSteerViewModel _MotorSteerViewModel;
+        public Ev3MotorSteerViewModel MotorSteerViewModel
+        {
+            get
+            {
+                if (null == this._MotorSteerViewModel)
+                {
+                    this._MotorSteerViewModel = new Ev3MotorSteerViewModel();
+                }
+                return this._MotorSteerViewModel;
+            }
+        }
+
 
         #endregion
 
@@ -388,6 +401,7 @@ namespace Ev3Controller.ViewModel
         public void KeyboardCommandExecute(KeyEventArgs e)
         {
             Console.WriteLine("KeyboardCommandExecute called");
+            Console.WriteLine("KeyCode = {0}", e.Key);
         }
 
         /// <summary>
