@@ -9,7 +9,7 @@ namespace Ev3Controller.ViewModel
     public class Ev3MotorSteerViewModel : ViewModelBase
     {
         #region
-        Ev3MotorSteerViewModel()
+        public Ev3MotorSteerViewModel()
         {
             this.TargetMotorOutput = 0;
             this.TargetSteer = 0;
