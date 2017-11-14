@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.ViewModel
 {
+    using Command;
     using Ev3Controller.Model;
     using System.Timers;
+    using System.Windows.Input;
 
     public class Ev3ControllerMainViewModel : ViewModelBase
     {
@@ -278,6 +280,36 @@ namespace Ev3Controller.ViewModel
             }
             set { this._UpdateTimer = value; }
         }
+
+        protected ICommand _KeyboardCommand;
+        public ICommand KeyboardCommand
+        {
+            get
+            {
+                if (null == this._KeyboardCommand)
+                {
+                    this._KeyboardCommand = 
+                        new DelegateCommand<KeyEventArgs>(
+                            this.KeyboardCommandExecute, this.CanKeyboardCommandExecute);
+                }
+                return this._KeyboardCommand;
+            }
+        }
+
+        protected Ev3MotorSteerViewModel _MotorSteerViewModel;
+        public Ev3MotorSteerViewModel MotorSteerViewModel
+        {
+            get
+            {
+                if (null == this._MotorSteerViewModel)
+                {
+                    this._MotorSteerViewModel = new Ev3MotorSteerViewModel();
+                }
+                return this._MotorSteerViewModel;
+            }
+        }
+
+
         #endregion
 
         #region Other methods and private properties in calling order
@@ -360,6 +392,50 @@ namespace Ev3Controller.ViewModel
                 this.UpdateTimer.Stop();
                 this.UpdateTimer.Elapsed -= ResetTimerEvent;//Remove ResetTimerEvent from Timer object itself.
             }
+        }
+
+        /// <summary>
+        /// Command executed when keyboard key pushed.
+        /// </summary>
+        /// <param name="e"></param>
+        public void KeyboardCommandExecute(KeyEventArgs e)
+        {
+            Console.WriteLine("KeyboardCommandExecute called");
+            Console.WriteLine("KeyCode = {0}", e.Key);
+            switch (e.Key)
+            {
+                case Key.Up:
+                    this.MotorSteerViewModel.TargetMotorOutput++;
+                    break;
+
+                case Key.Down:
+                    this.MotorSteerViewModel.TargetMotorOutput--;
+                    break;
+
+                case Key.Right:
+                    this.MotorSteerViewModel.TargetSteer++;
+                    break;
+
+                case Key.Left:
+                    this.MotorSteerViewModel.TargetSteer--;
+                    break;
+
+                default:
+                    //Nothig to do.
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Returns whether the KeyboardCommandExecute can execute or not.
+        /// If Ev3 is connected, this function returns true, otherwise returns
+        /// false.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public bool CanKeyboardCommandExecute(object obj)
+        {
+            return this.PortViewModel.IsConnected;
         }
         #endregion
     }

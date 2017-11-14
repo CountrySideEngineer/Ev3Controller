@@ -16,6 +16,11 @@ namespace Ev3Controller.Command
         protected Action _Execute;
 
         /// <summary>
+        /// Body of command operation with argument.
+        /// </summary>
+        protected Action<object> _ExecuteObj;
+        
+        /// <summary>
         /// Shows whether the command can execute or not.
         /// </summary>
         protected Func<bool> _CanExecute;
@@ -39,6 +44,20 @@ namespace Ev3Controller.Command
                 throw new ArgumentNullException("_CanExecute");
             }
             this._Execute = _Execute;
+            this._CanExecute = _CanExecute;
+        }
+        public DelegateCommand(Action<object> _ExecuteObj) : this(_ExecuteObj, () => true) { }
+        public DelegateCommand(Action<object> _ExecuteObj, Func<bool> _CanExecute)
+        {
+            if (null == _Execute)
+            {
+                throw new ArgumentNullException("_ExecuteObj");
+            }
+            if (null == _CanExecute)
+            {
+                throw new ArgumentNullException("_CanExecute");
+            }
+            this._ExecuteObj = _ExecuteObj;
             this._CanExecute = _CanExecute;
         }
         #endregion
@@ -72,6 +91,44 @@ namespace Ev3Controller.Command
         void ICommand.Execute(object parameter)
         {
             this._Execute();
+        }
+        #endregion
+    }
+
+    public class DelegateCommand<T> : ICommand
+    {
+        #region Private fields and constants
+        private readonly Action<T> _Execute;
+        private readonly Predicate<object> _CanExecute;
+        #endregion
+
+        #region Event
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+        #endregion
+
+        public bool CanExecute(object parameter)
+        {
+            return this._CanExecute == null ? true : this._CanExecute(parameter);
+        }
+
+        public void Execute(object parameter)
+        {
+            this._Execute((T)parameter);
+        }
+
+        #region Constructors and the Finalizer
+        public DelegateCommand(Action<T> _Execute, Predicate<object> _CanExecute)
+        {
+            if (null == _Execute)
+            {
+                throw new ArgumentNullException("_Execute");
+            }
+            this._Execute = _Execute;
+            this._CanExecute = _CanExecute;
         }
         #endregion
     }
