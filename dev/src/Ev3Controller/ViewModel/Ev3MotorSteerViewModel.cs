@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ev3Controller.ViewModel
 {
-    public class MotorSteerViewModel : ViewModelBase
+    public class Ev3MotorSteerViewModel : ViewModelBase
     {
         #region
-        MotorSteerViewModel()
+        Ev3MotorSteerViewModel()
         {
             this.TargetMotorOutput = 0;
             this.TargetSteer = 0;
