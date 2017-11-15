@@ -150,6 +150,7 @@
     <Compile Include="Model\Power.cs" />
     <Compile Include="Model\SafeState.cs" />
     <Compile Include="Model\SequenceChangedEventArgs.cs" />
+    <Compile Include="Model\TargetOutput.cs" />
     <Compile Include="UserControlView\Ev3MotorDeviceView.xaml.cs">
       <DependentUpon>Ev3MotorDeviceView.xaml</DependentUpon>
     </Compile>
@@ -161,6 +162,9 @@
     </Compile>
     <Compile Include="UserControlView\Ev3SensorDeviceView.xaml.cs">
       <DependentUpon>Ev3SensorDeviceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlView\Ev3TargetOutputView.xaml.cs">
+      <DependentUpon>Ev3TargetOutputView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\Ev3Utility.cs" />
     <Compile Include="ViewModel\ComPortViewModel.cs" />
@@ -206,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlView\Ev3SensorDeviceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlView\Ev3TargetOutputView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
