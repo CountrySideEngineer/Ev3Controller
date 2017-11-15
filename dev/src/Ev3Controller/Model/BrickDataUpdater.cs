@@ -133,6 +133,16 @@ namespace Ev3Controller.Model
             var Brick = Ev3Brick.GetInstance();
             Brick.Output.MotorOutput = ViewModel.MotorSteerViewModel.TargetMotorOutput;
             Brick.Output.Steering = ViewModel.MotorSteerViewModel.TargetSteer;
+
+            foreach (Ev3MotorDeviceViewModel MotorDeviceViewModel in
+                ViewModel.MotorViewModelArray)
+            {
+                if (MotorDeviceViewModel.IsConnected)
+                {
+                    MotorDeviceViewModel.TargetOutput = 
+                        Math.Abs(ViewModel.MotorSteerViewModel.TargetMotorOutput);
+                }
+            }
         }
         #endregion
     }
