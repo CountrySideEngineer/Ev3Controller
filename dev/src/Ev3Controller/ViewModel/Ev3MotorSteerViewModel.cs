@@ -28,7 +28,7 @@ namespace Ev3Controller.ViewModel
             get { return this._TargetMotorOutput; }
             set
             {
-                if ((this._TargetMotorOutput < -100) || (this._TargetMotorOutput < 100))
+                if ((this._TargetMotorOutput <= -100) || (this._TargetMotorOutput <= 100))
                 {
                     this._TargetMotorOutput = value;
                     this.RaisePropertyChanged("TargetMotorOutput");
@@ -46,7 +46,7 @@ namespace Ev3Controller.ViewModel
             get { return this._TargetSteer; }
             set
             {
-                if ((this._TargetSteer < -100) || (this._TargetSteer < 100))
+                if ((this._TargetSteer <= -100) || (this._TargetSteer <= 100))
                 {
                     this._TargetSteer = value;
                     this.RaisePropertyChanged("TargetSteer");
