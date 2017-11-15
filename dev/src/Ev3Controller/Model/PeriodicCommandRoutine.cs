@@ -19,6 +19,7 @@ namespace Ev3Controller.Model
             this.CommandQueue = new Queue<ACommand>();
             this.CommandQueue.Enqueue(new Command_06_00());
             this.CommandQueue.Enqueue(new Command_0C_00());
+            this.CommandQueue.Enqueue(new Command_12_00());
             this.CommandQueue.Enqueue(new Command_10_01());
             this.CommandQueue.Enqueue(new Command_F0_00());
         }
@@ -38,7 +39,15 @@ namespace Ev3Controller.Model
             foreach (ACommand Command in this.CommandQueue)
             {
                 Thread.Sleep(1);
-                Sequence.SendAndRecvRoutine(ComPortAcc, Command);
+                Command.UpdateCmdData();
+                try
+                {
+                    Sequence.SendAndRecvRoutine(ComPortAcc, Command);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
 
             return false;

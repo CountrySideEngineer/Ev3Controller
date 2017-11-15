@@ -115,6 +115,7 @@
     <Compile Include="Model\BrickUpdater_0E_00.cs" />
     <Compile Include="Model\BrickUpdater_10_00.cs" />
     <Compile Include="Model\BrickUpdater_10_01.cs" />
+    <Compile Include="Model\BrickUpdater_12_00.cs" />
     <Compile Include="Model\BrickUpdater_20_00.cs" />
     <Compile Include="Model\BrickUpdater_20_01.cs" />
     <Compile Include="Model\BrickUpdater_30_00.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Model\Power.cs" />
     <Compile Include="Model\SafeState.cs" />
     <Compile Include="Model\SequenceChangedEventArgs.cs" />
+    <Compile Include="Model\TargetOutput.cs" />
     <Compile Include="UserControlView\Ev3MotorDeviceView.xaml.cs">
       <DependentUpon>Ev3MotorDeviceView.xaml</DependentUpon>
     </Compile>
@@ -161,6 +163,9 @@
     </Compile>
     <Compile Include="UserControlView\Ev3SensorDeviceView.xaml.cs">
       <DependentUpon>Ev3SensorDeviceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlView\Ev3TargetOutputView.xaml.cs">
+      <DependentUpon>Ev3TargetOutputView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Util\Ev3Utility.cs" />
     <Compile Include="ViewModel\ComPortViewModel.cs" />
@@ -185,6 +190,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resource\TextBlockStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resource\TextBoxStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlView\Ev3SensorDeviceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlView\Ev3TargetOutputView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
