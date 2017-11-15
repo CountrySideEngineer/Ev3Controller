@@ -115,6 +115,7 @@
     <Compile Include="Model\BrickUpdater_0E_00.cs" />
     <Compile Include="Model\BrickUpdater_10_00.cs" />
     <Compile Include="Model\BrickUpdater_10_01.cs" />
+    <Compile Include="Model\BrickUpdater_12_00.cs" />
     <Compile Include="Model\BrickUpdater_20_00.cs" />
     <Compile Include="Model\BrickUpdater_20_01.cs" />
     <Compile Include="Model\BrickUpdater_30_00.cs" />
