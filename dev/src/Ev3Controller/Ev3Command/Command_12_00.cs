@@ -56,7 +56,8 @@ namespace Ev3Controller.Ev3Command
             {
                 var Brick = Ev3Brick.GetInstance();
                 byte Output = Convert.ToByte(Math.Abs(Brick.Output.MotorOutput));
-                CommandParam = new CommandParam_12_00(Output, 0);
+                byte Direction = (byte)(Brick.Output.MotorOutput > 0 ? 1 : 0);
+                CommandParam = new CommandParam_12_00(Output, Direction);
             }
             this.SetUp(CommandParam);
         }
