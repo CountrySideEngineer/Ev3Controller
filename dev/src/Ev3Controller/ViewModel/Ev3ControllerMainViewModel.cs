@@ -435,7 +435,8 @@ namespace Ev3Controller.ViewModel
         /// <returns></returns>
         public bool CanKeyboardCommandExecute(object obj)
         {
-            return this.PortViewModel.IsConnected;
+            //return this.PortViewModel.IsConnected;
+            return true;
         }
         #endregion
     }

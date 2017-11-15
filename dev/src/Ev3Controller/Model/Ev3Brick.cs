@@ -64,6 +64,20 @@ namespace Ev3Controller.Model
             set { this._State = value; }
         }
 
+        protected TargetOutput _Output;
+        public TargetOutput Output
+        {
+            get
+            {
+                if (null == this._Output)
+                {
+                    this._Output = new TargetOutput();
+                }
+                return this._Output;
+            }
+            set { this._Output = value; }
+        }
+
         /// <summary>
         /// Application version running on Ev3.
         /// </summary>
