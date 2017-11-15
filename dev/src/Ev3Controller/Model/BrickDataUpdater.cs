@@ -19,6 +19,7 @@ namespace Ev3Controller.Model
             this.UpdateMotorViewModel(ViewModel);
             this.UpdateSensorViewModel(ViewModel);
             this.UpdateSafeStateViewModel(ViewModel);
+            this.UpdateTargetMotor(ViewModel);
         }
 
         /// <summary>
@@ -121,6 +122,27 @@ namespace Ev3Controller.Model
             ViewModel.SafeStateViewModel.IsConnected = true;
             ViewModel.SafeStateViewModel.SafetyState = Brick.State.StateName;
             ViewModel.SafeStateViewModel.ImageSource = Brick.State.StateImage;
+        }
+
+        /// <summary>
+        /// Set target motor and steering value to Ev3Brick instance.
+        /// </summary>
+        /// <param name="ViewModel"></param>
+        public void UpdateTargetMotor(Ev3ControllerMainViewModel ViewModel)
+        {
+            var Brick = Ev3Brick.GetInstance();
+            Brick.Output.MotorOutput = ViewModel.MotorSteerViewModel.TargetMotorOutput;
+            Brick.Output.Steering = ViewModel.MotorSteerViewModel.TargetSteer;
+
+            foreach (Ev3MotorDeviceViewModel MotorDeviceViewModel in
+                ViewModel.MotorViewModelArray)
+            {
+                if (MotorDeviceViewModel.IsConnected)
+                {
+                    MotorDeviceViewModel.TargetOutput = 
+                        Math.Abs(ViewModel.MotorSteerViewModel.TargetMotorOutput);
+                }
+            }
         }
         #endregion
     }
