@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ev3Controller.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,6 +48,17 @@ namespace Ev3Controller.Ev3Command
             this.CmdData[DataIndex++] = this.CmdLen;
             this.CmdData[DataIndex++] = (CommandParam as CommandParam_12_00).Power;
             this.CmdData[DataIndex] = (CommandParam as CommandParam_12_00).Direction;
+        }
+
+        public override void UpdateCmdData(ICommandParam CommandParam = null)
+        {
+            if (null == CommandParam)
+            {
+                var Brick = Ev3Brick.GetInstance();
+                byte Output = Convert.ToByte(Math.Abs(Brick.Output.MotorOutput));
+                CommandParam = new CommandParam_12_00(Output, 0);
+            }
+            this.SetUp(CommandParam);
         }
 
         protected override void CheckParam() { }

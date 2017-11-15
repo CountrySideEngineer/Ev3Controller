@@ -121,6 +121,11 @@ namespace Ev3Controller.Ev3Command
         protected abstract void SetUp(ICommandParam CommandParam);
 
         /// <summary>
+        /// Update command parameter to send.
+        /// </summary>
+        public virtual void UpdateCmdData(ICommandParam CommandParam = null) { }
+
+        /// <summary>
         /// Check response data.
         /// </summary>
         public void Check()
