@@ -322,6 +322,7 @@ namespace Ev3Controller.ViewModel
                 var Arg = e as ConnectStateChangedEventArgs;
                 if (Arg.NewValue.State.Equals(ConnectionState.Connected))
                 {
+                    Ev3Brick.ResetInstance();
                     this.UpdateTimer.Elapsed += (send_source, arg_data) =>
                     {
                         try
@@ -346,6 +347,7 @@ namespace Ev3Controller.ViewModel
                         this.UpdateTimer.Elapsed += this.ResetTimerEvent;
                         this.UpdateTimer.Interval = 1;
                         this.UpdateTimer.Start();
+                        Ev3Brick.ResetInstance();
                     }
                     catch (NullReferenceException ex)
                     {
