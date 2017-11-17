@@ -422,6 +422,14 @@ namespace Ev3Controller.ViewModel
                     this.MotorSteerViewModel.TargetSteer--;
                     break;
 
+                case Key.Space:
+                    this.MotorSteerViewModel.TargetMotorOutput = 0;
+                    break;
+
+                case Key.Enter:
+                    this.MotorSteerViewModel.TargetSteer = 0;
+                    break;
+
                 default:
                     //Nothig to do.
                     break;
