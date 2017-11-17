@@ -43,7 +43,8 @@ namespace Ev3Controller.Model
                 int DataTopIndex = 4;
                 for (Index = 0; Index < 4; Index++)
                 {
-                    Brick.SensorDevice(Index).ConnectedPort = (Ev3Device.INPORT)Index;
+                    var Device = Brick.SensorDevice(Index);
+                    Device.ConnectedPort = (Ev3Device.INPORT)Index;
 
                     DEVICE_TYPE DeviceType = DEVICE_TYPE.SENSOR_DEVICE_NO_DEVICE;
                     byte Type = Command.ResData[DataTopIndex + Index];
@@ -56,7 +57,7 @@ namespace Ev3Controller.Model
                     {
                         DeviceType = DEVICE_TYPE.SENSOR_DEVICE_UNKNOWN;
                     }
-                    Brick.SensorDevice(Index).DeviceType = DeviceType;
+                    Device.DeviceType = DeviceType;
                     switch (DeviceType)
                     {
                         case DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC:
@@ -65,11 +66,11 @@ namespace Ev3Controller.Model
                         case DEVICE_TYPE.SENSOR_DEVICE_COLOR:
                         case DEVICE_TYPE.SENSOR_DEVICE_HT_NXT_ACCEL:
                         case DEVICE_TYPE.SENSOR_DEVICE_NXT_TEMP:
-                            Brick.SensorDevice(Index).IsConnected = true;
+                            Device.IsConnected = true;
                             break;
 
                         default:
-                            Brick.SensorDevice(Index).IsConnected = false;
+                            Device.IsConnected = false;
                             break;
                     }
                 }
