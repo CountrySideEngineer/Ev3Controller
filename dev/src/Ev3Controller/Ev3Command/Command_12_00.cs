@@ -50,6 +50,10 @@ namespace Ev3Controller.Ev3Command
             this.CmdData[DataIndex] = (CommandParam as CommandParam_12_00).Direction;
         }
 
+        /// <summary>
+        /// Update command param, motor output.
+        /// </summary>
+        /// <param name="CommandParam"></param>
         public override void UpdateCmdData(ICommandParam CommandParam = null)
         {
             if (null == CommandParam)
