@@ -22,6 +22,7 @@ namespace Ev3Controller.Model
                 new { Cmd = 0x10, Sub = 0x00, Updater = ((new BrickUpdater_10_00()) as BrickUpdater) },
                 new { Cmd = 0x10, Sub = 0x01, Updater = ((new BrickUpdater_10_01()) as BrickUpdater) },
                 new { Cmd = 0x12, Sub = 0x00, Updater = ((new BrickUpdater_12_00()) as BrickUpdater) },
+                new { Cmd = 0x16, Sub = 0x00, Updater = ((new BrickUpdater_16_00()) as BrickUpdater) },
                 new { Cmd = 0x20, Sub = 0x00, Updater = ((new BrickUpdater_20_00()) as BrickUpdater) },
                 new { Cmd = 0x20, Sub = 0x01, Updater = ((new BrickUpdater_20_01()) as BrickUpdater) },
                 new { Cmd = 0x30, Sub = 0x00, Updater = ((new BrickUpdater_30_00()) as BrickUpdater) },

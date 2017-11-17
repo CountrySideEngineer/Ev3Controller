@@ -126,6 +126,7 @@
     <Compile Include="Model\BrickUpdater_50_01.cs" />
     <Compile Include="Model\BrickUpdater_A0_00.cs" />
     <Compile Include="Model\BrickUpdater_F0_00.cs" />
+    <Compile Include="Model\BrickUpdater_16_00.cs" />
     <Compile Include="Model\CommandRoutine.cs" />
     <Compile Include="Model\ComPort.cs" />
     <Compile Include="Model\ComPortAccess.cs" />
