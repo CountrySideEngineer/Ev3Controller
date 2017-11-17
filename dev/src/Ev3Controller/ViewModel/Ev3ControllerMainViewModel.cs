@@ -322,6 +322,7 @@ namespace Ev3Controller.ViewModel
                 var Arg = e as ConnectStateChangedEventArgs;
                 if (Arg.NewValue.State.Equals(ConnectionState.Connected))
                 {
+                    Ev3Brick.ResetInstance();
                     this.UpdateTimer.Elapsed += (send_source, arg_data) =>
                     {
                         try
@@ -346,6 +347,7 @@ namespace Ev3Controller.ViewModel
                         this.UpdateTimer.Elapsed += this.ResetTimerEvent;
                         this.UpdateTimer.Interval = 1;
                         this.UpdateTimer.Start();
+                        Ev3Brick.ResetInstance();
                     }
                     catch (NullReferenceException ex)
                     {
@@ -420,6 +422,14 @@ namespace Ev3Controller.ViewModel
                     this.MotorSteerViewModel.TargetSteer--;
                     break;
 
+                case Key.Space:
+                    this.MotorSteerViewModel.TargetMotorOutput = 0;
+                    break;
+
+                case Key.Enter:
+                    this.MotorSteerViewModel.TargetSteer = 0;
+                    break;
+
                 default:
                     //Nothig to do.
                     break;
@@ -435,8 +445,7 @@ namespace Ev3Controller.ViewModel
         /// <returns></returns>
         public bool CanKeyboardCommandExecute(object obj)
         {
-            //return this.PortViewModel.IsConnected;
-            return true;
+            return this.PortViewModel.IsConnected;
         }
         #endregion
     }

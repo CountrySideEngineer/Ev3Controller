@@ -20,6 +20,7 @@ namespace Ev3Controller.Model
             this.CommandQueue.Enqueue(new Command_06_00());
             this.CommandQueue.Enqueue(new Command_0C_00());
             this.CommandQueue.Enqueue(new Command_12_00());
+            this.CommandQueue.Enqueue(new Command_16_00());
             this.CommandQueue.Enqueue(new Command_10_01());
             this.CommandQueue.Enqueue(new Command_F0_00());
         }

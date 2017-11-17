@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ev3Controller.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,7 +45,7 @@ namespace Ev3Controller.Ev3Command
 
             this.Res = 0x17;
             this.SubRes = 0x00;
-            this.ResLen = 0x01;
+            this.ResLen = 0x00;
 
             base.Init();
         }
@@ -70,6 +71,20 @@ namespace Ev3Controller.Ev3Command
             }
         }
 
+        /// <summary>
+        /// Update command param, steering output value.
+        /// </summary>
+        /// <param name="CommandParam">CommandParam object contains Steering value to set.</param>
+        public override void UpdateCmdData(ICommandParam CommandParam = null)
+        {
+            if (null == CommandParam)
+            {
+                var Brick = Ev3Brick.GetInstance();
+                int Steer = Brick.Output.Steering;
+                CommandParam = new CommandParam_16_00(Steer);
+            }
+            this.SetUp(CommandParam);
+        }
         protected override void CheckParam() { }
         #endregion
 
