@@ -323,19 +323,8 @@ namespace Ev3Controller.ViewModel
                 if (Arg.NewValue.State.Equals(ConnectionState.Connected))
                 {
                     Ev3Brick.ResetInstance();
-                    this.UpdateTimer.Elapsed += (send_source, arg_data) =>
-                    {
-                        try
-                        {
-                            this.UpdateTimer.Stop();
-                            var Updater = new BrickDataUpdater();
-                            Updater.UpdateViewModel(this);
-                        }
-                        finally
-                        {
-                            this.UpdateTimer.Start();
-                        }
-                    };
+                    this.UpdateTimer.Interval = 50;
+                    this.UpdateTimer.Elapsed += UpdateTimerEvent;
                     this.UpdateTimer.Start();
                 }
                 else if (Arg.NewValue.State.Equals(ConnectionState.Disconnected))
@@ -345,7 +334,7 @@ namespace Ev3Controller.ViewModel
                         this.UpdateTimer.Stop();
                         this.UpdateTimer.Elapsed -= this.UpdateTimerEvent;
                         this.UpdateTimer.Elapsed += this.ResetTimerEvent;
-                        this.UpdateTimer.Interval = 1;
+                        this.UpdateTimer.Interval = 100;
                         this.UpdateTimer.Start();
                         Ev3Brick.ResetInstance();
                     }

@@ -31,11 +31,11 @@ namespace Ev3Controller.Model
                     int DataIndex = DataTopIndex + (Index * 2);
                     byte Port = Command.ResData[DataIndex++];
                     byte Color = Command.ResData[DataIndex];
-                    Brick.SensorDevice(Port).ConnectedPort = (Ev3SensorDevice.INPORT)Port;
-                    Brick.SensorDevice(Port).IsConnected = true;
-                    Brick.SensorDevice(Port).Value2 = Color;
-                    Brick.SensorDevice(Port).DeviceType =
-                        Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_COLOR;
+                    var Device = Brick.SensorDevice(Port);
+                    Device.ConnectedPort = (Ev3SensorDevice.INPORT)Port;
+                    Device.IsConnected = true;
+                    Device.Value2 = Color;
+                    Device.DeviceType = Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_COLOR;
                 }
             }
         }
