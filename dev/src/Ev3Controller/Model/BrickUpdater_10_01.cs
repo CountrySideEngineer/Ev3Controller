@@ -29,7 +29,7 @@ namespace Ev3Controller.Model
                 {
                     int DataIndex = DataTopIndex + Index * 2;
                     byte Connection = Command.ResData[DataIndex++];
-                    byte Power = Command.ResData[DataIndex];
+                    int Power = (int)((sbyte)(Command.ResData[DataIndex]));
 
                     var Device = Brick.MotorDevice(Index);
                     Device.ConnectedPort = (Ev3Device.OUTPORT)Index;
