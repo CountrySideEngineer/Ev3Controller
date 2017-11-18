@@ -82,7 +82,7 @@
               IsEnabled="{Binding Path=IsConnected}"
               Width="80"
               Height="{Binding ElementName=ForegroundBar_TargetOutput, Path=Width}"
-              Stroke="#33BFDB" StrokeThickness="5"/>
+              StrokeThickness="5"/>
         <Path x:Name="BackgroundBar_TargetOutput"
               Grid.Column="0" Grid.ColumnSpan="4"
               Grid.Row="2" Grid.RowSpan="4"
@@ -98,7 +98,7 @@
               IsEnabled="{Binding Path=IsConnected}"
               Width="70"
               Height="{Binding ElementName=ForegroundBar_CurrentOutput, Path=Width}"
-              Stroke="#5EBABA" StrokeThickness="5"/>
+              StrokeThickness="5"/>
         <Path x:Name="BackgroundBar_CurrentOutput"
               Grid.Column="0" Grid.ColumnSpan="4"
               Grid.Row="2" Grid.RowSpan="4"
