@@ -139,8 +139,7 @@ namespace Ev3Controller.Model
             {
                 if (MotorDeviceViewModel.IsConnected)
                 {
-                    MotorDeviceViewModel.TargetOutput = 
-                        Math.Abs(ViewModel.MotorSteerViewModel.TargetMotorOutput);
+                    MotorDeviceViewModel.TargetOutput = ViewModel.MotorSteerViewModel.TargetMotorOutput;
                 }
             }
         }

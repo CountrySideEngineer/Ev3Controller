@@ -44,8 +44,18 @@ namespace Ev3Controller.UserControlView
         {
             var DstView = d as Ev3MotorDeviceView;
             double NewValue = (double)e.NewValue;
-            CircleProgressBar.SetValue(ref DstView.ForegroundBar_CurrentOutput, NewValue, true);
-            CircleProgressBar.SetValue(ref DstView.BackgroundBar_CurrentOutput, NewValue, false);
+            double NewValueAbs = Math.Abs(NewValue);
+            CircleProgressBar.SetValue(ref DstView.ForegroundBar_CurrentOutput, NewValueAbs, true);
+            CircleProgressBar.SetValue(ref DstView.BackgroundBar_CurrentOutput, NewValueAbs, false);
+
+            if (NewValue > 0)
+            {
+                DstView.ForegroundBar_CurrentOutput.Stroke = new SolidColorBrush(Colors.DeepSkyBlue);
+            }
+            else
+            {
+                DstView.ForegroundBar_CurrentOutput.Stroke = new SolidColorBrush(Colors.DeepPink);
+            }
         }
 
         public static readonly DependencyProperty CurrentOutputProperty = 
@@ -65,8 +75,18 @@ namespace Ev3Controller.UserControlView
         {
             var DstView = d as Ev3MotorDeviceView;
             double NewValue = (double)e.NewValue;
-            CircleProgressBar.SetValue(ref DstView.ForegroundBar_TargetOutput, NewValue, true);
-            CircleProgressBar.SetValue(ref DstView.BackgroundBar_TargetOutput, NewValue, false);
+            double NewValueAbs = Math.Abs(NewValue);
+            CircleProgressBar.SetValue(ref DstView.ForegroundBar_TargetOutput, NewValueAbs, true);
+            CircleProgressBar.SetValue(ref DstView.BackgroundBar_TargetOutput, NewValueAbs, false);
+
+            if (NewValue > 0)
+            {
+                DstView.ForegroundBar_TargetOutput.Stroke = new SolidColorBrush(Colors.DodgerBlue);
+            }
+            else
+            {
+                DstView.ForegroundBar_TargetOutput.Stroke = new SolidColorBrush(Colors.Fuchsia);
+            }
         }
         #endregion
 
