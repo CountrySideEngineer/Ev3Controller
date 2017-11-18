@@ -33,11 +33,11 @@ namespace Ev3Controller.Model
                     short Velocity = (short)
                         ((ushort)Command.ResData[DataIndex] +
                         (((ushort)Command.ResData[DataIndex + 1]) << 8));
-                    Brick.SensorDevice(Port).ConnectedPort = (Ev3Device.INPORT)Port;
-                    Brick.SensorDevice(Port).IsConnected = true;
-                    Brick.SensorDevice(Port).Value2 = Velocity;
-                    Brick.SensorDevice(Port).DeviceType =
-                        Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_GYRO;
+                    var Device = Brick.SensorDevice(Port);
+                    Device.ConnectedPort = (Ev3Device.INPORT)Port;
+                    Device.IsConnected = true;
+                    Device.Value2 = Velocity;
+                    Device.DeviceType = Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_GYRO;
                 }
             }
         }

@@ -12,7 +12,7 @@
         xmlns:cmd="clr-namespace:Ev3Controller.Command"
         mc:Ignorable="d"
         Background="Black"
-        Title="MainWindow" Height="316" Width="400">
+        Title="MainWindow" Height="280" Width="400">
     <Window.DataContext>
         <vm:Ev3ControllerMainViewModel/>
     </Window.DataContext>
@@ -29,7 +29,6 @@
             <RowDefinition Height="32"/>
             <RowDefinition Height="120"/>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -86,24 +85,6 @@
                            VerticalContentAlignment="Stretch"
                            DataContext="{Binding Path=PortViewModel}"
                            />
-        </Grid>
-        <Grid Grid.Row="3" Grid.RowSpan="1"
-            Grid.Column="0" Grid.ColumnSpan="4">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="32"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="32"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <local:Ev3SafeStateView x:Name="Ev3SafeStateView"
-                                    Grid.Row="1" Grid.RowSpan="1"
-                                    Grid.Column="0" Grid.ColumnSpan="1"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch"
-                                    DataContext="{Binding Path=SafeStateViewModel}"
-                                    IsEnabled="{Binding Path=IsConnected}"
-                                    />
         </Grid>
         <local:Ev3MotorDeviceView x:Name="Ev3MotorDeviceView1"
                                   Grid.Row="1" Grid.RowSpan="1"

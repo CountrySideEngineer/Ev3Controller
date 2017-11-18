@@ -47,8 +47,9 @@ namespace Ev3Controller.Ev3Command
                         "InvalidConnectState",
                         this.Cmd, this.SubCmd, this.Name);
                 }
-                byte MotorOutput = this.ResData[DataIndex++];
-                if (0x64 < MotorOutput)
+
+                int MotorOutput = Convert.ToInt32((sbyte)this.ResData[DataIndex++]);
+                if ((MotorOutput < -100) || (100 < MotorOutput))
                 {
                     throw new CommandOperationException(
                         "InvalidMotorPower",
