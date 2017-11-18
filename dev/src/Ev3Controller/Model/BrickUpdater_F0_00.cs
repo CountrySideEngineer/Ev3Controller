@@ -84,11 +84,11 @@ namespace Ev3Controller.Model
                     ((ushort)Command.ResData[StartIndex + 2] +
                     (((ushort)Command.ResData[StartIndex + 3]) << 8));
                 byte IsListen = Command.ResData[StartIndex + 4];
-                Brick.SensorDevice(Port).Value1 = Distance;
-                Brick.SensorDevice(Port).Value2 = IsListen;
-                Brick.SensorDevice(Port).Value3 = 0;
-                Brick.SensorDevice(Port).DeviceType =
-                    Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC;
+                var Device = Brick.SensorDevice(Port);
+                Device.Value1 = Distance;
+                Device.Value2 = IsListen;
+                Device.Value3 = 0;
+                Device.DeviceType = Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_ULTRASONIC;
 
                 return (base.Update(Command, Brick, Port, StartIndex) + 3);
             }
@@ -97,11 +97,11 @@ namespace Ev3Controller.Model
         {
             public override int Update(ACommand Command, Ev3Brick Brick, int Port, int StartIndex)
             {
-                Brick.SensorDevice(Port).Value1 = Command.ResData[StartIndex + 2];
-                Brick.SensorDevice(Port).Value2 = Command.ResData[StartIndex + 3];
-                Brick.SensorDevice(Port).Value3 = Command.ResData[StartIndex + 4];
-                Brick.SensorDevice(Port).DeviceType =
-                    Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_COLOR;
+                var Device = Brick.SensorDevice(Port);
+                Device.Value1 = Command.ResData[StartIndex + 2];
+                Device.Value2 = Command.ResData[StartIndex + 3];
+                Device.Value3 = Command.ResData[StartIndex + 4];
+                Device.DeviceType = Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_COLOR;
 
                 return (base.Update(Command, Brick, Port, StartIndex) + 3);
             }
@@ -110,11 +110,11 @@ namespace Ev3Controller.Model
         {
             public override int Update(ACommand Command, Ev3Brick Brick, int Port, int StartIndex)
             {
-                Brick.SensorDevice(Port).Value1 = Command.ResData[StartIndex + 2];
-                Brick.SensorDevice(Port).Value2 = 0;
-                Brick.SensorDevice(Port).Value3 = 0;
-                Brick.SensorDevice(Port).DeviceType =
-                    Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_TOUCH;
+                var Device = Brick.SensorDevice(Port);
+                Device.Value1 = Command.ResData[StartIndex + 2];
+                Device.Value2 = 0;
+                Device.Value3 = 0;
+                Device.DeviceType = Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_TOUCH;
 
                 return (base.Update(Command, Brick, Port, StartIndex) + 1);
             }
@@ -130,11 +130,11 @@ namespace Ev3Controller.Model
                     ((ushort)Command.ResData[StartIndex + 4] +
                     (((ushort)Command.ResData[StartIndex + 5]) << 8));
 
-                Brick.SensorDevice(Port).Value1 = Angle;
-                Brick.SensorDevice(Port).Value2 = Speed;
-                Brick.SensorDevice(Port).Value3 = 0;
-                Brick.SensorDevice(Port).DeviceType =
-                    Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_GYRO;
+                var Device = Brick.SensorDevice(Port);
+                Device.Value1 = Angle;
+                Device.Value2 = Speed;
+                Device.Value3 = 0;
+                Device.DeviceType = Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_GYRO;
 
                 return (base.Update(Command, Brick, Port, StartIndex) + 4);
             }

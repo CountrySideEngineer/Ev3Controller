@@ -28,11 +28,16 @@ namespace Ev3Controller.ViewModel
             get { return this._TargetMotorOutput; }
             set
             {
-                if ((this._TargetMotorOutput <= -100) || (this._TargetMotorOutput <= 100))
+                this._TargetMotorOutput = value;
+                if (this._TargetMotorOutput < -100)
                 {
-                    this._TargetMotorOutput = value;
-                    this.RaisePropertyChanged("TargetMotorOutput");
+                    this._TargetMotorOutput = -100;
                 }
+                else if (100 < this._TargetMotorOutput)
+                {
+                    this._TargetMotorOutput = 100;
+                }
+                this.RaisePropertyChanged("TargetMotorOutput");
             }
         }
 
@@ -46,11 +51,16 @@ namespace Ev3Controller.ViewModel
             get { return this._TargetSteer; }
             set
             {
-                if ((this._TargetSteer <= -100) || (this._TargetSteer <= 100))
+                this._TargetSteer = value;
+                if (this._TargetSteer < -100)
                 {
-                    this._TargetSteer = value;
-                    this.RaisePropertyChanged("TargetSteer");
+                    this._TargetSteer = -100;
                 }
+                else if (100 < this._TargetSteer)
+                {
+                    this._TargetSteer = 100;
+                }
+                this.RaisePropertyChanged("TargetSteer");
             }
         }
         #endregion

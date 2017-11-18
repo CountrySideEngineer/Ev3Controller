@@ -25,11 +25,11 @@ namespace Ev3Controller.Model
                     int DataIndex = DataTopIndex + (Index * 2);
                     byte Port = Command.ResData[DataIndex++];
                     byte IsTouch = Command.ResData[DataIndex];
-                    Brick.SensorDevice(Port).ConnectedPort = (Ev3Device.INPORT)Port;
-                    Brick.SensorDevice(Port).IsConnected = true;
-                    Brick.SensorDevice(Port).Value1 = IsTouch;
-                    Brick.SensorDevice(Port).DeviceType =
-                        Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_TOUCH;
+                    var Device = Brick.SensorDevice(Port);
+                    Device.ConnectedPort = (Ev3Device.INPORT)Port;
+                    Device.IsConnected = true;
+                    Device.Value1 = IsTouch;
+                    Device.DeviceType = Ev3SensorDevice.DEVICE_TYPE.SENSOR_DEVICE_TOUCH;
                 }
             }
         }

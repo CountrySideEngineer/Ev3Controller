@@ -31,16 +31,17 @@ namespace Ev3Controller.Model
                     byte Connection = Command.ResData[DataIndex++];
                     byte Power = Command.ResData[DataIndex];
 
-                    Brick.MotorDevice(Index).ConnectedPort = (Ev3Device.OUTPORT)Index;
+                    var Device = Brick.MotorDevice(Index);
+                    Device.ConnectedPort = (Ev3Device.OUTPORT)Index;
                     if (0x00 == Connection)
                     {
-                        Brick.MotorDevice(Index).IsConnected = false;
-                        Brick.MotorDevice(Index).Power = 0;
+                        Device.IsConnected = false;
+                        Device.Power = 0;
                     }
                     else
                     {
-                        Brick.MotorDevice(Index).IsConnected = true;
-                        Brick.MotorDevice(Index).Power = Power;
+                        Device.IsConnected = true;
+                        Device.Power = Power;
                     }
                 }
             }

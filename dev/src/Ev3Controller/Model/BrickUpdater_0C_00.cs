@@ -41,7 +41,8 @@ namespace Ev3Controller.Model
                 int DataTopIndex = 4;
                 for (Index = 0; Index < 4; Index++)
                 {
-                    Brick.MotorDevice(Index).ConnectedPort = (Ev3Device.OUTPORT)Index;
+                    var Device = Brick.MotorDevice(Index);
+                    Device.ConnectedPort = (Ev3Device.OUTPORT)Index;
 
                     DEVICE_TYPE DeviceType = DEVICE_TYPE.MOTOR_DEVICE_NO_DEVICE;
                     byte Type = Command.ResData[DataTopIndex + Index];
@@ -54,17 +55,17 @@ namespace Ev3Controller.Model
                     {
                         DeviceType = DEVICE_TYPE.MOTOR_DEVICE_UNKNOWN;
                     }
-                    Brick.MotorDevice(Index).DeviceType = DeviceType;
+                    Device.DeviceType = DeviceType;
                     switch (DeviceType)
                     {
                         case DEVICE_TYPE.MOTOR_DEVICE_MEDIUM_MOTOR:
                         case DEVICE_TYPE.MOTOR_DEVICE_LARGE_MOTOR:
                         case DEVICE_TYPE.MOTOR_DEVICE_UNADJUSTED:
-                            Brick.MotorDevice(Index).IsConnected = true;
+                            Device.IsConnected = true;
                             break;
 
                         default:
-                            Brick.MotorDevice(Index).IsConnected = false;
+                            Device.IsConnected = false;
                             break;
                     }
                 }

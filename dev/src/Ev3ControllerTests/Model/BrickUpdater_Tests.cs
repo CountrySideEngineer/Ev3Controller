@@ -173,15 +173,6 @@ namespace Ev3Controller.Model.Tests
 
             Assert.IsTrue(Updater is BrickUpdater_A0_00);
         }
-        [TestMethod()]
-        [TestCategory("BrickUpdater")]
-        [TestCategory("BrickUpdater_Factory_Test")]
-        [ExpectedExceptionAttribute(typeof(ArgumentException))]
-        public void BrickUpdater_Factory_Test_017()
-        {
-            var Command = new Command_12_00();
-            var Updater = BrickUpdater.Factory(Command);
-        }
         #endregion
     }
 }
