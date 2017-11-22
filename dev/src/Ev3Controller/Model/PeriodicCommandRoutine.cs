@@ -57,6 +57,7 @@ namespace Ev3Controller.Model
                     Console.WriteLine(ex.Message);
                 }
             }
+            this.Log(CommandQueue);
 
             return false;
         }
