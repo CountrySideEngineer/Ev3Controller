@@ -10,6 +10,7 @@ namespace Ev3Controller.Model
 {
     public class PeriodicCommandRoutine : CommandRoutine
     {
+        #region Constructors and the Finalizer
         /// <summary>
         /// Constructor.
         /// Setup command to send in the routine.
@@ -24,7 +25,13 @@ namespace Ev3Controller.Model
             this.CommandQueue.Enqueue(new Command_10_01());
             this.CommandQueue.Enqueue(new Command_F0_00());
         }
+        #endregion
 
+        #region Public Properties
+        public Queue<ACommand> CommandQueue { get; protected set; }
+        #endregion
+
+        #region Other methods and private properties in calling order
         /// <summary>
         /// Method to run periodic command routine.
         /// </summary>
@@ -50,10 +57,10 @@ namespace Ev3Controller.Model
                     Console.WriteLine(ex.Message);
                 }
             }
+            this.Log(CommandQueue);
 
             return false;
         }
-
-        public Queue<ACommand> CommandQueue { get; protected set; }
+        #endregion
     }
 }
